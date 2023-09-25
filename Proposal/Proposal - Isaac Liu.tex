@@ -37,7 +37,8 @@
 %
 % and set <dim> to something 5cm or larger.
 
-\title{Instructions for ACL 2023 Proceedings}
+% \title{Project Proposal: Metadata and Accuracy in Large Language Models}
+\title{Project Proposal: Measuring LLM Responses}
 
 % Author information can be set in various styles:
 % For several authors from the same institution:
@@ -55,16 +56,9 @@
 %         Author 2 \\ Address line \\ ... \\ Address line \And
 %         Author 3 \\ Address line \\ ... \\ Address line}
 
-\author{First Author \\
-  Affiliation / Address line 1 \\
-  Affiliation / Address line 2 \\
-  Affiliation / Address line 3 \\
-  \texttt{email@domain} \\\And
-  Second Author \\
-  Affiliation / Address line 1 \\
-  Affiliation / Address line 2 \\
-  Affiliation / Address line 3 \\
-  \texttt{email@domain} \\}
+\author{Isaac Liu \\
+  University of California, Berkeley \\
+  \texttt{ijyliu@berkeley.edu}}
 
 \begin{document}
 \maketitle
@@ -82,6 +76,22 @@ the \LaTeX{} style file used to format it (\texttt{acl2023.sty}),
 an ACL bibliography style (\texttt{acl\_natbib.bst}),
 an example bibliography (\texttt{custom.bib}),
 and the bibliography for the ACL Anthology (\texttt{anthology.bib}).
+
+\section{Literature Review}
+
+Speed: 
+
+https://arxiv.org/pdf/2305.15038.pdf provides some speed benchmarks on data analysis tasks in Table 4 on Page 6. It doesn't really discuss methodology, though.
+
+\section{Data}
+
+For some questions, new data must be collected.
+
+For other questions, pre-existing sources of LLM prompts and responses can be used.
+
+\section{Responsiblities}
+
+I am the only author of this proposal, but I am open to working with others with similar interests.
 
 \section{Engines}
 
@@ -237,14 +247,11 @@ Use the \verb|doi| field for DOIs and the \verb|url| field for URLs.
 If a Bib\TeX{} entry has a URL or DOI field, the paper title in the references section will appear as a hyperlink to the paper, using the hyperref \LaTeX{} package.
 
 \section*{Limitations}
-ACL 2023 requires all submissions to have a section titled ``Limitations'', for discussing the limitations of the paper as a complement to the discussion of strengths in the main text. This section should occur after the conclusion, but before the references. It will not count towards the page limit.
-The discussion of limitations is mandatory. Papers without a limitation section will be desk-rejected without review.
 
-While we are open to different types of limitations, just mentioning that a set of results have been shown for English only probably does not reflect what we expect. 
-Mentioning that the method works mostly for languages with limited morphology, like English, is a much better alternative.
-In addition, limitations such as low scalability to long text, the requirement of large GPU resources, or other things that inspire crucial further investigation are welcome.
+The actual length of time required by an online LLM to answer a question is difficult to estimate given the presence of confounding factors such as connection speed and server load. To limit associated variation, responses were generated during off-peak hours.
 
 \section*{Ethics Statement}
+
 Scientific work published at ACL 2023 must comply with the ACL Ethics Policy.\footnote{\url{https://www.aclweb.org/portal/content/acl-code-ethics}} We encourage all authors to include an explicit ethics statement on the broader impact of the work, or other ethical considerations after the conclusion but before the references. The ethics statement will not count toward the page limit (8 pages for long, 4 pages for short papers).
 
 \section*{Acknowledgements}
