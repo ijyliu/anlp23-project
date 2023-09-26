@@ -180,18 +180,6 @@
 	file = {arXiv.org Snapshot:C\:\\Users\\ijyli\\Zotero\\storage\\QWF7MR96\\2110.html:text/html;Full Text PDF:C\:\\Users\\ijyli\\Zotero\\storage\\74ILI65I\\Liu et al. - 2022 - Generated Knowledge Prompting for Commonsense Reas.pdf:application/pdf},
 }
 
-@misc{hulbert_using_2023,
-	title = {Using {Tree}-of-{Thought} {Prompting} to boost {ChatGPT}'s reasoning},
-	copyright = {MIT},
-	url = {https://github.com/dave1010/tree-of-thought-prompting},
-	abstract = {Using Tree-of-Thought Prompting to boost ChatGPT's reasoning},
-	urldate = {2023-09-26},
-	author = {Hulbert, Dave},
-	month = sep,
-	year = {2023},
-	note = {original-date: 2023-05-22T19:03:27Z},
-}
-
 @misc{shackell_prompt_2023,
 	title = {Prompt engineering: is being an {AI} 'whisperer' the job of the future or a short-lived fad?},
 	shorttitle = {Prompt engineering},
@@ -241,4 +229,63 @@
 	month = sep,
 	year = {2022},
 	file = {Full Text PDF:C\:\\Users\\ijyli\\Zotero\\storage\\K2UC5R8B\\Zhou et al. - 2022 - Large Language Models are Human-Level Prompt Engin.pdf:application/pdf},
+}
+
+@misc{hulbert_using_2023,
+	title = {Using {Tree}-of-{Thought} {Prompting} to boost {ChatGPT}'s reasoning},
+	copyright = {MIT},
+	url = {https://github.com/dave1010/tree-of-thought-prompting},
+	abstract = {Using Tree-of-Thought Prompting to boost ChatGPT's reasoning},
+	urldate = {2023-09-26},
+	author = {Hulbert, Dave},
+	month = sep,
+	year = {2023},
+	note = {original-date: 2023-05-22T19:03:27Z},
+}
+
+@misc{chen_evaluating_2021,
+	title = {Evaluating {Large} {Language} {Models} {Trained} on {Code}},
+	url = {http://arxiv.org/abs/2107.03374},
+	abstract = {We introduce Codex, a GPT language model fine-tuned on publicly available code from GitHub, and study its Python code-writing capabilities. A distinct production version of Codex powers GitHub Copilot. On HumanEval, a new evaluation set we release to measure functional correctness for synthesizing programs from docstrings, our model solves 28.8\% of the problems, while GPT-3 solves 0\% and GPT-J solves 11.4\%. Furthermore, we find that repeated sampling from the model is a surprisingly effective strategy for producing working solutions to difficult prompts. Using this method, we solve 70.2\% of our problems with 100 samples per problem. Careful investigation of our model reveals its limitations, including difficulty with docstrings describing long chains of operations and with binding operations to variables. Finally, we discuss the potential broader impacts of deploying powerful code generation technologies, covering safety, security, and economics.},
+	urldate = {2023-09-26},
+	publisher = {arXiv},
+	author = {Chen, Mark and Tworek, Jerry and Jun, Heewoo and Yuan, Qiming and Pinto, Henrique Ponde de Oliveira and Kaplan, Jared and Edwards, Harri and Burda, Yuri and Joseph, Nicholas and Brockman, Greg and Ray, Alex and Puri, Raul and Krueger, Gretchen and Petrov, Michael and Khlaaf, Heidy and Sastry, Girish and Mishkin, Pamela and Chan, Brooke and Gray, Scott and Ryder, Nick and Pavlov, Mikhail and Power, Alethea and Kaiser, Lukasz and Bavarian, Mohammad and Winter, Clemens and Tillet, Philippe and Such, Felipe Petroski and Cummings, Dave and Plappert, Matthias and Chantzis, Fotios and Barnes, Elizabeth and Herbert-Voss, Ariel and Guss, William Hebgen and Nichol, Alex and Paino, Alex and Tezak, Nikolas and Tang, Jie and Babuschkin, Igor and Balaji, Suchir and Jain, Shantanu and Saunders, William and Hesse, Christopher and Carr, Andrew N. and Leike, Jan and Achiam, Josh and Misra, Vedant and Morikawa, Evan and Radford, Alec and Knight, Matthew and Brundage, Miles and Murati, Mira and Mayer, Katie and Welinder, Peter and McGrew, Bob and Amodei, Dario and McCandlish, Sam and Sutskever, Ilya and Zaremba, Wojciech},
+	month = jul,
+	year = {2021},
+	note = {arXiv:2107.03374 [cs]
+version: 2},
+	keywords = {Computer Science - Machine Learning},
+	annote = {Comment: corrected typos, added references, added authors, added acknowledgements},
+	file = {arXiv.org Snapshot:C\:\\Users\\ijyli\\Zotero\\storage\\46D6JMMY\\2107.html:text/html;Full Text PDF:C\:\\Users\\ijyli\\Zotero\\storage\\VTN24YRF\\Chen et al. - 2021 - Evaluating Large Language Models Trained on Code.pdf:application/pdf},
+}
+
+@misc{min_rethinking_2022,
+	title = {Rethinking the {Role} of {Demonstrations}: {What} {Makes} {In}-{Context} {Learning} {Work}?},
+	shorttitle = {Rethinking the {Role} of {Demonstrations}},
+	url = {http://arxiv.org/abs/2202.12837},
+	abstract = {Large language models (LMs) are able to in-context learn -- perform a new task via inference alone by conditioning on a few input-label pairs (demonstrations) and making predictions for new inputs. However, there has been little understanding of how the model learns and which aspects of the demonstrations contribute to end task performance. In this paper, we show that ground truth demonstrations are in fact not required -- randomly replacing labels in the demonstrations barely hurts performance on a range of classification and multi-choce tasks, consistently over 12 different models including GPT-3. Instead, we find that other aspects of the demonstrations are the key drivers of end task performance, including the fact that they provide a few examples of (1) the label space, (2) the distribution of the input text, and (3) the overall format of the sequence. Together, our analysis provides a new way of understanding how and why in-context learning works, while opening up new questions about how much can be learned from large language models through inference alone.},
+	urldate = {2023-09-26},
+	publisher = {arXiv},
+	author = {Min, Sewon and Lyu, Xinxi and Holtzman, Ari and Artetxe, Mikel and Lewis, Mike and Hajishirzi, Hannaneh and Zettlemoyer, Luke},
+	month = oct,
+	year = {2022},
+	note = {arXiv:2202.12837 [cs]},
+	keywords = {Computer Science - Artificial Intelligence, Computer Science - Computation and Language},
+	annote = {Comment: 17 pages; 12 figures. Published as a conference paper at EMNLP 2022 (long). Code available at https://github.com/Alrope123/rethinking-demonstrations},
+	file = {arXiv.org Snapshot:C\:\\Users\\ijyli\\Zotero\\storage\\KNK3T7S7\\2202.html:text/html;Full Text PDF:C\:\\Users\\ijyli\\Zotero\\storage\\S9E7MHMC\\Min et al. - 2022 - Rethinking the Role of Demonstrations What Makes .pdf:application/pdf},
+}
+
+@misc{brown_language_2020,
+	title = {Language {Models} are {Few}-{Shot} {Learners}},
+	url = {http://arxiv.org/abs/2005.14165},
+	abstract = {Recent work has demonstrated substantial gains on many NLP tasks and benchmarks by pre-training on a large corpus of text followed by fine-tuning on a specific task. While typically task-agnostic in architecture, this method still requires task-specific fine-tuning datasets of thousands or tens of thousands of examples. By contrast, humans can generally perform a new language task from only a few examples or from simple instructions - something which current NLP systems still largely struggle to do. Here we show that scaling up language models greatly improves task-agnostic, few-shot performance, sometimes even reaching competitiveness with prior state-of-the-art fine-tuning approaches. Specifically, we train GPT-3, an autoregressive language model with 175 billion parameters, 10x more than any previous non-sparse language model, and test its performance in the few-shot setting. For all tasks, GPT-3 is applied without any gradient updates or fine-tuning, with tasks and few-shot demonstrations specified purely via text interaction with the model. GPT-3 achieves strong performance on many NLP datasets, including translation, question-answering, and cloze tasks, as well as several tasks that require on-the-fly reasoning or domain adaptation, such as unscrambling words, using a novel word in a sentence, or performing 3-digit arithmetic. At the same time, we also identify some datasets where GPT-3's few-shot learning still struggles, as well as some datasets where GPT-3 faces methodological issues related to training on large web corpora. Finally, we find that GPT-3 can generate samples of news articles which human evaluators have difficulty distinguishing from articles written by humans. We discuss broader societal impacts of this finding and of GPT-3 in general.},
+	urldate = {2023-09-26},
+	publisher = {arXiv},
+	author = {Brown, Tom B. and Mann, Benjamin and Ryder, Nick and Subbiah, Melanie and Kaplan, Jared and Dhariwal, Prafulla and Neelakantan, Arvind and Shyam, Pranav and Sastry, Girish and Askell, Amanda and Agarwal, Sandhini and Herbert-Voss, Ariel and Krueger, Gretchen and Henighan, Tom and Child, Rewon and Ramesh, Aditya and Ziegler, Daniel M. and Wu, Jeffrey and Winter, Clemens and Hesse, Christopher and Chen, Mark and Sigler, Eric and Litwin, Mateusz and Gray, Scott and Chess, Benjamin and Clark, Jack and Berner, Christopher and McCandlish, Sam and Radford, Alec and Sutskever, Ilya and Amodei, Dario},
+	month = jul,
+	year = {2020},
+	note = {arXiv:2005.14165 [cs]},
+	keywords = {Computer Science - Computation and Language},
+	annote = {Comment: 40+32 pages},
+	file = {arXiv.org Snapshot:C\:\\Users\\ijyli\\Zotero\\storage\\FGWYX2HG\\2005.html:text/html;Full Text PDF:C\:\\Users\\ijyli\\Zotero\\storage\\8TELU3ML\\Brown et al. - 2020 - Language Models are Few-Shot Learners.pdf:application/pdf},
 }
