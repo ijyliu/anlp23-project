@@ -29,6 +29,14 @@ Despite such controversy, it is difficult to find empirical and quantitative ana
 
 This paper uses several metrics to evaluate the costs of prompt engineering methods systematically, and analyzes the tradeoffs inherent in their application to standardized data. Such an assessment is valuable on several dimensions. Beyond quantifiably testing the practicality of prompt engineering as a whole, it can be used to compare the performance of different approaches, useful in a world where so many competing techniques are available. I also offer a new look at these methods in a period long after ideas were introduced and in an enviroment with greater capabilities in underlying models. Finally, I survey and introduce some useful measures of costs and complexity such as the ratio of interaction length with prompting to the length of an accepted human-generated answer.
 
+\section*{Data}
+
+To evaluate the LLMs, I attempt to use tasks that are both general-purpose and close to practical, real-world applications. In this spirit, I use GRE General Test questions (likely from a purchased prep book/or practice exams recently published online to minimize contamination), as well as HumanEval coding problems. For multiple choice choice questions, I add formatting to the prompt to indicate what should be done to represent a final answer "When you are ready, please put your final, letter answer in the form of a single capital letter, enclosed in parentheses. For example, if you think the answer is A, please write (A)." HumanEval uses the pass at k metric to automatically assess the probability a solution is correct given a set of unit tests. \cite{chen_evaluating_2021}
+
+I perform the analysis on one cutting-edge model, to get the current state of things, and one older model, closer to the time that these techniques were introduced. This will allow one picture of the changing costs and benefits of advanced prompting, a trend that may even be extrapolated into the future if current LLM scaling laws continue to hold. As the most widely used models and the ones behind much original work in the field, I select two models from the OpenAI series: GPT-4 and text-davinci-003 on OpenAI playground. Should text-davinci-003 (a legacy model) become unavailable during the course of the project, or should I encounter other difficulties, I will use the simplest/smallest model available, likely GPT-3.5 (something to note is that models older than GPT-3.5 have, in the past, scored 0\% for accuracy on coding problems - I will need to test all of my evaluations quickly to get a sense of their feasibility before scaling up). All of these models are available both via the OpenAI API and in web interfaces - where possible I will use web interfaces to limit resources required.
+
+To the extent possible, I will report accuracy scores on the domain dataset as they are in the original paper. It may also be possible to use any prompts, LLM responses, and correct responses provided along with original papers to calculate other simple metrics such as response lengths and complexity. However, some metrics (time taken, human assessments of complexity) will require my own evaluations.
+
 \section*{Metrics}
 
 \subsection*{Accuracy}
@@ -55,10 +63,12 @@ The length of responses and interactions can effect the practicality of promptin
 Similarly to length, complexity could be an indicator of high accuracy. However, it has substantial costs in potentially making review more difficult. I report:
 
 \begin{itemize}
-  \item Vocabulary complexity, sentence length, readability scores of responses
+  \item Vocabulary - share of words on the Academic Vocabulary List (AWL). \cite{gardner_new_2014}
+  \item Sentence length and Flesch reading ease (implemented via the textstat Python package) for natural language and non-code components of responses. \cite{flesch_how_2016, aggarwal_textstat_nodate} 
+  \item Cyclomatic complexity for code responses (implemented via the radon Python package). \cite{lacchia_radon_nodate}
   \item Ratio or difference of these scores in prompts vs. responses, responses vs. accepted/outside correct answer
-  \item Human assessment of need for specialized knowledge/difficulty of implementation of the technique. This could be task specific (done for some novel real world example questions/prompting scenarios), or it could be done overall based on a pre-existing description of the technique. Perhaps a balance of both is best.
-  \item Human assessment of output complexity (ease of evaluating results). This could be task specific (done for some novel real world example questions/prompting scenarios), or it could be done overall based on a pre-existing examples of the technique. Perhaps a balance of both is best.
+  \item Human assessment of need for specialized knowledge/difficulty of implementation of the technique. This could be task specific (done for some novel real world example questions/prompting scenarios), or it could be done overall based on a pre-existing description of the technique. Perhaps a balance of both is best. The actual metric will be a numerical score and a qualitative description.
+  \item Human assessment of output complexity (ease of evaluating results). This could be task specific (done for some novel real world example questions/prompting scenarios), or it could be done overall based on a pre-existing examples of the technique. Perhaps a balance of both is best. The actual metric will be a numerical score and a qualitative description.
 \end{itemize}
 
 \section*{Prompting Methods Assessed}
@@ -74,14 +84,6 @@ Below items are listed in order of increasing complexity/human intervention:
   \item Chain of Verification Prompting: The LLM is prompted a series of times to produce an initial baseline response, write its own verification questions, answer those verification questions, and write a final, verified response. \cite{dhuliawala_chain--verification_2023}
   \item Few-Shot Prompting: The prompter provides a few examples of successfully/answered questions or tasks before the main question/task. Despite the work involved in implementing this method, I believe it has potential to be effective for two reasons. First, prior evidence indicates that larger and more modern language models benefit more from few-shot learning, potentially making this a consistently useful technique. \cite{brown_language_2020} Second, earlier research has found that the formatting and input/label space distribution is more important than example correctness, meaning this method is somewhat robust to human error. \cite{min_rethinking_2022}
 \end{itemize}
-
-\section*{Data}
-
-To evaluate the LLMs, I attempt to use tasks that are both general-purpose and close to practical, real-world applications. In this spirit, I use GRE General Test questions (likely from a purchased prep book/or practice exams recently published online to minimize contamination), as well as HumanEval coding problems. For multiple choice choice questions, I add formatting to the prompt to indicate what should be done to represent a final answer "When you are ready, please put your final, letter answer in the form of a single capital letter, enclosed in parentheses. For example, if you think the answer is A, please write (A)." HumanEval uses the pass at k metric to automatically assess the probability a solution is correct given a set of unit tests. \cite{chen_evaluating_2021}
-
-I perform the analysis on one cutting-edge model, to get the current state of things, and one older model, closer to the time that these techniques were introduced. This will allow one picture of the changing costs and benefits of advanced prompting, a trend that may even be extrapolated into the future if current LLM scaling laws continue to hold. As the most widely used models and the ones behind much original work in the field, I select two models from the OpenAI series: GPT-4 and text-davinci-003 on OpenAI playground. Should text-davinci-003 (a legacy model) become unavailable during the course of the project, or should I encounter other difficulties, I will use the simplest/smallest model available, likely GPT-3.5 (something to note is that models older than GPT-3.5 have, in the past, scored 0\% for accuracy on coding problems - I will need to test all of my evaluations quickly to get a sense of their feasibility before scaling up). All of these models are available both via the OpenAI API and in web interfaces - where possible I will use web interfaces to limit resources required.
-
-To the extent possible, I will report accuracy scores on the domain dataset as they are in the original paper. It may also be possible to use any prompts, LLM responses, and correct responses provided along with original papers to calculate other simple metrics such as response lengths and complexity. However, some metrics (time taken, etc.) will require my own evaluations.
 
 \section*{Analyses}
 

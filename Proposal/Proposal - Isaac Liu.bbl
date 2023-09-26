@@ -1,4 +1,4 @@
-\begin{thebibliography}{15}
+\begin{thebibliography}{19}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 
 \bibitem[{noa()}]{noauthor_promptbase_nodate}
@@ -11,6 +11,11 @@ Oguz~A. Acar. 2023.
   {{AI} {Prompt} {Engineering} {Isn}’t the {Future}}.
 \newblock \emph{Harvard Business Review}.
 \newblock Section: Technology and analytics.
+
+\bibitem[{Aggarwal()}]{aggarwal_textstat_nodate}
+Shivam~Bansal Aggarwal, Chaitanya.
+\newblock \href {https://github.com/shivam5992/textstat} {textstat: {Calculate}
+  statistical features from text}.
 
 \bibitem[{Brown et~al.(2020)Brown, Mann, Ryder, Subbiah, Kaplan, Dhariwal,
   Neelakantan, Shyam, Sastry, Askell, Agarwal, Herbert-Voss, Krueger, Henighan,
@@ -75,6 +80,18 @@ Shizhe Diao, Pengcheng Wang, Yong Lin, and Tong Zhang. 2023.
   went from complex in v3 to easy in v4. {Same} with {ChatGPT} to {Bing}.
   https://t.co/{BTtSN4oVF4}}.
 
+\bibitem[{Flesch(2016)}]{flesch_how_2016}
+Rudolf Flesch. 2016.
+\newblock \href
+  {https://web.archive.org/web/20160712094308/http://www.mang.canterbury.ac.nz/writing_guide/writing/flesch.shtml}
+  {How to {Write} {Plain} {English}}.
+
+\bibitem[{Gardner and Davies(2014)}]{gardner_new_2014}
+Dee Gardner and Mark Davies. 2014.
+\newblock \href {https://doi.org/10.1093/applin/amt015} {A {New} {Academic}
+  {Vocabulary} {List}}.
+\newblock \emph{Applied Linguistics}, 35(3):305--327.
+
 \bibitem[{Hebenstreit et~al.(2023)Hebenstreit, Praas, Kiesewetter, and
   Samwald}]{hebenstreit_automatically_2023}
 Konstantin Hebenstreit, Robert Praas, Louis~P. Kiesewetter, and Matthias
@@ -88,6 +105,11 @@ Dave Hulbert. 2023.
 \newblock \href {https://github.com/dave1010/tree-of-thought-prompting} {Using
   {Tree}-of-{Thought} {Prompting} to boost {ChatGPT}'s reasoning}.
 \newblock Original-date: 2023-05-22T19:03:27Z.
+
+\bibitem[{Lacchia()}]{lacchia_radon_nodate}
+Michele Lacchia.
+\newblock \href {https://radon.readthedocs.org/} {radon: {Code} {Metrics} in
+  {Python}}.
 
 \bibitem[{Mann()}]{mann_microsoft_nodate}
 Jyoti Mann.
