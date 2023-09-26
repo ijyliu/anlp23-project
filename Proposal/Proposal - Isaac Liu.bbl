@@ -1,4 +1,4 @@
-\begin{thebibliography}{19}
+\begin{thebibliography}{20}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 
 \bibitem[{noa()}]{noauthor_promptbase_nodate}
@@ -110,6 +110,14 @@ Dave Hulbert. 2023.
 Michele Lacchia.
 \newblock \href {https://radon.readthedocs.org/} {radon: {Code} {Metrics} in
   {Python}}.
+
+\bibitem[{Liu et~al.(2022)Liu, Liu, Lu, Welleck, West, Bras, Choi, and
+  Hajishirzi}]{liu_generated_2022}
+Jiacheng Liu, Alisa Liu, Ximing Lu, Sean Welleck, Peter West, Ronan~Le Bras,
+  Yejin Choi, and Hannaneh Hajishirzi. 2022.
+\newblock \href {http://arxiv.org/abs/2110.08387} {Generated {Knowledge}
+  {Prompting} for {Commonsense} {Reasoning}}.
+\newblock ArXiv:2110.08387 [cs].
 
 \bibitem[{Mann()}]{mann_microsoft_nodate}
 Jyoti Mann.
