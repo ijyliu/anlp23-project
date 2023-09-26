@@ -1,5 +1,36 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{8}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+
+\bibitem[{noa()}]{noauthor_promptbase_nodate}
+
+\newblock \href {https://promptbase.com} {{PromptBase}}.
+
+\bibitem[{Acar(2023)}]{acar_ai_2023}
+Oguz~A. Acar. 2023.
+\newblock \href {https://hbr.org/2023/06/ai-prompt-engineering-isnt-the-future}
+  {{AI} {Prompt} {Engineering} {Isn}’t the {Future}}.
+\newblock \emph{Harvard Business Review}.
+\newblock Section: Technology and analytics.
+
+\bibitem[{Diao et~al.(2023)Diao, Wang, Lin, and Zhang}]{diao_active_2023}
+Shizhe Diao, Pengcheng Wang, Yong Lin, and Tong Zhang. 2023.
+\newblock \href {http://arxiv.org/abs/2302.12246} {Active {Prompting} with
+  {Chain}-of-{Thought} for {Large} {Language} {Models}}.
+\newblock ArXiv:2302.12246 [cs].
+
+\bibitem[{{Ethan Mollick [@emollick]}(2023)}]{ethan_mollick_emollick_i_2023}
+{Ethan Mollick [@emollick]}. 2023.
+\newblock \href {https://twitter.com/emollick/status/1627804798224580608} {I
+  have a strong suspicion that “prompt engineering” is not going to be a
+  big deal in the long-term \& prompt engineer is not the job of the future
+  {AI} gets easier. {You} can already see in {Midjourney} how basic prompts
+  went from complex in v3 to easy in v4. {Same} with {ChatGPT} to {Bing}.
+  https://t.co/{BTtSN4oVF4}}.
+
+\bibitem[{Martineau(2021)}]{martineau_what_2021}
+Kim Martineau. 2021.
+\newblock \href {https://research.ibm.com/blog/what-is-ai-prompt-tuning} {What
+  is prompt tuning?}
 
 \bibitem[{Roose(2023)}]{roose_conversation_2023}
 Kevin Roose. 2023.
@@ -8,5 +39,20 @@ Kevin Roose. 2023.
   {A {Conversation} {With} {Bing}’s {Chatbot} {Left} {Me} {Deeply}
   {Unsettled}}.
 \newblock \emph{The New York Times}.
+
+\bibitem[{Shackell(2023)}]{shackell_prompt_2023}
+Cameron Shackell. 2023.
+\newblock \href
+  {http://theconversation.com/prompt-engineering-is-being-an-ai-whisperer-the-job-of-the-future-or-a-short-lived-fad-211833}
+  {Prompt engineering: is being an {AI} 'whisperer' the job of the future or a
+  short-lived fad?}
+
+\bibitem[{Wu et~al.(2022)Wu, Terry, and Cai}]{wu_ai_2022}
+Tongshuang Wu, Michael Terry, and Carrie~Jun Cai. 2022.
+\newblock \href {https://doi.org/10.1145/3491102.3517582} {{AI} {Chains}:
+  {Transparent} and {Controllable} {Human}-{AI} {Interaction} by {Chaining}
+  {Large} {Language} {Model} {Prompts}}.
+\newblock In \emph{{CHI} {Conference} on {Human} {Factors} in {Computing}
+  {Systems}}, pages 1--22, New Orleans LA USA. ACM.
 
 \end{thebibliography}
