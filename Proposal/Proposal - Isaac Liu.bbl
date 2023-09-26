@@ -27,18 +27,17 @@ Shizhe Diao, Pengcheng Wang, Yong Lin, and Tong Zhang. 2023.
   went from complex in v3 to easy in v4. {Same} with {ChatGPT} to {Bing}.
   https://t.co/{BTtSN4oVF4}}.
 
+\bibitem[{Mann()}]{mann_microsoft_nodate}
+Jyoti Mann.
+\newblock \href
+  {https://www.businessinsider.com/microsoft-limits-bing-chat-exchanges-and-conversation-lengths-2023-2}
+  {Microsoft limits {Bing} chat exchanges and conversation lengths after
+  'creepy' interactions with some users}.
+
 \bibitem[{Martineau(2021)}]{martineau_what_2021}
 Kim Martineau. 2021.
 \newblock \href {https://research.ibm.com/blog/what-is-ai-prompt-tuning} {What
   is prompt tuning?}
-
-\bibitem[{Roose(2023)}]{roose_conversation_2023}
-Kevin Roose. 2023.
-\newblock \href
-  {https://www.nytimes.com/2023/02/16/technology/bing-chatbot-microsoft-chatgpt.html}
-  {A {Conversation} {With} {Bing}’s {Chatbot} {Left} {Me} {Deeply}
-  {Unsettled}}.
-\newblock \emph{The New York Times}.
 
 \bibitem[{Shackell(2023)}]{shackell_prompt_2023}
 Cameron Shackell. 2023.
