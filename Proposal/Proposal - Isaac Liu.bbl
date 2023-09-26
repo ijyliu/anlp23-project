@@ -1,0 +1,12 @@
+\begin{thebibliography}{1}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+
+\bibitem[{Roose(2023)}]{roose_conversation_2023}
+Kevin Roose. 2023.
+\newblock \href
+  {https://www.nytimes.com/2023/02/16/technology/bing-chatbot-microsoft-chatgpt.html}
+  {A {Conversation} {With} {Bing}’s {Chatbot} {Left} {Me} {Deeply}
+  {Unsettled}}.
+\newblock \emph{The New York Times}.
+
+\end{thebibliography}
