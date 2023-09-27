@@ -1,9 +1,5 @@
-\begin{thebibliography}{20}
+\begin{thebibliography}{19}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
-
-\bibitem[{noa()}]{noauthor_promptbase_nodate}
-
-\newblock \href {https://promptbase.com} {{PromptBase}}.
 
 \bibitem[{Acar(2023)}]{acar_ai_2023}
 Oguz~A. Acar. 2023.
