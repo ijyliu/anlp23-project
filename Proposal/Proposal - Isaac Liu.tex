@@ -64,7 +64,7 @@ The length of responses and interactions can effect the practicality of promptin
 \begin{itemize}
   \item Length of the entire interaction in tokens
   \item Financial cost of the entire interaction in tokens
-  \item Length of the entire interaction in tokens relative to the length of the baseline task + a human/solved out/generally accepted as correct answer (or relative to direct prompting). How much is prompt engineering stretching the interaction out? This ratio can be informative.
+  \item Length of the entire interaction in tokens relative to the length of the task/question + a human/solved out/generally accepted as correct answer (or relative to direct prompting). How much is prompt engineering stretching the interaction out? This ratio can be informative.
   \item The change in accuracy (in percentage points, 0 to 100) divided by the change in tokens (difference in token counts), between the prompt engineering technique and direct prompting. Is any stretching of output adding value/improving accuracy? % token cost of accuracy
   \begin{displaymath}
     \frac{Accuracy_{PE} - Accuracy_{B}}{Tokens_{PE} - Tokens_{B}}
