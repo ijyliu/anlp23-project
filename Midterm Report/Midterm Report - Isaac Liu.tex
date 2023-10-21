@@ -30,7 +30,15 @@ Prompt engineering, the practice of developing specialized prompts and queries t
 
 Despite such controversy, it is difficult to find empirical analyses of the tradeoff between costs and accuracy benefits associated with advanced prompting. Papers introducing new prompting techniques often only include performance benchmarks concerning the techniques' efficacy, typically within a limited domain. Some authors briefly mention problems associated with human-tailored prompts, such as the increased complexity induced by prompt-chaining and limitations on creativity and randomness \cite{wu_ai_2022}, and others suggest the automation of prompting to avoid these costs \cite{diao_active_2023}, but the extent of these issues has not been (to my knowledge) quantified. Online marketplaces such as \href{https://promptbase.com/}{Promptbase} provide input token costs for prompt texts sold on the platform, but do not provide any other information.
 
+Briefly some practical considerations for prompt engineering 
+On the cost side there are token costs, the filling of context window lengths leading to lower performance quality
+Dubious benefits due to a lack of research for some anecdotal techniques and decreased effectiveness with larger models
+but does not quantify these measures for specific techniques
+https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4504303
+
 This paper uses several metrics to evaluate the costs of prompt engineering methods systematically, and analyzes the tradeoffs inherent in their application to standardized data. Such an assessment is valuable on several dimensions. Beyond quantifiably testing the practicality of prompt engineering as a whole, it can be used to compare the performance of different approaches, useful in a world where so many competing techniques are available. I also offer a new look at these prompting methods in a period long after ideas were introduced and in an enviroment with greater capabilities in underlying models. Finally, I introduce and adapt some useful measures of costs and complexity, such as the ratio of interaction length with prompting to the length of an accepted human-generated answer, to the challenge of LLM evaluation.
+
+I provide a newly constructed dataset summarizing the wide variety of existing techniques and data on their popularity as measured by Semantic Scholar citations, which may be useful for future surveys of the field
 
 \section*{Prompting Methods Assessed}
 
@@ -77,7 +85,7 @@ The length of responses and interactions can effect the practicality of promptin
 Similarly to length, complexity could be an indicator of high accuracy. However, it has substantial costs in potentially making review of LLM output more difficult. I report:
 
 \begin{itemize}
-  \item Vocabulary - share of words on the Academic Vocabulary List (AVL) for natural language and non-code components of responses. \cite{gardner_new_2014}
+  \item Vocabulary - share of words on the Academic Vocabulary List (AVL) for natural language and non-code components of responses. \cite{gardner_new_2014} Share of novel n-grams in the response (words not in the prompt), presence of contrasting words {'while', 'but', 'though', 'although', 'other', 'others', 'however'}. https://aclanthology.org/2023.findings-acl.591.pdf
   \item Sentence length and Flesch reading ease (implemented via the textstat Python package) for natural language and non-code components of responses. \cite{flesch_how_2016, aggarwal_textstat_nodate}
   \item Cyclomatic complexity for code responses (implemented via the radon Python package). \cite{lacchia_radon_nodate}
   \item Ratio or difference of these scores in prompts vs. responses, responses vs. accepted/outside correct answer
