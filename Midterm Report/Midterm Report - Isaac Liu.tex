@@ -79,7 +79,11 @@ Improved accuracy can be a benefit of prompt engineering. I report:
 
 \subsection*{Length}
 
-The length of responses and interactions can effect the practicality of prompting. It could indicate that a model is carefully and correctly solving through the steps of a problem (though it may actually be a confounder of other factors in such cases https://browse.arxiv.org/pdf/2210.00720.pdf). It can also impose time and financial costs to users, or become an indicator of degraded performance as models sometimes tend to go off on tangents or repeat themselves (to the extent some platforms have imposed length limitations) \cite{mann_microsoft_nodate}. I report:
+The length of responses and interactions can effect the practicality of prompting. It could indicate that a model is carefully and correctly solving through the steps of a problem (though it may actually be a confounder of other factors in such cases https://browse.arxiv.org/pdf/2210.00720.pdf). It can also impose time and financial costs to users, or become an indicator of degraded performance as models sometimes tend to go off on tangents or repeat themselves (to the extent some platforms have imposed length limitations) \cite{mann_microsoft_nodate}. 
+
+Prompt length is helpful up to 20 tokens, detrimental past 100 tokens. p.5 of https://arxiv.org/pdf/2104.08691.pdf
+
+I report:
 
 \begin{itemize}
   \item Length of the entire interaction in tokens
@@ -145,5 +149,7 @@ The template for this document was adapted by Jordan Boyd-Graber, Naoaki Okazaki
 I used Semantic Scholar \cite{noauthor_semantic_nodate} to compile the following statistics concerning the popularity of X_NUMBER general-purpose prompt engineering methods in the collection at \url{https://www.promptingguide.ai/papers#approaches} on October 8, 2023. Here are the top 50 papers and their methods in terms of citations per day.
 
 (See Internet Archive for list of paper collection stablelink)
+
+Another good resource for prompt engineering methods and evaluations is the paperswithcode website https://paperswithcode.com/task/prompt-engineering. I did not make use of this page, however, as it seemed to be missing many prominent approaches, contains text-to-vision methods, and focuses on GitHub implementations (which are often low integer numbers difficult to compare) and currently trending social media items.
 
 \end{document}
