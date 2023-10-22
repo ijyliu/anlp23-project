@@ -94,7 +94,9 @@ The length of responses and interactions can effect the practicality of promptin
 
 \subsection*{Complexity}
 
-Similarly to length, complexity could be an indicator of high accuracy. However, it has substantial costs in potentially making review of LLM output more difficult, and on simple questions it may even lead to degraded accuracy https://browse.arxiv.org/pdf/2302.12822.pdf. I report:
+Similarly to length, complexity could be an indicator of high accuracy. In the case of summarization tasks, increased output complexity achieved by requests for summaries at an "expert" level can improve precision and recall in the face of concerns about named entity hallucination and detection https://aclanthology.org/2023.acl-srw.1.pdf. However, complexity has substantial costs in potentially making review of LLM output more difficult, and on simple questions it may even lead to degraded accuracy https://browse.arxiv.org/pdf/2302.12822.pdf. 
+
+I report:
 
 \begin{itemize}
   \item Vocabulary - share of words on the Academic Vocabulary List (AVL) for natural language and non-code components of responses. \cite{gardner_new_2014} Share of novel n-grams in the response (words not in the prompt), presence of contrasting words {'while', 'but', 'though', 'although', 'other', 'others', 'however'}. https://aclanthology.org/2023.findings-acl.591.pdf
@@ -105,6 +107,7 @@ Similarly to length, complexity could be an indicator of high accuracy. However,
   \item Ratio or difference of these scores in prompts vs. responses, responses vs. accepted/outside correct answer
   \item Human assessment of need for specialized knowledge/difficulty of implementation of the technique. This could be task specific (done for some novel real world example questions/prompting scenarios), or it could be done overall based on a pre-existing description of the technique. Perhaps a balance of both is best. The actual metric will be a numeric score and a qualitative description.
   \item Human assessment of output complexity (ease of evaluating results). This could be task specific (done for some novel real world example questions/prompting scenarios), or it could be done overall based on pre-existing examples of the technique. Perhaps a balance of both is best. The actual metric will be a numeric score and a qualitative description.
+  \item Human assessment of amount of irrelevant text generated
 \end{itemize}
 
 \section*{Data}
