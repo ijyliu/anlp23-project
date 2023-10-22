@@ -36,6 +36,18 @@ Dubious benefits due to a lack of research for some anecdotal techniques and dec
 but does not quantify these measures for specific techniques
 https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4504303
 
+The quality, length, and complexity of LLM responses have been analyzed within several individual task and technique domains. 
+
+Some research with GPT-3 series models on math and non-math reasoning tasks suggests the addition of complexity through the introduction of extra reasoning steps for both input prompts and output responses improves performance when using chain-of-thought prompting techniques https://browse.arxiv.org/pdf/2210.00720.pdf. Effects are on the magnitude of several points of accuracy per added step, with generally low costs as long as prompt examples are selected carefully. Improvements from complex chain-of-thought prompting are not fully accepted in the literature, however - some research has noted a tendency for the method to lead to degraded performance on simple questions https://browse.arxiv.org/pdf/2302.12822.pdf.
+
+Costs and complexity are important!
+
+The Chain of Density prompting technique seeks to optimize the named entity density of generated summaries through choice from a series of repeated, increasingly dense iterations https://browse.arxiv.org/pdf/2309.04269.pdf. Human preferences tend to align with 0.1 - 0.15 named entities per token, a point near the middle of the usual sequence of generations, demonstrating the existence of a tradeoff between informativeness and clarity.
+
+Response to why can't you just ask for a certain level of length/complexity:
+It is difficult to control language model output length/complexity on tasks:
+Research also demonstrates current models are not yet able to achieve compliance with desired readability and complexity instructions for the tasks of story generation, simplification, and summarization, though a small amount of improvement is achievable through careful prompt word choice and the use of few-shot examples https://aclanthology.org/2023.acl-srw.1.pdf https://browse.arxiv.org/pdf/2309.05454.pdf.
+
 This paper uses several metrics to evaluate the costs of prompt engineering methods systematically, and analyzes the tradeoffs inherent in their application to standardized data. Such an assessment is valuable on several dimensions. Beyond quantifiably testing the practicality of prompt engineering as a whole, it can be used to compare the performance of different approaches, useful in a world where so many competing techniques are available. I also offer a new look at these prompting methods in a period long after ideas were introduced and in an enviroment with greater capabilities in underlying models. Finally, I introduce and adapt some useful measures of costs and complexity, such as the ratio of interaction length with prompting to the length of an accepted human-generated answer, to the challenge of LLM evaluation.
 
 I provide a newly constructed dataset summarizing the wide variety of existing techniques and data on their popularity as measured by Semantic Scholar citations, which may be useful for future surveys of the field
@@ -67,7 +79,7 @@ Improved accuracy can be a benefit of prompt engineering. I report:
 
 \subsection*{Length}
 
-The length of responses and interactions can effect the practicality of prompting. It could indicate that a model is carefully and correctly solving through the steps of a problem. It can also impose time and financial costs to users, or become an indicator of degraded performance as models sometimes tend to go off on tangents or repeat themselves (to the extent some platforms have imposed length limitations) \cite{mann_microsoft_nodate}. I report:
+The length of responses and interactions can effect the practicality of prompting. It could indicate that a model is carefully and correctly solving through the steps of a problem (though it may actually be a confounder of other factors in such cases https://browse.arxiv.org/pdf/2210.00720.pdf). It can also impose time and financial costs to users, or become an indicator of degraded performance as models sometimes tend to go off on tangents or repeat themselves (to the extent some platforms have imposed length limitations) \cite{mann_microsoft_nodate}. I report:
 
 \begin{itemize}
   \item Length of the entire interaction in tokens
@@ -82,10 +94,12 @@ The length of responses and interactions can effect the practicality of promptin
 
 \subsection*{Complexity}
 
-Similarly to length, complexity could be an indicator of high accuracy. However, it has substantial costs in potentially making review of LLM output more difficult. I report:
+Similarly to length, complexity could be an indicator of high accuracy. However, it has substantial costs in potentially making review of LLM output more difficult, and on simple questions it may even lead to degraded accuracy https://browse.arxiv.org/pdf/2302.12822.pdf. I report:
 
 \begin{itemize}
   \item Vocabulary - share of words on the Academic Vocabulary List (AVL) for natural language and non-code components of responses. \cite{gardner_new_2014} Share of novel n-grams in the response (words not in the prompt), presence of contrasting words {'while', 'but', 'though', 'although', 'other', 'others', 'however'}. https://aclanthology.org/2023.findings-acl.591.pdf
+  \item Number of named entities https://browse.arxiv.org/pdf/2309.04269.pdf
+  \item Number of reasoning steps - linebreaks, periods, "step i" strings, and semicolons serve as separators. https://browse.arxiv.org/pdf/2210.00720.pdf
   \item Sentence length and Flesch reading ease (implemented via the textstat Python package) for natural language and non-code components of responses. \cite{flesch_how_2016, aggarwal_textstat_nodate}
   \item Cyclomatic complexity for code responses (implemented via the radon Python package). \cite{lacchia_radon_nodate}
   \item Ratio or difference of these scores in prompts vs. responses, responses vs. accepted/outside correct answer
