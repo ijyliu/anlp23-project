@@ -128,6 +128,10 @@ I perform the analysis on one cutting-edge model and one older model, closer to 
 
 To the extent possible, I will also report accuracy scores on the domain dataset as they are in the original paper introducing each technique. It may also be possible to use any prompts, LLM responses, and correct responses provided along with original papers to calculate other simple metrics such as response lengths and complexity. However, some metrics (time taken, human assessments of complexity) will require my own evaluations.
 
+GSM8K is known to not be contaminated
+
+Creative writing task came with tree of thoughts paper released only in 2023. LLM outputs/responses for that paper were not released. Alternatively could use freshly generated sentences if really concerned. But then it might be less possible to make a comparison... though maybe that's not important since coherence is subjective anyway...
+
 \section*{Analyses}
 
 I provide summary statistics of the metrics for each prompting method by model by question/task type. In cases where human/textual assessment and comments have been provided, it might be interesting to use NLP methods to evaluate responses (ex: for sentiment).
