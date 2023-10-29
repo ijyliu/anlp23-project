@@ -394,6 +394,8 @@ A:
 
 Source: https://arxiv.org/pdf/2305.10601.pdf
 
+No training data was provided, so I used random sentences courtesy of https://www.thewordfinder.com/random-sentence-generator/
+
 <Question>: 
 Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph, respectively, must be: 1. It isn't difficult to do a handstand if you just stand on your hands. 2. It caught him off guard that space smelled of seared steak.
 
@@ -426,38 +428,35 @@ See python code
 
 Least-to-most Prompting (1-shot): https://arxiv.org/pdf/2205.10625.pdf
 
-Q: Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph, respectively, must be: 1. It isn't difficult to do a handstand if you just stand on your hands. 2. It caught him off guard that space smelled of seared steak.
-A: Let's break down this problem into steps: First, we will write a few ideas for the passage. Second, draft the passage.
-Ideas:
-1. Make the passage about an astronaut in a space station doing handstands while someone is cooking steak.
-2. Make the passage about a gymnast going to a school picnic where steak is served.
-3. Make the passage about an interdimensional traveler being flipped around in a strange space.
-Passage:
-Paul was really enjoying after-school gymnastics practice. Years of hard work had begun to pay off, to the point where he was almost aloof when going through the motions of training repetitions. It isn't difficult to do a handstand if you just stand on your hands.
-On this particular day, Paul was looking forward to the school picnic after practice. When his coach told him they were done for the day, he hurried over to the park. He'd been expecting the principal and the teachers to bring hot dogs and hamburgers to the picnic shelter. It caught him off guard that space smelled of seared steak.
 Q: Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph, respectively, must be: 1. She couldn't get a job because she didn't have a permanent address. 2. He didn't have any hidden talents.
 A: Let's break down this problem into steps: First, we will write a few ideas for the passage. Second, draft the passage.
 Ideas:
 1. Make the passage about travelling circus performers looking for other work as their circus shuts down.
-2. Make the passage about a homeless person who is trying to get a job. 
+2. Make the passage about the struggles of a homeless person who is trying to get a job. 
+3. Make the passage about perceptions and preconceptions of people's skills and social status as factors in hiring.
 Passage: 
 Laura sat on the park bench, watching the people walk by. She was homeless, and had been for a few months now. She couldn't get a job because she didn't have a permanent address.
 She had tried to talk to career counselors about her situation, but the conversations often seemed fruitless. She didn't feel she had any marketable skills. Her situation was similar to that of her friend, Rodrigo, who openly shared a similar attitude with counselors in his meetings. He didn't have any hidden talents.
 Q: Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph, respectively, must be: 1. He had always wanted to be a Youtuber but never thought it would actually happen. 2. My sweater got caught on the door hinge.
 A: Let's break down this problem into steps: First, we will write a few ideas for the passage. Second, draft the passage.
 Ideas:
-1. Make the passage about a sister visiting her brother; the brother has recently become a successful Youtuber.
+1. Make the passage about a sister visiting her brother; the brother has recently become a successful Youtuber - she excitedly gets her sweater caught leaving a meeting with him.
 2. Make the passage about a men's fashion reviewer who is working on a video review of a sweater.
+3. Make the passage about a Youtuber preparing for a video shoot - as they hurry through things, their sweater gets caught but this becomes an amusing part of their vlog.
 Passage:
 My brother, John, had been making home videos for years, but they never got much attention. He was always disappointed when he saw other people's videos getting thousands of views. Then one day, he got a call from a company that wanted to sponsor him. They offered him a lot of money to make videos for them. He was so excited that he couldn't sleep that night. He had always wanted to be a Youtuber but never thought it would actually happen.
 As it turned out, John would need his own production staff to help with script writing and video editing. As I lived in the area and had prior experience in these fields, I was a natural choice for a part-time role on his channel. The company's sponsorship was very generous, and I would get a large portion of the profits. I was glad to finally be able to earn a substantial income in a more exciting and engaging role than my current position as a barista. I was smiling for most of our first business meeting, and strutted with pride out of our new studio. My sweater got caught on the door hinge.
+Q: <Question>
 A: 
   
 Manual Few-Shot:
 
-Q: Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph, respectively, must be: 1. It isn't difficult to do a handstand if you just stand on your hands. 2. It caught him off guard that space smelled of seared steak.
-A: Paul was really enjoying after-school gymnastics practice. Years of hard work had begun to pay off, to the point where he was almost aloof when going through the motions of training repetitions. It isn't difficult to do a handstand if you just stand on your hands.
-On this particular day, Paul was looking forward to the school picnic after practice. When his coach told him they were done for the day, he hurried over to the park. He'd been expecting the principal and the teachers to bring hot dogs and hamburgers to the picnic shelter. It caught him off guard that space smelled of seared steak.
+Q: Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph, respectively, must be: 1. She couldn't get a job because she didn't have a permanent address. 2. He didn't have any hidden talents.
+A: Laura sat on the park bench, watching the people walk by. She was homeless, and had been for a few months now. She couldn't get a job because she didn't have a permanent address.
+She had tried to talk to career counselors about her situation, but the conversations often seemed fruitless. She didn't feel she had any marketable skills. Her situation was similar to that of her friend, Rodrigo, who openly shared a similar attitude with counselors in his meetings. He didn't have any hidden talents.
+Q: Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph, respectively, must be: 1. He had always wanted to be a Youtuber but never thought it would actually happen. 2. My sweater got caught on the door hinge.
+A: My brother, John, had been making home videos for years, but they never got much attention. He was always disappointed when he saw other people's videos getting thousands of views. Then one day, he got a call from a company that wanted to sponsor him. They offered him a lot of money to make videos for them. He was so excited that he couldn't sleep that night. He had always wanted to be a Youtuber but never thought it would actually happen.
+As it turned out, John would need his own production staff to help with script writing and video editing. As I lived in the area and had prior experience in these fields, I was a natural choice for a part-time role on his channel. The company's sponsorship was very generous, and I would get a large portion of the profits. I was glad to finally be able to earn a substantial income in a more exciting and engaging role than my current position as a barista. I was smiling for most of our first business meeting, and strutted with pride out of our new studio. My sweater got caught on the door hinge.
 Q: <Question>
 A: 
 
@@ -465,15 +464,24 @@ Manual Chain-of-Thought:
 
 Page 36 of https://arxiv.org/pdf/2201.11903.pdf
 
-Q: Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph, respectively, must be: 1. It isn't difficult to do a handstand if you just stand on your hands. 2. It caught him off guard that space smelled of seared steak.
+Q: Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph, respectively, must be: 1. She couldn't get a job because she didn't have a permanent address. 2. He didn't have any hidden talents.
 A: 
 Ideas:
-1. Make the passage about an astronaut in a space station doing handstands while someone is cooking steak.
-2. Make the passage about a gymnast going to a school picnic where steak is served.
-3. Make the passage about an interdimensional traveler being flipped around in a strange space.
+1. Make the passage about travelling circus performers looking for other work as their circus shuts down.
+2. Make the passage about the struggles of a homeless person who is trying to get a job. 
+3. Make the passage about perceptions and preconceptions of people's skills and social status as factors in hiring.
+Passage: 
+Laura sat on the park bench, watching the people walk by. She was homeless, and had been for a few months now. She couldn't get a job because she didn't have a permanent address.
+She had tried to talk to career counselors about her situation, but the conversations often seemed fruitless. She didn't feel she had any marketable skills. Her situation was similar to that of her friend, Rodrigo, who openly shared a similar attitude with counselors in his meetings. He didn't have any hidden talents.
+Q: Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph, respectively, must be: 1. He had always wanted to be a Youtuber but never thought it would actually happen. 2. My sweater got caught on the door hinge.
+A:
+Ideas:
+1. Make the passage about a sister visiting her brother; the brother has recently become a successful Youtuber - she excitedly gets her sweater caught leaving a meeting with him.
+2. Make the passage about a men's fashion reviewer who is working on a video review of a sweater.
+3. Make the passage about a Youtuber preparing for a video shoot - as they hurry through things, their sweater gets caught but this becomes an amusing part of their vlog.
 Passage:
-Paul was really enjoying after-school gymnastics practice. Years of hard work had begun to pay off, to the point where he was almost aloof when going through the motions of training repetitions. It isn't difficult to do a handstand if you just stand on your hands.
-On this particular day, Paul was looking forward to the school picnic after practice. When his coach told him they were done for the day, he hurried over to the park. He'd been expecting the principal and the teachers to bring hot dogs and hamburgers to the picnic shelter. It caught him off guard that space smelled of seared steak.
+My brother, John, had been making home videos for years, but they never got much attention. He was always disappointed when he saw other people's videos getting thousands of views. Then one day, he got a call from a company that wanted to sponsor him. They offered him a lot of money to make videos for them. He was so excited that he couldn't sleep that night. He had always wanted to be a Youtuber but never thought it would actually happen.
+As it turned out, John would need his own production staff to help with script writing and video editing. As I lived in the area and had prior experience in these fields, I was a natural choice for a part-time role on his channel. The company's sponsorship was very generous, and I would get a large portion of the profits. I was glad to finally be able to earn a substantial income in a more exciting and engaging role than my current position as a barista. I was smiling for most of our first business meeting, and strutted with pride out of our new studio. My sweater got caught on the door hinge.
 Q: <Question>
 
 \end{document}
