@@ -8,6 +8,8 @@
 \usepackage[utf8]{inputenc}
 \usepackage{microtype}
 \usepackage{inconsolata}
+\usepackage{pdflscape}
+\usepackage{booktabs}
 
 % Set math text size
 \DeclareMathSizes{8}{8}{8}{8}
@@ -150,11 +152,24 @@ The template for this document was adapted by Jordan Boyd-Graber, Naoaki Okazaki
 
 \section{The Popularity of Some Prompting Methods}
 
-I used Semantic Scholar to compile the following statistics concerning the popularity of X NUMBER general-purpose prompt engineering methods in the collection at \url{https://www.promptingguide.ai/papers#approaches} on October X, 2023 \cite{noauthor_semantic_nodate}. Here are the top 50 papers in terms of citations per day and their associated methods.
+Table \ref{tab:method_pop} displays the popularity (in terms of Semantic Scholar citations \cite{noauthor_semantic_nodate}) of some of the most popular generalizable prompt engineering methods based on the lists at \url{https://www.promptingguide.ai/papers#approaches} and \url{https://en.wikipedia.org/wiki/Prompt_engineering#Text-to-text} as of October 22, 2023. Please contact the author for a full list of the 162 papers considered.
 
-(See Internet Archive for list of paper collection stablelink)
+Another good resource for prompt engineering methods and evaluations is the paperswithcode website: \url{https://paperswithcode.com/task/prompt-engineering}. I did not make use of this page, however, as it seemed to be missing many prominent approaches, contains text-to-vision methods, and focuses on GitHub implementations (which are often low integer numbers difficult to compare) and currently trending social media items.
 
-Another good resource for prompt engineering methods and evaluations is the paperswithcode website https://paperswithcode.com/task/prompt-engineering. I did not make use of this page, however, as it seemed to be missing many prominent approaches, contains text-to-vision methods, and focuses on GitHub implementations (which are often low integer numbers difficult to compare) and currently trending social media items.
+\begin{landscape}
+
+  \begin{centering}
+
+    \begin{table}[h]
+      \caption{Popularity of Selected Prompt Engineering Methods}
+      \small
+      \input{../Selection of Prompt Engineering Methods/selected_methods_popularity.tex}
+      \label{tab:method_pop}
+    \end{table}
+
+  \end{centering}
+
+\end{landscape}
 
 \section{Prompts Used}
 
@@ -176,7 +191,7 @@ APE Improved Zero-Shot Chain-of-Thought:
 <Question>
 Let's work this out in a step by step way to be sure we have the right answer.
 
-Tree-of-Thought: https://github.com/princeton-nlp/tree-of-thought-llm/tree/master https://github.com/kyegomez/tree-of-thoughts
+Tree-of-Thought: \url{https://github.com/princeton-nlp/tree-of-thought-llm/tree/master https://github.com/kyegomez/tree-of-thoughts}
 
 One reasoning step:
 
