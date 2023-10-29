@@ -23,61 +23,61 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-  This paper examines the practicality of prompt engineering in improving the performance of Large Language Models (LLMs). Through empirical analysis, we evaluate the trade-offs between costs and benefits of prompting using novel metrics. Different prompting methods are assessed using standardized tasks and both modern and older models.
+  This paper examines the practicality of prompt engineering in improving the performance of Large Language Models (LLMs). Through empirical analysis, we evaluate the trade-offs between costs and benefits of prompting using novel metrics. Different prompting methods are assessed using standardized tasks and both state-of-the-art and older models.
 \end{abstract}
 
 \section*{Introduction}
 
-Prompt engineering, the practice of developing specialized prompts and queries to improve the accuracy of Large Language Models after training, is a prominent topic of interest in the NLP community, and among the general public. The practice is believed to allow for improvements in LLM performance a variety of domains without investment in underlying training \cite{martineau_what_2021}. It is not, however, without its critics. Some commentators believe that the practice will become irrelevant as models grow larger and more powerful, becoming more capable of directly interpreting a user's intent. \cite{ethan_mollick_emollick_i_2023}. Others question the need for specialized professionals or training to attain minimal improvements which are often not repeatable across contexts \cite{shackell_prompt_2023, acar_ai_2023}. 
+Prompt engineering, the practice of developing specialized prompts and queries to improve the accuracy of Large Language Models after training, is a prominent topic of interest in the NLP community, and among the general public. The practice is believed to allow for improvements in LLM performance a variety of domains without investment in underlying training \cite{martineau_what_2021}. It is not, however, without its critics. Some commentators believe that the practice will become irrelevant as models grow larger and more powerful, becoming more capable of directly interpreting a user's intent \cite{ethan_mollick_emollick_i_2023}. Others question the need for specialized professionals or training to attain minimal improvements which are often not repeatable across contexts \cite{shackell_prompt_2023, acar_ai_2023}. 
 
-Despite such controversy, it is difficult to find empirical analyses of the tradeoff between costs and accuracy benefits associated with advanced prompting. Papers introducing new prompting techniques often only include performance benchmarks concerning the techniques' efficacy, typically within a limited domain. Some authors briefly mention problems associated with human-tailored prompts, such as the increased complexity induced by prompt-chaining and limitations on creativity and randomness \cite{wu_ai_2022}, and others suggest the automation of prompting to avoid these costs \cite{diao_active_2023}, but the extent of these issues has not been (to my knowledge) quantified. Online marketplaces such as \href{https://promptbase.com/}{Promptbase} provide input token costs for prompt texts sold on the platform, but do not provide any other information.
+Despite such controversy, it is difficult to find empirical analyses of the tradeoff between costs and accuracy benefits associated with advanced prompting. Papers introducing new prompting techniques often only include performance benchmarks concerning the techniques' efficacy, typically within a limited domain. Some authors briefly mention problems associated with human-tailored prompts, such as the increased complexity induced by prompt-chaining and limitations on creativity and randomness \cite{wu_ai_2022}, and others suggest the automation of prompting to avoid these costs \cite{diao_active_2023}. It is known that token costs, degradation of quality with increased prompt context lengths, and the uncertain nature of accuracy gains are all important practical considerations \cite{gao_prompt_2023}. However, the extent of these issues for various techniques, so as to enable standardized comparison between them and with a control baseline (no special prompting), has not been (to my knowledge) quantified.
 
-Briefly some practical considerations for prompt engineering 
-On the cost side there are token costs, the filling of context window lengths leading to lower performance quality
-Dubious benefits due to a lack of research for some anecdotal techniques and decreased effectiveness with larger models
-but does not quantify these measures for specific techniques
-\url{https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4504303}
+The quality, length, and complexity of LLM responses have been analyzed within several individual task and technique domains. Some research with GPT-3 series models on math and non-math reasoning tasks suggests the addition of length and complexity through the introduction of extra reasoning steps for both input prompts and output responses improves performance when using chain-of-thought prompting techniques \cite{fu_complexity-based_2023}. Effects are on the magnitude of several points of accuracy per added step, with generally low costs as long as prompt examples are selected carefully. Improvements from complex chain-of-thought prompting are not fully accepted in the literature, however - other work has noted a tendency for the method to lead to worse performance on simple questions \cite{shum_automatic_2023}.
 
-The quality, length, and complexity of LLM responses have been analyzed within several individual task and technique domains. 
+Complexity has also been studied with the context of prompting for summarization and story generation tasks. The Chain of Density prompting technique seeks to optimize the named entity density of generated summaries through choice from a series of repeated, increasingly dense iterations \cite{adams_sparse_2023}. Human preferences tend to align with 0.1 - 0.15 named entities per token, a point near the middle of the usual sequence of generations, demonstrating the existence of a tradeoff between informativeness and clarity. At the same time, other work has shown is difficult to control language model output complexity, meaning that the choice of specific techniques is important. Research demonstrates current models are not yet able to achieve compliance with desired readability instructions for the tasks of story generation, simplification, and summarization, though a small amount of improvement is achievable through careful prompt word choice and the use of few-shot examples \cite{pu_chatgpt_2023, imperial_flesch_2023}.
 
-Some research with GPT-3 series models on math and non-math reasoning tasks suggests the addition of complexity through the introduction of extra reasoning steps for both input prompts and output responses improves performance when using chain-of-thought prompting techniques https://browse.arxiv.org/pdf/2210.00720.pdf. Effects are on the magnitude of several points of accuracy per added step, with generally low costs as long as prompt examples are selected carefully. Improvements from complex chain-of-thought prompting are not fully accepted in the literature, however - some research has noted a tendency for the method to lead to degraded performance on simple questions https://browse.arxiv.org/pdf/2302.12822.pdf.
-
-Costs and complexity are important!
-
-The Chain of Density prompting technique seeks to optimize the named entity density of generated summaries through choice from a series of repeated, increasingly dense iterations https://browse.arxiv.org/pdf/2309.04269.pdf. Human preferences tend to align with 0.1 - 0.15 named entities per token, a point near the middle of the usual sequence of generations, demonstrating the existence of a tradeoff between informativeness and clarity.
-
-Response to why can't you just ask for a certain level of length/complexity:
-It is difficult to control language model output length/complexity on tasks:
-Research also demonstrates current models are not yet able to achieve compliance with desired readability and complexity instructions for the tasks of story generation, simplification, and summarization, though a small amount of improvement is achievable through careful prompt word choice and the use of few-shot examples https://aclanthology.org/2023.acl-srw.1.pdf https://browse.arxiv.org/pdf/2309.05454.pdf.
-
-This paper uses several metrics to evaluate the costs of prompt engineering methods systematically, and analyzes the tradeoffs inherent in their application to standardized data. Such an assessment is valuable on several dimensions. Beyond quantifiably testing the practicality of prompt engineering as a whole, it can be used to compare the performance of different approaches, useful in a world where so many competing techniques are available. I also offer a new look at these prompting methods in a period long after ideas were introduced and in an enviroment with greater capabilities in underlying models. Finally, I introduce and adapt some useful measures of costs and complexity, such as the ratio of interaction length with prompting to the length of an accepted human-generated answer, to the challenge of LLM evaluation.
-
-I provide a newly constructed dataset summarizing the wide variety of existing techniques and data on their popularity as measured by Semantic Scholar citations, which may be useful for future surveys of the field
+This paper uses several metrics to evaluate the costs of prompt engineering methods systematically, and analyzes the tradeoffs inherent in their application to standardized data. Such an assessment is valuable on several dimensions. Beyond quantifiably testing the practicality of prompt engineering as a whole, it can be used to compare the performance of different approaches, useful in a world where so many competing techniques are available. I also provide a newly constructed dataset summarizing the wide variety of existing techniques and data on their popularity as measured by Semantic Scholar citations, which may be useful for future surveys of the field. Next, I offer a new look at these prompting methods in a period long after ideas were introduced. The current environment is one in which far greater capabilities are native to underlying foundation models. Finally, I introduce and adapt some useful measures of costs and complexity, such as the ratio of interaction length with prompting to the length of an accepted human-generated answer, to the challenge of LLM evaluation.
 
 \section*{Prompting Methods Assessed}
 
-This list is subject to change, pending further assessment of popularity, implementation difficulty, and potential accuracy gains for each method. Higher accuracy methods are likely to be more interesting.
-
-The below items are listed in order of increasing complexity/human intervention:
+The following methods were selected based on their popularity (see Appendix Section \ref{sec:popularity}) and ease of implementation.
 
 \begin{itemize}
-  \item Zero-Shot Control Baseline/Direct Prompting: Providing the question/task directly.
-  \item Zero-Shot Chain of Thought Prompting: Existing literature mentions several examples of this; a simple one to append to every initial question/task, found to be optimal through automated testing is "Let's work this out in a step by step way to be sure we have the right answer." \cite{hebenstreit_automatically_2023, zhou_large_2022}
-  \item Tree of Thought Prompting: This prepends the following to the task/question: "Imagine three different experts are answering this question. All experts will write down 1 step of their thinking, then share it with the group. Then all experts will go on to the next step, etc. If any expert realises they're wrong at any point then they leave. The question is..." \cite{hulbert_using_2023}
-  \item Generated Knowledge Prompting: The LLM is first prompted to generate some related facts and knowledge about the task/question. It is then prompted to answer the task/question. \cite{liu_generated_2022} The knowledge generating and task/question models could be different, but for my purposes I use the same model.
-  \item Chain of Verification Prompting: The LLM is prompted a series of times to produce an initial baseline response, write its own verification questions, answer those verification questions, and write a final, verified response. \cite{dhuliawala_chain--verification_2023}
-  \item Few-Shot Prompting: The prompter provides a few examples of successfully/answered questions or tasks before the main question/task. Despite the work involved in implementing this method, I believe it has potential to be effective for two reasons. First, prior evidence indicates that larger and more modern language models benefit more from few-shot learning, potentially making this a consistently useful technique. \cite{brown_language_2020} Second, earlier research has found that the formatting and input/label space distribution is more important than example correctness, meaning this method is somewhat robust to human error. \cite{min_rethinking_2022}
+  \item Zero-Shot Control Baseline/Direct Prompting: This method consists of just providing the question/task directly.
+  \item Zero-Shot Chain of Thought Prompting (Original): Initial advances in chain of thought prompting to improve reasoning were achieved by simply including the following before the question/task: "Let's think step by step." \cite{kojima_large_2023}
+  \item Zero-Shot Chain of Thought Prompting (Automatic Prompt Engineer): Automated testing has indicated that an optimal zero-shot Chain of Thought prompt is "Let's work this out in a step by step way to be sure we have the right answer." \cite{zhou_large_2022}
+  % \item Tree of Thought Prompting: This prepends the following to the task/question: "Imagine three different experts are answering this question. All experts will write down 1 step of their thinking, then share it with the group. Then all experts will go on to the next step, etc. If any expert realises they're wrong at any point then they leave. The question is..." \cite{hulbert_using_2023}
+  \item Self-Refine Prompting: The model produces an initial response, then is prompted for feedback which it uses to refine it. \cite{madaan_self-refine_2023}
+  \item Least-to-most Prompting: The model is given few-shot examples that demonstrate how to first break down the task into smaller and simpler subproblems, then solve them sequentially. \cite{zhou_least--most_2023}
+  \item Few-Shot Prompting: The prompter provides a few examples of successfully/answered questions or tasks before the main question/task.
+  \item Few-Shot Chain-of-Thought Prompting: The model is provided worked examples of answers in which the reasoning steps are written out. \cite{wei_chain--thought_nodate} Note, however, that such steps are not initially planned out as is the case in least-to-most prompting.
 \end{itemize}
+
+\section*{Data}
+
+To evaluate performance, I attempt to use tasks that are general-purpose, close to real-world applications, and standardized in the literature. To this end, I selected the GSM8K dataset, a collection of elementary-level math word problems \cite{cobbe_training_2021}, and a creative writing task involving the generation of a coherent two-paragraph passage with two random, predetermined ending sentences \cite{yao_tree_2023}. These tasks carry several key benefits. They cover both the logical/mathematical and linguistic domains - two types of tasks that form the foundation of the standardized testing of humans. GSM8K is studied in the majority of the papers introducing techniques I mentioned and is among the most common datasets used in the far larger list of papers I initially surveyed. Text and story generation is a widespread foundational task in NLP. Importantly, these sets of tasks are known to be free of data contamination. The GSM8K test set has been intentionally withheld from the training of OpenAI's models \cite{openai_gpt-4_2023}. The creative writing task was released only in 2023, and the code and data provided with the associated paper includes only questions and not LLM responses. \footnote{It is also relatively simple to find randoom sentence generators online (such as \url{https://www.thewordfinder.com/random-sentence-generator/}), which would work for this task - at the cost of comparability with the results of \cite{yao_tree_2023}. In any case, the task does make use of subjective human evaluations of the coherence of generated stories, limiting comparisons anyway.}
+
+I perform the analysis on one cutting-edge model and one older model, closer to the time that these techniques were introduced. This provides a picture of the changing costs and benefits of advanced prompting, a trend that may even be extrapolated into the future if current LLM scaling laws continue to hold. As the most widely used models and the ones behind much original work in the field, I select two models from the OpenAI series: GPT-4 and text-davinci-003 on OpenAI playground. These models are available both via the OpenAI API and in web interfaces - where possible I use web interfaces to limit resources required.
+
+To the extent possible, I report accuracy scores on the domain dataset as they are in the original paper introducing each technique. It is possible to use any prompts, LLM responses, and correct responses provided along with original papers to calculate other simple metrics such as response lengths and complexity. However, some metrics (time taken, human assessments of complexity) require my own evaluations.
 
 \section*{Metrics}
 
-\subsection*{Accuracy}
+\subsection*{Quality}
 
-Improved accuracy can be a benefit of prompt engineering. I report:
+Improved response quality can be a benefit of prompt engineering. I report:
 
+For GSM8K problems:
 \begin{itemize}
   \item Correct/Incorrect accuracy at the point a technique has been fully implemented (the end of the chain of thought, etc., modelling the real world)
 \end{itemize}
+
+For Creative Writing:
+\begin{itemize}
+  \item Human assessment of coherence (on a scale of 1 to 5, 1 being incoherent and 5 being very coherent)
+\end{itemize}
+
+I grade LLM responses manually and with assistance from GPT-4
 
 \subsection*{Length}
 
@@ -120,25 +120,21 @@ I report:
   \item Human assessment of amount of irrelevant text generated
 \end{itemize}
 
-\section*{Data}
-
-To evaluate performance, I attempt to use tasks that are both general-purpose and close to practical, real-world applications. In this spirit, I use GRE General Test questions (from a purchased prep book or practice exams recently published online to minimize contamination), as well as HumanEval coding problems. For multiple choice choice questions, I will perform a string search, or use another (very capable) LLM, or perform manual interpretation to determine the letter answer the model selected based on its response (experimentation will be necessary before picking a method to use here). HumanEval uses the pass@k metric to automatically assess the probability a code solution is correct given a set of unit tests. \cite{chen_evaluating_2021}
-
-I perform the analysis on one cutting-edge model and one older model, closer to the time that these techniques were introduced. This will provide a picture of the changing costs and benefits of advanced prompting, a trend that may even be extrapolated into the future if current LLM scaling laws continue to hold. As the most widely used models and the ones behind much original work in the field, I select two models from the OpenAI series: GPT-4 and text-davinci-003 on OpenAI playground. Should text-davinci-003 (a legacy model) become unavailable during the course of the project, or should I encounter other difficulties, I will use the simplest/smallest model available, likely GPT-3.5 (something to note is that models older than GPT-3.5 have, in the past, scored 0\% for accuracy on coding problems - I will need to test all of my evaluations quickly to get a sense of feasible model choices before scaling up). All of these models are available both via the OpenAI API and in web interfaces - where possible I will use web interfaces to limit resources required.
-
-To the extent possible, I will also report accuracy scores on the domain dataset as they are in the original paper introducing each technique. It may also be possible to use any prompts, LLM responses, and correct responses provided along with original papers to calculate other simple metrics such as response lengths and complexity. However, some metrics (time taken, human assessments of complexity) will require my own evaluations.
-
-GSM8K is known to not be contaminated
-
-Creative writing task came with tree of thoughts paper released only in 2023. LLM outputs/responses for that paper were not released. Alternatively could use freshly generated sentences if really concerned. But then it might be less possible to make a comparison... though maybe that's not important since coherence is subjective anyway...
-
 \section*{Analyses}
 
 I provide summary statistics of the metrics for each prompting method by model by question/task type. In cases where human/textual assessment and comments have been provided, it might be interesting to use NLP methods to evaluate responses (ex: for sentiment).
 
+The results can provide insight into several questions:
+
+Finish filling this out with points from the introduction.
+
+Do larger/more modern models benefit more from prompt engineering, or are the techniques becoming obsolete? Earlier evidence demonstrated that gains from few-shot learning increased with scale - has this trend continued to hold? \cite{brown_language_2020} Are the most recent prompt engineering techniques more powerful and useful?
+
+Does increased complexity limit creativity and randomness (investigating the creative writing task in particular might be helpful)? Does it lead to worse performance on simple questions?
+
 \section*{Limitations}
 
-It was difficult to select prompt engineering methods to try for this paper, and there is potential for my choice of methods to be somewhat biased. I mostly picked methods based my perception of their popularity and ease of implementation. If anything, this may lead to an underestimation of costs.
+It was difficult to select prompt engineering methods to try for this paper, and there is potential for my choice of methods to be somewhat biased. I mostly picked methods based my perception of their popularity and ease of implementation. If anything, this may lead to an underestimation of costs if easy-to-implement and high quality methods are likely to be popular.
 
 Just as my evaluation comes at a time with significantly more capable LLMs relative to those available when much work began on prompting, I expect the underlying calculus concerning prompting to continue to change in the future. However, I again only expect relative costs of complex engineering to increase as models get better.
 
@@ -155,6 +151,7 @@ The template for this document was adapted by Jordan Boyd-Graber, Naoaki Okazaki
 \appendix
 
 \section{The Popularity of Some Prompting Methods}
+\label{sec:popularity}
 
 Table \ref{tab:method_pop} displays the popularity (in terms of Semantic Scholar citations \cite{noauthor_semantic_nodate}) of some of the most popular generalizable prompt engineering methods based on the lists at \url{https://www.promptingguide.ai/papers#approaches} and \url{https://en.wikipedia.org/wiki/Prompt_engineering#Text-to-text} as of October 22, 2023. Please contact the author for a full list of the 162 papers considered.
 
@@ -195,7 +192,7 @@ APE Improved Zero-Shot Chain-of-Thought:
 <Question>
 Let's work this out in a step by step way to be sure we have the right answer.
 
-Tree-of-Thought: \url{https://github.com/princeton-nlp/tree-of-thought-llm/tree/master https://github.com/kyegomez/tree-of-thoughts}
+Tree-of-Thought: \url{https://github.com/princeton-nlp/tree-of-thought-llm/tree/master} \url{https://github.com/kyegomez/tree-of-thoughts}
 
 One reasoning step:
 

@@ -1,4 +1,4 @@
-\begin{thebibliography}{20}
+\begin{thebibliography}{22}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 
 \bibitem[{noa()}]{noauthor_semantic_nodate}
@@ -86,6 +86,18 @@ Rudolf Flesch. 2016.
 \newblock \href
   {https://web.archive.org/web/20160712094308/http://www.mang.canterbury.ac.nz/writing_guide/writing/flesch.shtml}
   {How to {Write} {Plain} {English}}.
+
+\bibitem[{Fu et~al.(2023)Fu, Peng, Sabharwal, Clark, and
+  Khot}]{fu_complexity-based_2023}
+Yao Fu, Hao Peng, Ashish Sabharwal, Peter Clark, and Tushar Khot. 2023.
+\newblock \href {http://arxiv.org/abs/2210.00720} {Complexity-{Based}
+  {Prompting} for {Multi}-{Step} {Reasoning}}.
+\newblock ArXiv:2210.00720 [cs].
+
+\bibitem[{Gao(2023)}]{gao_prompt_2023}
+Andrew Gao. 2023.
+\newblock \href {https://doi.org/10.2139/ssrn.4504303} {Prompt {Engineering}
+  for {Large} {Language} {Models}}.
 
 \bibitem[{Gardner and Davies(2014)}]{gardner_new_2014}
 Dee Gardner and Mark Davies. 2014.
