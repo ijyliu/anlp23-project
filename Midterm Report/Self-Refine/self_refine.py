@@ -1,40 +1,34 @@
+
+# NOTE: It seems possible to simplify things in conversation mode - just asking a problem, then always sending the same task string.
+
 feedback_prompt = 
 
-"""We want to score each acronym on five qualities: i) ease of pronunciation, ii) ease of spelling, and iii) relation to the title, iv) positive connotation, v) well-known.
+"""
+Problem: 
+{problem}
 
-Here are some examples of this scoring rubric:
+Response:
+{response}
 
+Task:
+Please check the math for the response above. If there is an error, state what the error is, but don't fix it. If there are no errors, output STOP.
 """
 
-"""Title: {title}
-
-Acronym: {answer}
-
-Scores:
-
-* Ease of pronunciation: {pronunciation_score}
-* Ease of spelling: {spelling_score}
-* Relation to title: {relation_score}
-* Positive connotation: {connotation_score}
-* Well-known: {well_known_score}
-
-* Total score: {total_score}"""
-
-
-"IF then STOP"
 
 refiner_prompt = 
 
-"""Title: {title}
+"""
+Problem: 
+{problem}
 
-Acronym: {acronym}
+Response:
+{response}
 
-Scores:
+Feedback:
+{feedback}
 
-{scores}
-
-Okay, let's use this feedback to improve the acronym.
-
+Task:
+Use the provided feedback to re-write the response.
 """
 
 def self_refine(prompt: str) -> str:
