@@ -390,4 +390,75 @@ A: The last letter of "Bill" is "l". The last letter of "Gates" is "s". Concaten
 Q: <Question>
 A: 
 
+\subsection{Creative Writing}
+
+Source: https://arxiv.org/pdf/2305.10601.pdf
+
+<Question>: 
+Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph, respectively, must be: 1. It isn't difficult to do a handstand if you just stand on your hands. 2. It caught him off guard that space smelled of seared steak.
+
+Zero-Shot Control Baseline/Direct Prompting:
+<Question>
+
+Zero-Shot Chain-of-Thought:
+<Question>
+Let's think step by step.
+
+APE Improved Zero-Shot Chain-of-Thought:
+<Question>
+Let's work this out in a step by step way to be sure we have a correct and coherent answer.
+
+Tree-of-Thought: https://github.com/princeton-nlp/tree-of-thought-llm/tree/master https://github.com/kyegomez/tree-of-thoughts
+
+NEEDS HELP
+
+<Question>
+Generate 3 plans for potential passages. Do not write the passage.
+
+Select the most coherent outline that follows the rules of the task. Do not write the passage.
+
+Write three drafts of the passage based on this outline.
+
+Select the most coherent draft that follows the rules of the task and write it out.
+
+Self-Refine: https://selfrefine.info/
+See python code
+
+Least-to-most Prompting (1-shot): https://arxiv.org/pdf/2205.10625.pdf
+
+Q: Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph, respectively, must be: 1. It isn't difficult to do a handstand if you just stand on your hands. 2. It caught him off guard that space smelled of seared steak.
+A: Let's break down this problem into steps: First, we will write a few ideas for the passage. Second, draft the passage.
+Ideas:
+1. Make the passage about an astronaut in a space station doing handstands while someone is cooking steak.
+2. Make the passage about a gymnast going to a school picnic where steak is served.
+3. Make the passage about an interdimensional traveler being flipped around in a strange space.
+Passage:
+Paul was really enjoying after-school gymnastics practice. Years of hard work had begun to pay off, to the point where he was almost aloof when going through the motions of training repetitions. It isn't difficult to do a handstand if you just stand on your hands.
+On this particular day, Paul was looking forward to the school picnic after practice. When his coach told him they were done for the day, he hurried over to the park. He'd been expecting the principal and the teachers to bring hot dogs and hamburgers to the picnic shelter. It caught him off guard that space smelled of seared steak.
+Q: <Question>
+A: 
+
+Manual Few-Shot:
+
+Q: Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph, respectively, must be: 1. It isn't difficult to do a handstand if you just stand on your hands. 2. It caught him off guard that space smelled of seared steak.
+A: Paul was really enjoying after-school gymnastics practice. Years of hard work had begun to pay off, to the point where he was almost aloof when going through the motions of training repetitions. It isn't difficult to do a handstand if you just stand on your hands.
+On this particular day, Paul was looking forward to the school picnic after practice. When his coach told him they were done for the day, he hurried over to the park. He'd been expecting the principal and the teachers to bring hot dogs and hamburgers to the picnic shelter. It caught him off guard that space smelled of seared steak.
+Q: <Question>
+A: 
+
+Manual Chain-of-Thought:
+
+Page 36 of https://arxiv.org/pdf/2201.11903.pdf
+
+Q: Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph, respectively, must be: 1. It isn't difficult to do a handstand if you just stand on your hands. 2. It caught him off guard that space smelled of seared steak.
+A: 
+Ideas:
+1. Make the passage about an astronaut in a space station doing handstands while someone is cooking steak.
+2. Make the passage about a gymnast going to a school picnic where steak is served.
+3. Make the passage about an interdimensional traveler being flipped around in a strange space.
+Passage:
+Paul was really enjoying after-school gymnastics practice. Years of hard work had begun to pay off, to the point where he was almost aloof when going through the motions of training repetitions. It isn't difficult to do a handstand if you just stand on your hands.
+On this particular day, Paul was looking forward to the school picnic after practice. When his coach told him they were done for the day, he hurried over to the park. He'd been expecting the principal and the teachers to bring hot dogs and hamburgers to the picnic shelter. It caught him off guard that space smelled of seared steak.
+Q: <Question>
+
 \end{document}
