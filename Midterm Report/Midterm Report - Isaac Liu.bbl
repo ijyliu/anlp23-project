@@ -1,4 +1,4 @@
-\begin{thebibliography}{22}
+\begin{thebibliography}{27}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 
 \bibitem[{noa()}]{noauthor_semantic_nodate}
@@ -12,6 +12,14 @@ Oguz~A. Acar. 2023.
   {{AI} {Prompt} {Engineering} {Isn}’t the {Future}}.
 \newblock \emph{Harvard Business Review}.
 \newblock Section: Technology and analytics.
+
+\bibitem[{Adams et~al.(2023)Adams, Fabbri, Ladhak, Lehman, and
+  Elhadad}]{adams_sparse_2023}
+Griffin Adams, Alexander Fabbri, Faisal Ladhak, Eric Lehman, and Noémie
+  Elhadad. 2023.
+\newblock \href {http://arxiv.org/abs/2309.04269} {From {Sparse} to {Dense}:
+  {GPT}-4 {Summarization} with {Chain} of {Density} {Prompting}}.
+\newblock ArXiv:2309.04269 [cs].
 
 \bibitem[{Aggarwal()}]{aggarwal_textstat_nodate}
 Shivam~Bansal Aggarwal, Chaitanya.
@@ -34,37 +42,14 @@ Tom~B. Brown, Benjamin Mann, Nick Ryder, Melanie Subbiah, Jared Kaplan,
   {Few}-{Shot} {Learners}}.
 \newblock ArXiv:2005.14165 [cs].
 
-\bibitem[{Chen et~al.(2021)Chen, Tworek, Jun, Yuan, Pinto, Kaplan, Edwards,
-  Burda, Joseph, Brockman, Ray, Puri, Krueger, Petrov, Khlaaf, Sastry, Mishkin,
-  Chan, Gray, Ryder, Pavlov, Power, Kaiser, Bavarian, Winter, Tillet, Such,
-  Cummings, Plappert, Chantzis, Barnes, Herbert-Voss, Guss, Nichol, Paino,
-  Tezak, Tang, Babuschkin, Balaji, Jain, Saunders, Hesse, Carr, Leike, Achiam,
-  Misra, Morikawa, Radford, Knight, Brundage, Murati, Mayer, Welinder, McGrew,
-  Amodei, McCandlish, Sutskever, and Zaremba}]{chen_evaluating_2021}
-Mark Chen, Jerry Tworek, Heewoo Jun, Qiming Yuan, Henrique Ponde de~Oliveira
-  Pinto, Jared Kaplan, Harri Edwards, Yuri Burda, Nicholas Joseph, Greg
-  Brockman, Alex Ray, Raul Puri, Gretchen Krueger, Michael Petrov, Heidy
-  Khlaaf, Girish Sastry, Pamela Mishkin, Brooke Chan, Scott Gray, Nick Ryder,
-  Mikhail Pavlov, Alethea Power, Lukasz Kaiser, Mohammad Bavarian, Clemens
-  Winter, Philippe Tillet, Felipe~Petroski Such, Dave Cummings, Matthias
-  Plappert, Fotios Chantzis, Elizabeth Barnes, Ariel Herbert-Voss,
-  William~Hebgen Guss, Alex Nichol, Alex Paino, Nikolas Tezak, Jie Tang, Igor
-  Babuschkin, Suchir Balaji, Shantanu Jain, William Saunders, Christopher
-  Hesse, Andrew~N. Carr, Jan Leike, Josh Achiam, Vedant Misra, Evan Morikawa,
-  Alec Radford, Matthew Knight, Miles Brundage, Mira Murati, Katie Mayer, Peter
-  Welinder, Bob McGrew, Dario Amodei, Sam McCandlish, Ilya Sutskever, and
-  Wojciech Zaremba. 2021.
-\newblock \href {http://arxiv.org/abs/2107.03374} {Evaluating {Large}
-  {Language} {Models} {Trained} on {Code}}.
-\newblock ArXiv:2107.03374 [cs] version: 2.
-
-\bibitem[{Dhuliawala et~al.(2023)Dhuliawala, Komeili, Xu, Raileanu, Li,
-  Celikyilmaz, and Weston}]{dhuliawala_chain--verification_2023}
-Shehzaad Dhuliawala, Mojtaba Komeili, Jing Xu, Roberta Raileanu, Xian Li, Asli
-  Celikyilmaz, and Jason Weston. 2023.
-\newblock \href {http://arxiv.org/abs/2309.11495} {Chain-of-{Verification}
-  {Reduces} {Hallucination} in {Large} {Language} {Models}}.
-\newblock ArXiv:2309.11495 [cs].
+\bibitem[{Cobbe et~al.(2021)Cobbe, Kosaraju, Bavarian, Chen, Jun, Kaiser,
+  Plappert, Tworek, Hilton, Nakano, Hesse, and Schulman}]{cobbe_training_2021}
+Karl Cobbe, Vineet Kosaraju, Mohammad Bavarian, Mark Chen, Heewoo Jun, Lukasz
+  Kaiser, Matthias Plappert, Jerry Tworek, Jacob Hilton, Reiichiro Nakano,
+  Christopher Hesse, and John Schulman. 2021.
+\newblock \href {http://arxiv.org/abs/2110.14168} {Training {Verifiers} to
+  {Solve} {Math} {Word} {Problems}}.
+\newblock ArXiv:2110.14168 [cs].
 
 \bibitem[{Diao et~al.(2023)Diao, Wang, Lin, and Zhang}]{diao_active_2023}
 Shizhe Diao, Pengcheng Wang, Yong Lin, and Tong Zhang. 2023.
@@ -105,32 +90,36 @@ Dee Gardner and Mark Davies. 2014.
   {Vocabulary} {List}}.
 \newblock \emph{Applied Linguistics}, 35(3):305--327.
 
-\bibitem[{Hebenstreit et~al.(2023)Hebenstreit, Praas, Kiesewetter, and
-  Samwald}]{hebenstreit_automatically_2023}
-Konstantin Hebenstreit, Robert Praas, Louis~P. Kiesewetter, and Matthias
-  Samwald. 2023.
-\newblock \href {http://arxiv.org/abs/2305.02897} {An automatically discovered
-  chain-of-thought prompt generalizes to novel models and datasets}.
-\newblock ArXiv:2305.02897 [cs].
+\bibitem[{Imperial and Madabushi(2023)}]{imperial_flesch_2023}
+Joseph~Marvin Imperial and Harish~Tayyar Madabushi. 2023.
+\newblock \href {http://arxiv.org/abs/2309.05454} {Flesch or {Fumble}?
+  {Evaluating} {Readability} {Standard} {Alignment} of {Instruction}-{Tuned}
+  {Language} {Models}}.
+\newblock ArXiv:2309.05454 [cs].
 
-\bibitem[{Hulbert(2023)}]{hulbert_using_2023}
-Dave Hulbert. 2023.
-\newblock \href {https://github.com/dave1010/tree-of-thought-prompting} {Using
-  {Tree}-of-{Thought} {Prompting} to boost {ChatGPT}'s reasoning}.
-\newblock Original-date: 2023-05-22T19:03:27Z.
+\bibitem[{Kojima et~al.(2023)Kojima, Gu, Reid, Matsuo, and
+  Iwasawa}]{kojima_large_2023}
+Takeshi Kojima, Shixiang~Shane Gu, Machel Reid, Yutaka Matsuo, and Yusuke
+  Iwasawa. 2023.
+\newblock \href {https://doi.org/10.48550/arXiv.2205.11916} {Large {Language}
+  {Models} are {Zero}-{Shot} {Reasoners}}.
+\newblock ArXiv:2205.11916 [cs].
 
 \bibitem[{Lacchia()}]{lacchia_radon_nodate}
 Michele Lacchia.
 \newblock \href {https://radon.readthedocs.org/} {radon: {Code} {Metrics} in
   {Python}}.
 
-\bibitem[{Liu et~al.(2022)Liu, Liu, Lu, Welleck, West, Bras, Choi, and
-  Hajishirzi}]{liu_generated_2022}
-Jiacheng Liu, Alisa Liu, Ximing Lu, Sean Welleck, Peter West, Ronan~Le Bras,
-  Yejin Choi, and Hannaneh Hajishirzi. 2022.
-\newblock \href {http://arxiv.org/abs/2110.08387} {Generated {Knowledge}
-  {Prompting} for {Commonsense} {Reasoning}}.
-\newblock ArXiv:2110.08387 [cs].
+\bibitem[{Madaan et~al.(2023)Madaan, Tandon, Gupta, Hallinan, Gao, Wiegreffe,
+  Alon, Dziri, Prabhumoye, Yang, Gupta, Majumder, Hermann, Welleck,
+  Yazdanbakhsh, and Clark}]{madaan_self-refine_2023}
+Aman Madaan, Niket Tandon, Prakhar Gupta, Skyler Hallinan, Luyu Gao, Sarah
+  Wiegreffe, Uri Alon, Nouha Dziri, Shrimai Prabhumoye, Yiming Yang, Shashank
+  Gupta, Bodhisattwa~Prasad Majumder, Katherine Hermann, Sean Welleck, Amir
+  Yazdanbakhsh, and Peter Clark. 2023.
+\newblock \href {http://arxiv.org/abs/2303.17651} {Self-{Refine}: {Iterative}
+  {Refinement} with {Self}-{Feedback}}.
+\newblock ArXiv:2303.17651 [cs].
 
 \bibitem[{Mann()}]{mann_microsoft_nodate}
 Jyoti Mann.
@@ -144,13 +133,21 @@ Kim Martineau. 2021.
 \newblock \href {https://research.ibm.com/blog/what-is-ai-prompt-tuning} {What
   is prompt tuning?}
 
-\bibitem[{Min et~al.(2022)Min, Lyu, Holtzman, Artetxe, Lewis, Hajishirzi, and
-  Zettlemoyer}]{min_rethinking_2022}
-Sewon Min, Xinxi Lyu, Ari Holtzman, Mikel Artetxe, Mike Lewis, Hannaneh
-  Hajishirzi, and Luke Zettlemoyer. 2022.
-\newblock \href {http://arxiv.org/abs/2202.12837} {Rethinking the {Role} of
-  {Demonstrations}: {What} {Makes} {In}-{Context} {Learning} {Work}?}
-\newblock ArXiv:2202.12837 [cs].
+\bibitem[{OpenAI(2023)}]{openai_gpt-4_2023}
+OpenAI. 2023.
+\newblock \href {http://arxiv.org/abs/2303.08774} {{GPT}-4 {Technical}
+  {Report}}.
+\newblock ArXiv:2303.08774 [cs].
+
+\bibitem[{Pu and Demberg(2023)}]{pu_chatgpt_2023}
+Dongqi Pu and Vera Demberg. 2023.
+\newblock \href {https://doi.org/10.18653/v1/2023.acl-srw.1} {{ChatGPT} vs
+  {Human}-authored {Text}: {Insights} into {Controllable} {Text}
+  {Summarization} and {Sentence} {Style} {Transfer}}.
+\newblock In \emph{Proceedings of the 61st {Annual} {Meeting} of the
+  {Association} for {Computational} {Linguistics} ({Volume} 4: {Student}
+  {Research} {Workshop})}, pages 1--18, Toronto, Canada. Association for
+  Computational Linguistics.
 
 \bibitem[{Shackell(2023)}]{shackell_prompt_2023}
 Cameron Shackell. 2023.
@@ -159,6 +156,20 @@ Cameron Shackell. 2023.
   {Prompt engineering: is being an {AI} 'whisperer' the job of the future or a
   short-lived fad?}
 
+\bibitem[{Shum et~al.(2023)Shum, Diao, and Zhang}]{shum_automatic_2023}
+KaShun Shum, Shizhe Diao, and Tong Zhang. 2023.
+\newblock \href {http://arxiv.org/abs/2302.12822} {Automatic {Prompt}
+  {Augmentation} and {Selection} with {Chain}-of-{Thought} from {Labeled}
+  {Data}}.
+\newblock ArXiv:2302.12822 [cs].
+
+\bibitem[{Wei et~al.()Wei, Wang, Schuurmans, Bosma, Ichter, Xia, Chi, Le, and
+  Zhou}]{wei_chain--thought_nodate}
+Jason Wei, Xuezhi Wang, Dale Schuurmans, Maarten Bosma, Brian Ichter, Fei Xia,
+  Ed~H Chi, Quoc~V Le, and Denny Zhou.
+\newblock Chain-of-{Thought} {Prompting} {Elicits} {Reasoning} in {Large}
+  {Language} {Models}.
+
 \bibitem[{Wu et~al.(2022)Wu, Terry, and Cai}]{wu_ai_2022}
 Tongshuang Wu, Michael Terry, and Carrie~Jun Cai. 2022.
 \newblock \href {https://doi.org/10.1145/3491102.3517582} {{AI} {Chains}:
@@ -166,6 +177,23 @@ Tongshuang Wu, Michael Terry, and Carrie~Jun Cai. 2022.
   {Large} {Language} {Model} {Prompts}}.
 \newblock In \emph{{CHI} {Conference} on {Human} {Factors} in {Computing}
   {Systems}}, pages 1--22, New Orleans LA USA. ACM.
+
+\bibitem[{Yao et~al.(2023)Yao, Yu, Zhao, Shafran, Griffiths, Cao, and
+  Narasimhan}]{yao_tree_2023}
+Shunyu Yao, Dian Yu, Jeffrey Zhao, Izhak Shafran, Thomas~L. Griffiths, Yuan
+  Cao, and Karthik Narasimhan. 2023.
+\newblock \href {https://doi.org/10.48550/arXiv.2305.10601} {Tree of
+  {Thoughts}: {Deliberate} {Problem} {Solving} with {Large} {Language}
+  {Models}}.
+\newblock ArXiv:2305.10601 [cs].
+
+\bibitem[{Zhou et~al.(2023)Zhou, Schärli, Hou, Wei, Scales, Wang, Schuurmans,
+  Cui, Bousquet, Le, and Chi}]{zhou_least--most_2023}
+Denny Zhou, Nathanael Schärli, Le~Hou, Jason Wei, Nathan Scales, Xuezhi Wang,
+  Dale Schuurmans, Claire Cui, Olivier Bousquet, Quoc Le, and Ed~Chi. 2023.
+\newblock \href {http://arxiv.org/abs/2205.10625} {Least-to-{Most} {Prompting}
+  {Enables} {Complex} {Reasoning} in {Large} {Language} {Models}}.
+\newblock ArXiv:2205.10625 [cs].
 
 \bibitem[{Zhou et~al.(2022)Zhou, Muresanu, Han, Paster, Pitis, Chan, and
   Ba}]{zhou_large_2022}
