@@ -1,4 +1,4 @@
-\begin{thebibliography}{27}
+\begin{thebibliography}{26}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 
 \bibitem[{noa()}]{noauthor_semantic_nodate}
@@ -104,11 +104,6 @@ Takeshi Kojima, Shixiang~Shane Gu, Machel Reid, Yutaka Matsuo, and Yusuke
 \newblock \href {https://doi.org/10.48550/arXiv.2205.11916} {Large {Language}
   {Models} are {Zero}-{Shot} {Reasoners}}.
 \newblock ArXiv:2205.11916 [cs].
-
-\bibitem[{Lacchia()}]{lacchia_radon_nodate}
-Michele Lacchia.
-\newblock \href {https://radon.readthedocs.org/} {radon: {Code} {Metrics} in
-  {Python}}.
 
 \bibitem[{Madaan et~al.(2023)Madaan, Tandon, Gupta, Hallinan, Gao, Wiegreffe,
   Alon, Dziri, Prabhumoye, Yang, Gupta, Majumder, Hermann, Welleck,

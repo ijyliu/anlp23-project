@@ -55,7 +55,9 @@ The following methods were selected based on their popularity (see Appendix Sect
 
 \section*{Data}
 
-To evaluate performance, I attempt to use tasks that are general-purpose, close to real-world applications, and standardized in the literature. To this end, I selected the GSM8K dataset, a collection of elementary-level math word problems \cite{cobbe_training_2021}, and a creative writing task involving the generation of a coherent two-paragraph passage with two random, predetermined ending sentences \cite{yao_tree_2023}. The original creative writing task in \citealp{yao_tree_2023} uses four sentences, but this is too difficult for older models and for the production of good chain-of-thought/few-shot demonstrations - I simply take the first two sentences for each original question. These tasks carry several key benefits. They cover both the mathematical and linguistic domains - two types of tasks that form the foundation of the standardized testing of humans. GSM8K is studied in the majority of the papers introducing techniques I mentioned and is among the most common datasets used in the far larger list of papers I initially surveyed. Text and story generation is a widespread foundational task in NLP. Importantly, these sets of tasks are known to be free of data contamination. The GSM8K test set has been intentionally withheld from the training of OpenAI's models \cite{openai_gpt-4_2023}. The creative writing task was released only in 2023, and the code and data provided with the associated paper includes only questions and not LLM responses. \footnote{It is also relatively simple to find random sentence generators online (such as \url{https://www.thewordfinder.com/random-sentence-generator/}), which would work for this task - at the cost of comparability with the results of \cite{yao_tree_2023}. In any case, the 2-sentence task represents a modification of the original, and the test overall makes use of subjective human evaluations of the coherence of generated stories, limiting comparisons anyway.}
+To evaluate performance, I attempt to use tasks that are general-purpose, close to real-world applications, and standardized in the literature. To this end, I selected the GSM8K dataset, a collection of elementary-level math word problems \cite{cobbe_training_2021}, and a creative writing task involving the generation of a coherent two-paragraph passage with two random, predetermined ending sentences modified from \citealp{yao_tree_2023}. The original creative writing task in \citealp{yao_tree_2023} uses four paragraphs and sentences, but this is too difficult for older models and for the production of good chain-of-thought/few-shot demonstrations - I simply take the first two sentences for each original question. 
+
+These tasks carry several key benefits. They cover both the mathematical and linguistic domains - two types of tasks that form the foundation of the standardized testing of humans. GSM8K is studied in the majority of the papers introducing techniques I mentioned and is among the most common datasets used in the far larger list of papers I initially surveyed. Text and story generation is a widespread foundational task in NLP. Importantly, these sets of tasks are known to be free of data contamination. The GSM8K test set has been intentionally withheld from the training of OpenAI's models \cite{openai_gpt-4_2023}. The creative writing task was released only in 2023, and the code and data provided with the associated paper includes only questions and not LLM responses. \footnote{It is also relatively simple to find random sentence generators online (such as \url{https://www.thewordfinder.com/random-sentence-generator/}), which would work for this task - at the cost of comparability with the results of \cite{yao_tree_2023}. In any case, the 2-sentence task represents a modification of the original, and the test overall makes use of subjective human evaluations of the coherence of generated stories, limiting comparisons anyway.}
 
 I perform the analysis on one cutting-edge model and one older model from closer to the time that these techniques were introduced. This provides a picture of the changing costs and benefits of advanced prompting, a trend that may even be extrapolated into the future if current LLM scaling laws continue to hold. As the most widely used models and the ones behind much original work in the field, I select two models from the OpenAI series: GPT-4 and text-davinci-003 on OpenAI playground. These models are available both via the OpenAI API and in web interfaces - where possible I use web interfaces to limit resources required.
 
@@ -100,7 +102,7 @@ I report:
 
 Similarly to length, complexity could be an indicator of high accuracy. In the case of summarization tasks, increased output complexity achieved by requests for summaries at an "expert" level can improve precision and recall in the face of concerns about named entity hallucination and detection https://aclanthology.org/2023.acl-srw.1.pdf. However, complexity has substantial costs in potentially making review of LLM output more difficult, and on simple questions it may even lead to degraded accuracy https://browse.arxiv.org/pdf/2302.12822.pdf. 
 
-COmplicated prompts may hurt robustness to irrelevant context: https://proceedings.mlr.press/v202/shi23a/shi23a.pdf
+Complicated prompts may hurt robustness to irrelevant context: https://proceedings.mlr.press/v202/shi23a/shi23a.pdf
 
 Chaining prompts creates complexity but also enables fluency and transparency - qualitative statements https://arxiv.org/pdf/2110.01691.pdf. In a study of prompt chaining, participants qualitatively reported...
 
@@ -111,7 +113,6 @@ I report:
   \item Number of named entities https://browse.arxiv.org/pdf/2309.04269.pdf
   \item Number of reasoning steps - linebreaks, periods, "step i" strings, and semicolons serve as separators. https://browse.arxiv.org/pdf/2210.00720.pdf
   \item Sentence length and Flesch reading ease (implemented via the textstat Python package) for natural language and non-code components of responses. \cite{flesch_how_2016, aggarwal_textstat_nodate}
-  \item Cyclomatic complexity for code responses (implemented via the radon Python package). \cite{lacchia_radon_nodate}
   \item Ratio or difference of these scores in prompts vs. responses, responses vs. accepted/outside correct answer
   \item Human assessment of need for specialized knowledge/difficulty of implementation of the technique. This could be task specific (done for some novel real world example questions/prompting scenarios), or it could be done overall based on a pre-existing description of the technique. Perhaps a balance of both is best. The actual metric will be a numeric score and a qualitative description.
   \item Human assessment of output complexity (ease of evaluating results). This could be task specific (done for some novel real world example questions/prompting scenarios), or it could be done overall based on pre-existing examples of the technique. Perhaps a balance of both is best. The actual metric will be a numeric score and a qualitative description.
@@ -128,7 +129,7 @@ Finish filling this out with points from the introduction.
 
 Do larger/more modern models benefit more from prompt engineering, or are the techniques becoming obsolete? Earlier evidence demonstrated that gains from few-shot learning increased with scale - has this trend continued to hold? \cite{brown_language_2020} Are the most recent prompt engineering techniques more powerful and useful?
 
-Does increased complexity limit creativity and randomness (investigating the creative writing task in particular might be helpful)? Does it lead to worse performance on simple questions?
+Does increased complexity limit creativity and randomness (investigating the creative writing task in particular might be helpful - coherence requires creativity)? Does it lead to worse performance on simple questions?
 
 \section*{Limitations}
 
@@ -292,34 +293,32 @@ A:
 
 Source: https://arxiv.org/pdf/2305.10601.pdf
 
-No training data was provided, so I used random sentences courtesy of https://www.thewordfinder.com/random-sentence-generator/
+No training data was provided, so I used random sentences courtesy of \url{https://www.thewordfinder.com/random-sentence-generator/} in the construction of few-shot examples.
 
 <Question>: 
-Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph, respectively, must be: 1. It isn't difficult to do a handstand if you just stand on your hands. 2. It caught him off guard that space smelled of seared steak.
+Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph must be: 1. It isn't difficult to do a handstand if you just stand on your hands. 2. It caught him off guard that space smelled of seared steak.
+
+SHOULD I REALLY BE MAKING ANY MODIFICATIONS HERE? VERSUS YAO? MODIFICATIONS: COHERENT PASSAGE "CONSISTING" OF, CHANGE Q: to TASK:
 
 Zero-Shot Control Baseline/Direct Prompting:
 <Question>
 
 Zero-Shot Chain-of-Thought:
-<Question>
-Let's think step by step.
+<Question>. Plan step-by-step before writing the passage.
 
 APE Improved Zero-Shot Chain-of-Thought:
-<Question>
-Let's work this out in a step by step way to be sure we have a correct and coherent answer.
+<Question>. Plan step-by-step before writing the passage to be sure we have a correct and coherent answer.
 
-Tree-of-Thought: https://github.com/princeton-nlp/tree-of-thought-llm/tree/master https://github.com/kyegomez/tree-of-thoughts
-
-NEEDS HELP
-
-<Question>
-Generate 3 plans for potential passages. Do not write the passage.
-
-Select the most coherent outline that follows the rules of the task. Do not write the passage.
-
-Write three drafts of the passage based on this outline.
-
-Select the most coherent draft that follows the rules of the task and write it out.
+Tree-of-Thought:
+<Modified Question. Example: Goal: A coherent passage of 2 short paragraphs. The end sentence of each paragraph, respectively, must be: 1. It isn't difficult to do a handstand if you just stand on your hands. 2. It caught him off guard that space smelled of seared steak.>
+Your Task: Generate 3 one-sentence plans for potential passages. Only generate one-sentence plans - do not write the passage.
+<Response>
+Your Task: Select the most coherent plan that follows the rules of the task. Only state the plan - do not write the passage.
+<Response>
+Your Task: Write three drafts of the 2-paragraph passage based on this plan.
+<Response>
+Your Task: Select the most coherent draft that follows the rules of the task and write it out.
+<Response>
 
 Self-Refine: https://selfrefine.info/
 See python code
