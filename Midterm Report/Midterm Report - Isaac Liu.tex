@@ -251,13 +251,9 @@ A: Let's break down this problem:
 Append to this: "The answer is:" in a second pass.
 
 Manual Few-Shot:
-
 Randomly draw examples from the training set, as per https://arxiv.org/pdf/2005.14165.pdf
 
 Manual Chain-of-Thought:
-
-Page 35 of https://arxiv.org/pdf/2201.11903.pdf
-
 Q: There are 15 trees in the grove. Grove workers will plant trees in the grove today. After they are done, there
 will be 21 trees. How many trees did the grove workers plant today?
 A: There are 15 trees originally. Then there were 21 trees after some more were planted. So there must have
@@ -291,26 +287,22 @@ A:
 
 \subsection{Creative Writing}
 
-Source: https://arxiv.org/pdf/2305.10601.pdf
+No training data was provided, so I used random sentences courtesy of \url{https://www.thewordfinder.com/random-sentence-generator/} and my own answers in the construction of few-shot examples.
 
-No training data was provided, so I used random sentences courtesy of \url{https://www.thewordfinder.com/random-sentence-generator/} in the construction of few-shot examples.
-
-<Question>: 
+<Task>:
 Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph must be: 1. It isn't difficult to do a handstand if you just stand on your hands. 2. It caught him off guard that space smelled of seared steak.
 
-SHOULD I REALLY BE MAKING ANY MODIFICATIONS HERE? VERSUS YAO? MODIFICATIONS: COHERENT PASSAGE "CONSISTING" OF, CHANGE Q: to TASK:
-
 Zero-Shot Control Baseline/Direct Prompting:
-<Question>
+<Task>
 
 Zero-Shot Chain-of-Thought:
-<Question>. Plan step-by-step before writing the passage.
+<Task>. Plan step-by-step before writing the passage.
 
 APE Improved Zero-Shot Chain-of-Thought:
-<Question>. Plan step-by-step before writing the passage to be sure we have a correct and coherent answer.
+<Task>. Plan step-by-step before writing the passage to be sure we have a correct and coherent answer.
 
 Tree-of-Thought:
-<Modified Question. Example: Goal: A coherent passage of 2 short paragraphs. The end sentence of each paragraph, respectively, must be: 1. It isn't difficult to do a handstand if you just stand on your hands. 2. It caught him off guard that space smelled of seared steak.>
+<Modified Task. Example: Goal: A coherent passage of 2 short paragraphs. The end sentence of each paragraph, respectively, must be: 1. It isn't difficult to do a handstand if you just stand on your hands. 2. It caught him off guard that space smelled of seared steak.>
 Your Task: Generate 3 one-sentence plans for potential passages. Only generate one-sentence plans - do not write the passage.
 <Response>
 Your Task: Select the most coherent plan that follows the rules of the task. Only state the plan - do not write the passage.
@@ -323,10 +315,9 @@ Your Task: Select the most coherent draft that follows the rules of the task and
 Self-Refine: https://selfrefine.info/
 See python code
 
-Least-to-most Prompting (1-shot): https://arxiv.org/pdf/2205.10625.pdf
-
-Q: Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph, respectively, must be: 1. She couldn't get a job because she didn't have a permanent address. 2. He didn't have any hidden talents.
-A: Let's break down this problem into steps: First, we will write a few ideas for the passage. Second, draft the passage.
+Least-to-most Prompting:
+Task: Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph, respectively, must be: 1. She couldn't get a job because she didn't have a permanent address. 2. He didn't have any hidden talents.
+Response: Let's break down this problem into steps: First, we will write a few ideas for the passage. Second, draft the passage.
 Ideas:
 1. Make the passage about travelling circus performers looking for other work as their circus shuts down.
 2. Make the passage about the struggles of a homeless person who is trying to get a job. 
@@ -334,8 +325,8 @@ Ideas:
 Passage: 
 Laura sat on the park bench, watching the people walk by. She was homeless, and had been for a few months now. She couldn't get a job because she didn't have a permanent address.
 She had tried to talk to career counselors about her situation, but the conversations often seemed fruitless. She didn't feel she had any marketable skills. Her situation was similar to that of her friend, Rodrigo, who openly shared a similar attitude with counselors in his meetings. He didn't have any hidden talents.
-Q: Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph, respectively, must be: 1. He had always wanted to be a Youtuber but never thought it would actually happen. 2. My sweater got caught on the door hinge.
-A: Let's break down this problem into steps: First, we will write a few ideas for the passage. Second, draft the passage.
+Task: Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph, respectively, must be: 1. He had always wanted to be a Youtuber but never thought it would actually happen. 2. My sweater got caught on the door hinge.
+Response: Let's break down this problem into steps: First, we will write a few ideas for the passage. Second, draft the passage.
 Ideas:
 1. Make the passage about a sister visiting her brother; the brother has recently become a successful Youtuber - she excitedly gets her sweater caught leaving a meeting with him.
 2. Make the passage about a men's fashion reviewer who is working on a video review of a sweater.
@@ -343,26 +334,22 @@ Ideas:
 Passage:
 My brother, John, had been making home videos for years, but they never got much attention. He was always disappointed when he saw other people's videos getting thousands of views. Then one day, he got a call from a company that wanted to sponsor him. They offered him a lot of money to make videos for them. He was so excited that he couldn't sleep that night. He had always wanted to be a Youtuber but never thought it would actually happen.
 As it turned out, John would need his own production staff to help with script writing and video editing. As I lived in the area and had prior experience in these fields, I was a natural choice for a part-time role on his channel. The company's sponsorship was very generous, and I would get a large portion of the profits. I was glad to finally be able to earn a substantial income in a more exciting and engaging role than my current position as a barista. I was smiling for most of our first business meeting, and strutted with pride out of our new studio. My sweater got caught on the door hinge.
-Q: <Question>
-A: 
+Task: <Task>
+Response: 
   
 Manual Few-Shot:
-
-Q: Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph, respectively, must be: 1. She couldn't get a job because she didn't have a permanent address. 2. He didn't have any hidden talents.
-A: Laura sat on the park bench, watching the people walk by. She was homeless, and had been for a few months now. She couldn't get a job because she didn't have a permanent address.
+Task: Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph, respectively, must be: 1. She couldn't get a job because she didn't have a permanent address. 2. He didn't have any hidden talents.
+Response: Laura sat on the park bench, watching the people walk by. She was homeless, and had been for a few months now. She couldn't get a job because she didn't have a permanent address.
 She had tried to talk to career counselors about her situation, but the conversations often seemed fruitless. She didn't feel she had any marketable skills. Her situation was similar to that of her friend, Rodrigo, who openly shared a similar attitude with counselors in his meetings. He didn't have any hidden talents.
-Q: Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph, respectively, must be: 1. He had always wanted to be a Youtuber but never thought it would actually happen. 2. My sweater got caught on the door hinge.
-A: My brother, John, had been making home videos for years, but they never got much attention. He was always disappointed when he saw other people's videos getting thousands of views. Then one day, he got a call from a company that wanted to sponsor him. They offered him a lot of money to make videos for them. He was so excited that he couldn't sleep that night. He had always wanted to be a Youtuber but never thought it would actually happen.
+Task: Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph, respectively, must be: 1. He had always wanted to be a Youtuber but never thought it would actually happen. 2. My sweater got caught on the door hinge.
+Response: My brother, John, had been making home videos for years, but they never got much attention. He was always disappointed when he saw other people's videos getting thousands of views. Then one day, he got a call from a company that wanted to sponsor him. They offered him a lot of money to make videos for them. He was so excited that he couldn't sleep that night. He had always wanted to be a Youtuber but never thought it would actually happen.
 As it turned out, John would need his own production staff to help with script writing and video editing. As I lived in the area and had prior experience in these fields, I was a natural choice for a part-time role on his channel. The company's sponsorship was very generous, and I would get a large portion of the profits. I was glad to finally be able to earn a substantial income in a more exciting and engaging role than my current position as a barista. I was smiling for most of our first business meeting, and strutted with pride out of our new studio. My sweater got caught on the door hinge.
-Q: <Question>
-A: 
+Task: <Task>
+Response: 
 
 Manual Chain-of-Thought:
-
-Page 36 of https://arxiv.org/pdf/2201.11903.pdf
-
-Q: Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph, respectively, must be: 1. She couldn't get a job because she didn't have a permanent address. 2. He didn't have any hidden talents.
-A: 
+Task: Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph, respectively, must be: 1. She couldn't get a job because she didn't have a permanent address. 2. He didn't have any hidden talents.
+Response: 
 Ideas:
 1. Make the passage about travelling circus performers looking for other work as their circus shuts down.
 2. Make the passage about the struggles of a homeless person who is trying to get a job. 
@@ -370,8 +357,8 @@ Ideas:
 Passage: 
 Laura sat on the park bench, watching the people walk by. She was homeless, and had been for a few months now. She couldn't get a job because she didn't have a permanent address.
 She had tried to talk to career counselors about her situation, but the conversations often seemed fruitless. She didn't feel she had any marketable skills. Her situation was similar to that of her friend, Rodrigo, who openly shared a similar attitude with counselors in his meetings. He didn't have any hidden talents.
-Q: Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph, respectively, must be: 1. He had always wanted to be a Youtuber but never thought it would actually happen. 2. My sweater got caught on the door hinge.
-A:
+Task: Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph, respectively, must be: 1. He had always wanted to be a Youtuber but never thought it would actually happen. 2. My sweater got caught on the door hinge.
+Response:
 Ideas:
 1. Make the passage about a sister visiting her brother; the brother has recently become a successful Youtuber - she excitedly gets her sweater caught leaving a meeting with him.
 2. Make the passage about a men's fashion reviewer who is working on a video review of a sweater.
@@ -379,14 +366,14 @@ Ideas:
 Passage:
 My brother, John, had been making home videos for years, but they never got much attention. He was always disappointed when he saw other people's videos getting thousands of views. Then one day, he got a call from a company that wanted to sponsor him. They offered him a lot of money to make videos for them. He was so excited that he couldn't sleep that night. He had always wanted to be a Youtuber but never thought it would actually happen.
 As it turned out, John would need his own production staff to help with script writing and video editing. As I lived in the area and had prior experience in these fields, I was a natural choice for a part-time role on his channel. The company's sponsorship was very generous, and I would get a large portion of the profits. I was glad to finally be able to earn a substantial income in a more exciting and engaging role than my current position as a barista. I was smiling for most of our first business meeting, and strutted with pride out of our new studio. My sweater got caught on the door hinge.
-Q: <Question>
-A:
+Task: <Task>
+Response:
 
 \section{Evaluating Creative Writing Responses}
 
 GPT-4 was prompted with the following to elucidate a scalar score of passage coherence:
 
-<Question>
+<Task>
 <Passage>
 Rate the coherence of the answer on a scale of 1 to 10, 1 being incoherent and 10 being very coherent.
 
