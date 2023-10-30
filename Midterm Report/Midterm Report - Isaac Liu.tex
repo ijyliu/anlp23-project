@@ -290,7 +290,7 @@ A:
 No training data was provided, so I used random sentences courtesy of \url{https://www.thewordfinder.com/random-sentence-generator/} and my own answers in the construction of few-shot examples.
 
 <Task>:
-Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph must be: 1. It isn't difficult to do a handstand if you just stand on your hands. 2. It caught him off guard that space smelled of seared steak.
+Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph must be: 1. It isn't difficult to do a handstand if you just stand on your hands. 2. It caught him off guard that space smelled of seared steak. \footnote{Some preliminary experiments replacing the first sentence with "Write a coherent passage of 2 short paragraphs that flow together.", which seemed to improve zero-shot performance. However, I decided not to adopt this modification to stay in line with the original task.}
 
 Zero-Shot Control Baseline/Direct Prompting:
 <Task>
@@ -312,8 +312,13 @@ Your Task: Write three drafts of the 2-paragraph passage based on this plan.
 Your Task: Select the most coherent draft that follows the rules of the task and write it out.
 <Response>
 
-Self-Refine: https://selfrefine.info/
-See python code
+Self-Refine: 
+Task: <Task>
+Response: <Response>
+Your Task: Provide feedback on the correctness and coherence of the response and a rating on a scale of 1-10. If it is already coherent and correct to the extent you would award a 10, output 10 and the word STOP.
+Feedback: <Feedback>
+Your Task: Rewrite the passage based on the most recent feedback.
+Response: <Response>
 
 Least-to-most Prompting:
 Task: Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph, respectively, must be: 1. She couldn't get a job because she didn't have a permanent address. 2. He didn't have any hidden talents.
