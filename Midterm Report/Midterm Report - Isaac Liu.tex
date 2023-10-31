@@ -65,9 +65,9 @@ To the extent possible, I report accuracy scores on the domain dataset as they a
 
 \section*{Metrics}
 
-\subsection*{Quality}
+\subsection*{Accuracy}
 
-Improved response quality can be a benefit of prompt engineering. I report:
+Improved response accuracy can be a benefit of prompt engineering. I report:
 
 For GSM8K problems:
 \begin{itemize}
@@ -76,7 +76,7 @@ For GSM8K problems:
 
 For Creative Writing:
 \begin{itemize}
-  \item Assessment of coherence (on a scale of 1 to 10, 1 being incoherent and 10 being very coherent). GPT-4 is known to be capable of producing scalar scores useful for this task \cite{yao_tree_2023}, so I also collect its evaluations as an additional opinion. \footnote{I additionally tried to use GPT-4 to assess adherence to the original instructions - to check if the exact sentences specified in the prompt were used. In my initial experiments - in contrast to \citealp{yao_tree_2023} - I found that GPT-4 was not able to do this, repeatedly missing deviations of one or a few words, even when told to carefully perform the check in a step-by-step manner!}
+  \item Assessment of coherence (on a scale of 1 to 10, 1 being incoherent and 10 being very coherent). GPT-4 is known to be capable of producing scalar scores useful for this task \cite{yao_tree_2023}, so I also collect its evaluations as an additional opinion. I report Krippendorff's alpha for these scores. I also collect data on whether or not the task constraints were followed (ending sentences exactly matching those specified), and additionally report scores when the lowest possible rating of 1 assigned to cases where the rules are broken. \footnote{I additionally tried to use GPT-4 to assess adherence to the original instructions - to check if the exact sentences specified in the prompt were used. In my initial experiments - in contrast to \citealp{yao_tree_2023} - I found that GPT-4 was not able to do this, repeatedly missing deviations of one or a few words, even when told to carefully perform the check in a step-by-step manner!}
 \end{itemize}
 
 \subsection*{Length}
@@ -173,10 +173,12 @@ Another good resource for prompt engineering methods and evaluations is the pape
 
 \section{Prompts Used}
 
-Below I have listed question and prompt examples for each method.
+Below I have listed question and prompt examples for each task and method.
 \subsection{GSM8K}
 
-The sample problem is the first one in the GSM8K test dataset. All prompt examples for non-zero-shot methods are drawn from the training dataset.
+The sample problem is the first one in the GSM8K test dataset. \cite{cobbe_training_2021}
+
+All prompt examples for few-shot methods come from the training dataset.
 
 <Question> "Janet's ducks lay 16 eggs per day. She eats three for breakfast every morning and bakes muffins for her friends every day with four. She sells the remainder at the farmers' market daily for \$2 per fresh duck egg. How much in dollars does she make every day at the farmers' market?"
 
@@ -191,7 +193,7 @@ APE Improved Zero-Shot Chain-of-Thought:
 <Question>
 Let's work this out in a step by step way to be sure we have the right answer.
 
-Tree-of-Thought: \url{https://github.com/princeton-nlp/tree-of-thought-llm/tree/master} \url{https://github.com/kyegomez/tree-of-thoughts}
+Tree-of-Thought: 
 
 One reasoning step:
 
@@ -239,21 +241,18 @@ The question is...
 Self-Refine: https://selfrefine.info/
 See python code
 
-Least-to-most Prompting (1-shot): https://arxiv.org/pdf/2205.10625.pdf
+Least-to-most Prompting (1-shot; taken from p.58 of \citealp{zhou_least--most_2023}):
 Q: Elsa has 5 apples. Anna has 2 more apples than Elsa. How many apples do they have together?
 A: Let's break down this problem: 1. How many apples does Anna have? 2. How many apples do Elsa and Anna have together?
 1. Anna has 2 more apples than Elsa. So Anna has 2 + 5 = 7 apples.
 2. Elsa and Anna have 5 + 7 = 12 apples together.
-
-Q: Janet's ducks lay 16 eggs per day. She eats three for breakfast every morning and bakes muffins for her friends every day with four. She sells the remainder at the farmers' market daily for \$2 per fresh duck egg. How much in dollars does she make every day at the farmers' market?
+Q: <Question>
 A: Let's break down this problem:
 
-Append to this: "The answer is:" in a second pass.
-
-Manual Few-Shot:
+Manual Few-Shot (randomly drawn examples from the training set - following the methodology in \citealp{brown_language_2020}):
 Randomly draw examples from the training set, as per https://arxiv.org/pdf/2005.14165.pdf
 
-Manual Chain-of-Thought:
+Manual Chain-of-Thought (taken from p.35 of \citealp{wei_chain--thought_nodate}):
 Q: There are 15 trees in the grove. Grove workers will plant trees in the grove today. After they are done, there
 will be 21 trees. How many trees did the grove workers plant today?
 A: There are 15 trees originally. Then there were 21 trees after some more were planted. So there must have
@@ -286,6 +285,8 @@ Q: <Question>
 A:
 
 \subsection{Creative Writing}
+
+The sample task is the first one in the Creative Writing dataset. \cite{yao_tree_2023}
 
 No training data was provided, so I used random sentences courtesy of \url{https://www.thewordfinder.com/random-sentence-generator/} and my own answers in the construction of few-shot examples.
 
