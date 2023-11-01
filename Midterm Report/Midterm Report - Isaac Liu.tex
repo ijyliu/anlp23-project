@@ -38,9 +38,20 @@ Complexity has also been studied with the context of prompting for summarization
 
 This paper uses several metrics to evaluate the costs of prompt engineering methods systematically, and analyzes the tradeoffs inherent in their application to standardized data. Such an assessment is valuable on several dimensions. Beyond quantifiably testing the practicality of prompt engineering as a whole, it can be used to compare the performance of different approaches, useful in a world where so many competing techniques are available. I also provide a newly constructed dataset summarizing the wide variety of existing techniques and data on their popularity as measured by Semantic Scholar citations, which may be useful for future surveys of the field. Next, I offer a new look at these prompting methods in a period long after ideas were introduced. The current environment is one in which far greater capabilities are native to underlying foundation models. Finally, I introduce and adapt some useful measures of costs and complexity, such as the ratio of interaction length with prompting to the length of an accepted human-generated answer, to the challenge of LLM evaluation.
 
+\section*{Data}
+
+To evaluate performance, I attempt to use tasks that are general-purpose, close to real-world applications, and standardized in the literature. To this end, I selected the GSM8K dataset, a collection of elementary-level math word problems \cite{cobbe_training_2021}, and a creative writing task involving the generation of a coherent two-paragraph passage with two random, predetermined ending sentences modified from \citealp{yao_tree_2023}. The original creative writing task in \citealp{yao_tree_2023} uses four paragraphs and sentences, but this is too difficult for older models and for the manual production of good answer demonstrations - I simply take the first two sentences for each original question. 
+
+These tasks carry several key benefits. They cover both the mathematical and linguistic domains - two types of tasks that form the foundation of the standardized testing of humans. GSM8K is studied in the majority of the papers introducing techniques I mentioned and is among the most common datasets used in the far larger list of papers I initially surveyed. Text and story generation is a widespread foundational task in NLP. Importantly, these sets of tasks are known to be free of data contamination. The GSM8K test set has been intentionally withheld from the training of OpenAI's models \cite{openai_gpt-4_2023}. The creative writing task was released only in 2023, and the code and data provided with the associated paper includes only questions and not LLM responses. \footnote{It is also relatively simple to find random sentence generators online (such as \url{https://www.thewordfinder.com/random-sentence-generator/}), which would work for this task - at the cost of comparability with the results of \cite{yao_tree_2023}. In any case, the 2-sentence task represents a modification of the original, and the test overall makes use of subjective human evaluations of the coherence of generated stories, limiting comparisons anyway.}
+
+I perform the analysis on one cutting-edge model and one older model from closer to the time that these techniques were introduced. This provides a picture of the changing costs and benefits of advanced prompting, a trend that may even be extrapolated into the future if current LLM scaling laws continue to hold. As the most widely used models and the ones behind much original work in the field, I select two models from the OpenAI series: GPT-4 and text-davinci-003 on OpenAI playground. These models are available both via the OpenAI API and in web interfaces - where possible I use web interfaces to limit resources required.
+
+%To the extent possible, I report accuracy scores on the domain dataset as they are in the original paper introducing each technique. It is possible to use any prompts, LLM responses, and correct responses provided along with original papers to calculate other simple metrics such as response lengths and complexity. However, some metrics (time taken, human assessments of complexity) require my own evaluations.
+% Note - this can be a part of any accuracy discussions
+
 \section*{Prompting Methods Assessed}
 
-The following methods were selected based on their popularity (see Appendix Section \ref{sec:popularity}) and ease of implementation.
+The following methods were selected based on their popularity (see Appendix Section \ref{sec:popularity}) and ease of implementation. A full list of all prompts for each task can be found in Appendix Section \ref{sec:prompts}.
 
 \begin{itemize}
   \item Zero-Shot Control Baseline/Direct Prompting: This method consists of just providing the question/task directly.
@@ -50,19 +61,8 @@ The following methods were selected based on their popularity (see Appendix Sect
   \item Self-Refine Prompting: The model produces an initial response, then is prompted for feedback which is used for refinement. \cite{madaan_self-refine_2023}
   \item Least-to-most Prompting: The model is given few-shot examples that demonstrate how to first break down the task into smaller and simpler subproblems, then solve them sequentially. \cite{zhou_least--most_2023}
   \item Few-Shot Prompting: The prompter provides a few examples of successfully/answered questions or tasks before the main question/task.
-  \item Few-Shot Chain-of-Thought Prompting: The model is provided worked examples of answers in which the reasoning steps are written out. \cite{wei_chain--thought_nodate} Note, however, that such steps are not initially planned out as is the case in least-to-most prompting.
+  \item Few-Shot Chain-of-Thought Prompting: The model is provided worked examples of answers in which the reasoning steps are written out. \cite{wei_chain--thought_nodate} Note, however, that such steps are not explicitly planned out or mentioned, as is the case in least-to-most prompting.
 \end{itemize}
-
-\section*{Data}
-
-To evaluate performance, I attempt to use tasks that are general-purpose, close to real-world applications, and standardized in the literature. To this end, I selected the GSM8K dataset, a collection of elementary-level math word problems \cite{cobbe_training_2021}, and a creative writing task involving the generation of a coherent two-paragraph passage with two random, predetermined ending sentences modified from \citealp{yao_tree_2023}. The original creative writing task in \citealp{yao_tree_2023} uses four paragraphs and sentences, but this is too difficult for older models and for the production of good chain-of-thought/few-shot demonstrations - I simply take the first two sentences for each original question. 
-
-These tasks carry several key benefits. They cover both the mathematical and linguistic domains - two types of tasks that form the foundation of the standardized testing of humans. GSM8K is studied in the majority of the papers introducing techniques I mentioned and is among the most common datasets used in the far larger list of papers I initially surveyed. Text and story generation is a widespread foundational task in NLP. Importantly, these sets of tasks are known to be free of data contamination. The GSM8K test set has been intentionally withheld from the training of OpenAI's models \cite{openai_gpt-4_2023}. The creative writing task was released only in 2023, and the code and data provided with the associated paper includes only questions and not LLM responses. \footnote{It is also relatively simple to find random sentence generators online (such as \url{https://www.thewordfinder.com/random-sentence-generator/}), which would work for this task - at the cost of comparability with the results of \cite{yao_tree_2023}. In any case, the 2-sentence task represents a modification of the original, and the test overall makes use of subjective human evaluations of the coherence of generated stories, limiting comparisons anyway.}
-
-I perform the analysis on one cutting-edge model and one older model from closer to the time that these techniques were introduced. This provides a picture of the changing costs and benefits of advanced prompting, a trend that may even be extrapolated into the future if current LLM scaling laws continue to hold. As the most widely used models and the ones behind much original work in the field, I select two models from the OpenAI series: GPT-4 and text-davinci-003 on OpenAI playground. These models are available both via the OpenAI API and in web interfaces - where possible I use web interfaces to limit resources required.
-
-%To the extent possible, I report accuracy scores on the domain dataset as they are in the original paper introducing each technique. It is possible to use any prompts, LLM responses, and correct responses provided along with original papers to calculate other simple metrics such as response lengths and complexity. However, some metrics (time taken, human assessments of complexity) require my own evaluations.
-% Note - this can be a part of any accuracy discussions
 
 \section*{Metrics}
 
@@ -186,6 +186,7 @@ Few-Shot Chain-of-Thought: 4. Worked questions and solutions must be provided, b
 Few-Shot Least-to-Most: 3. A little more detail must be added to chain of thought solutions to demonstrate the structure behind splitting a problem into subproblems.
 
 \section{Prompts Used}
+\label{sec:prompts}
 
 Below I have listed question and prompt examples for each task and method.
 
