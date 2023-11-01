@@ -55,8 +55,8 @@ The following methods were selected based on their popularity (see Appendix Sect
 
 \begin{itemize}
   \item Zero-Shot Control Baseline/Direct Prompting: This method consists of just providing the question/task directly.
-  \item Zero-Shot Chain of Thought Prompting (Original): Initial advances in chain of thought prompting to improve reasoning were achieved by simply including the following before the question/task: "Let's think step by step." \cite{kojima_large_2023}
-  \item Zero-Shot Chain of Thought Prompting (Automatic Prompt Engineer): Automated testing has indicated that an optimal zero-shot Chain of Thought prompt is "Let's work this out in a step by step way to be sure we have the right answer." \cite{zhou_large_2022}
+  \item Zero-Shot Chain of Thought Prompting (Original): Initial advances in chain of thought prompting to improve reasoning were achieved by simply including the following before the question/task: "Let's think step by step." \cite{kojima_large_2023} For the creative writing task, the prompt following the question/task is adapted to: "Plan step-by-step before writing the passage." \footnote{In initial experiments, this modification was found necessary to elicit any sort of step-by-step behavior from the model.}
+  \item Zero-Shot Chain of Thought Prompting (Automatic Prompt Engineer): Automated testing has indicated that an optimal zero-shot Chain of Thought prompt is "Let's work this out in a step by step way to be sure we have the right answer." \cite{zhou_large_2022} \footnote{Again, in initial experiments, this modification was found necessary to elicit any sort of step-by-step behavior from the model.}
   \item Tree of Thought Prompting: The language model traverses a tree of decisions - choosing among multiple steps or ideas it has generated to arrive at a conclusion. \cite{yao_tree_2023}
   \item Self-Refine Prompting: The model produces an initial response, then is prompted for feedback which is used for refinement. \cite{madaan_self-refine_2023}
   \item Least-to-most Prompting: The model is given few-shot examples that demonstrate how to first break down the task into smaller and simpler subproblems, then solve them sequentially. \cite{zhou_least--most_2023}
@@ -74,7 +74,7 @@ Improved response accuracy can be a benefit of prompt engineering. I report:
 
 For GSM8K problems:
 \begin{itemize}
-  \item Correct/Incorrect accuracy at the point a technique has been fully implemented (the end of the chain of thought, etc.)
+  \item Correct/Incorrect accuracy at the point a technique has been fully implemented (the end of the tree of thought or after all self-refinement, etc.)
 \end{itemize}
 
 For Creative Writing:
@@ -267,8 +267,23 @@ A: Let's break down this problem: 1. How many apples does Anna have? 2. How many
 Q: <Question>
 A: Let's break down this problem:
 
-Manual Few-Shot (randomly drawn examples from the training set - following the methodology in \citealp{brown_language_2020}):
-Randomly draw examples from the training set, as per https://arxiv.org/pdf/2005.14165.pdf
+Manual Few-Shot (randomly drawn questions and final answers from the training set - following the methodology on p.10 \citealp{brown_language_2020}. 8 examples were chosen, so as to enable comparison with the Chain-of-Thought exemplars below, and in light of evidence that this is around the optimal number of exemplars \cite{min_rethinking_2022}. Explanations were removed from the answers.):
+Q: For every 12 cans you recycle, you receive \$0.50, and for every 5 kilograms of newspapers, you receive \$1.50. If your family collected 144 cans and 20 kilograms of newspapers, how much money would you receive?
+A: 12
+Q: Betty picked 16 strawberries. Matthew picked 20 more strawberries than Betty and twice as many as Natalie. They used their strawberries to make jam. One jar of jam used 7 strawberries and they sold each jar at \$4. How much money were they able to make from the strawberries they picked?
+A: 40
+Q: Jack has a stack of books that is 12 inches thick. He knows from experience that 80 pages is one inch thick. If he has 6 books, how many pages is each one on average?
+A: 160
+Q: James dumps his whole collection of 500 Legos on the floor and starts building a castle out of them.  He uses half the pieces before finishing and is told to put the rest away.  He puts all of the leftover pieces back in the box they came from, except for 5 missing pieces that he can't find.  How many Legos are in the box at the end?
+A: 245
+Q: Ines had \$20 in her purse. She bought 3 pounds of peaches, which are \$2 per pound at the local farmers' market. How much did she have left?
+A: 14
+Q: Aaron pays his actuary membership fees each year. The membership fee increases yearly by \$10. If he pays \$80 in the first year, how much does his membership cost, in dollars, in the sixth year?
+A: 130
+Q: Joseph invested \$1000 into a hedge fund. The fund promised a yearly interest rate of 10\%. If he deposited an additional \$100 every month into the account to add to his initial investment of \$1000, how much money will he have in the fund after two years?
+A: 3982
+Q: The price of buying a wooden toy at the new Craftee And Best store is \$20, and the cost of buying a hat is \$10. If Kendra went to the shop with a \$100 bill and bought two wooden toys and three hats, calculate the change she received.
+A: 30
 
 Manual Chain-of-Thought (taken from p.35 of \citealp{wei_chain--thought_nodate}):
 Q: There are 15 trees in the grove. Grove workers will plant trees in the grove today. After they are done, there
@@ -392,6 +407,8 @@ My brother, John, had been making home videos for years, but they never got much
 As it turned out, John would need his own production staff to help with script writing and video editing. As I lived in the area and had prior experience in these fields, I was a natural choice for a part-time role on his channel. The company's sponsorship was very generous, and I would get a large portion of the profits. I was glad to finally be able to earn a substantial income in a more exciting and engaging role than my current position as a barista. I was smiling for most of our first business meeting, and strutted with pride out of our new studio. My sweater got caught on the door hinge.
 Task: <Task>
 Response:
+
+Note \citealp{yao_tree_2023} prompts the model for a plan in what is considered the Chain-of-Thought method adaptation for the Creative Writing task.
 
 \section{Evaluating Creative Writing Responses}
 
