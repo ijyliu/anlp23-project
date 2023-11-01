@@ -95,6 +95,7 @@ I report:
   \begin{displaymath}
     \frac{Accuracy_{PE} - Accuracy_{B}}{Tokens_{PE} - Tokens_{B}}
   \end{displaymath}
+  \item Time required to grade responses - a proxy for human review time. Is there really value add here beyond token length?
 \end{itemize}
 
 \subsection*{Complexity}
@@ -108,9 +109,10 @@ Chaining prompts creates complexity but also enables fluency and transparency - 
 I report:
 
 \begin{itemize}
-  \item Vocabulary - share of words on the Academic Vocabulary List (AVL) for natural language and non-code components of responses. \cite{gardner_new_2014} Share of novel n-grams in the response (words not in the prompt), presence of contrasting words {'while', 'but', 'though', 'although', 'other', 'others', 'however'}. https://aclanthology.org/2023.findings-acl.591.pdf
-  \item Number of reasoning steps - linebreaks, periods, "step i" strings, and semicolons serve as separators. https://browse.arxiv.org/pdf/2210.00720.pdf
-  \item Sentence length and Flesch reading ease (implemented via the textstat Python package) for natural language and non-code components of responses. \cite{flesch_how_2016, aggarwal_textstat_nodate}
+  \item For GSM8K: the number of reasoning steps - linebreaks, periods, "step i" strings, and semicolons serve as separators. \cite{fu_complexity-based_2023}
+  \item For Creative Writing: Number of ideas considered
+  \item For Creative Writing: Vocabulary - share of words on the Academic Vocabulary List (AVL) for natural language components of responses. \cite{gardner_new_2014} Presence of contrasting words {'while', 'but', 'though', 'although', 'other', 'others', 'however'}. \cite{bhaskar_prompted_2023}
+  \item Sentence length and Flesch reading ease (implemented via the textstat Python package) for natural language components of responses. \cite{flesch_how_2016, aggarwal_textstat_nodate}
   \item Ratio or difference of these scores in prompts vs. responses, responses vs. accepted/outside correct answer
   \item Human assessment of need for specialized knowledge/difficulty of implementation of the technique. This could be task specific (done for some novel real world example questions/prompting scenarios), or it could be done overall based on a pre-existing description of the technique. Perhaps a balance of both is best. The actual metric will be a numeric score and a qualitative description.
   \item Human assessment of output complexity (ease of evaluating results). This could be task specific (done for some novel real world example questions/prompting scenarios), or it could be done overall based on pre-existing examples of the technique. Perhaps a balance of both is best. The actual metric will be a numeric score and a qualitative description.
