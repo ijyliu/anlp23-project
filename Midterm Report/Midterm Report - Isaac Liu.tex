@@ -201,15 +201,16 @@ All prompt examples for few-shot methods come from the training dataset.
 <Question> "Janet's ducks lay 16 eggs per day. She eats three for breakfast every morning and bakes muffins for her friends every day with four. She sells the remainder at the farmers' market daily for \$2 per fresh duck egg. How much in dollars does she make every day at the farmers' market?"
 
 Zero-Shot Control Baseline/Direct Prompting:
-<Question>
+Q: <Question>
+A:
 
 Zero-Shot Chain-of-Thought:
-<Question>
-Let's think step by step.
+Q: <Question>
+A: Let's think step by step.
 
 APE Improved Zero-Shot Chain-of-Thought:
-<Question>
-Let's work this out in a step by step way to be sure we have the right answer.
+Q: <Question>
+A: Let's work this out in a step by step way to be sure we have the right answer.
 
 Tree-of-Thought: 
 
@@ -256,8 +257,13 @@ If any expert realises they're wrong at any point then they leave.
 The question is...
 <Question>
 
-Self-Refine: https://selfrefine.info/
-See python code
+Self-Refine:
+Q: <Question>
+A: <Response>
+Task: Please check the answer above. If there is an error, state what the error is, but don't fix it. If there are no errors, output STOP.
+Feedback: <Feedback>
+Task: Redo the entire problem based on the most recent feedback.
+A: <Response>
 
 Least-to-most Prompting (1-shot; taken from p.58 of \citealp{zhou_least--most_2023}):
 Q: Elsa has 5 apples. Anna has 2 more apples than Elsa. How many apples do they have together?
