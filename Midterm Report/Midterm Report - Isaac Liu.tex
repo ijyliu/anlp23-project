@@ -84,9 +84,7 @@ For Creative Writing:
 
 \subsection*{Length}
 
-The length of responses and interactions can effect the practicality of prompting. It could indicate that a model is carefully and correctly solving through the steps of a problem (though it may actually be a confounder of other factors in such cases https://browse.arxiv.org/pdf/2210.00720.pdf). It can also impose time and financial costs to users, or become an indicator of degraded performance as models sometimes tend to go off on tangents or repeat themselves (to the extent some platforms have imposed length limitations) \cite{mann_microsoft_nodate}. 
-
-Prompt length is helpful up to 20 tokens, detrimental past 100 tokens. p.5 of https://arxiv.org/pdf/2104.08691.pdf
+The length of responses and interactions can effect the practicality of prompting. It could indicate that a model is carefully and correctly solving through the steps of a problem (though it may actually be a confounder of other factors in such cases https://browse.arxiv.org/pdf/2210.00720.pdf). It can also impose time and financial costs to users. Importantly, it can become an indicator of degraded performance as models sometimes tend to go off on tangents or repeat themselves (to the extent some platforms have imposed length limitations) \cite{mann_microsoft_nodate}. For language understanding tasks, prompt length has been found to improve model performance, with optimality achieved somewhere in the range of 20-100 tokens \cite{lester_power_2021}.
 
 I report:
 
@@ -123,8 +121,6 @@ I report:
 \section*{Analyses}
 
 I provide accuracy scores as well as summary statistics (mean, standard deviation) of the metrics for each prompting method by model by question/task type.
-
-In cases where human/textual assessment and comments have been provided, it might be interesting to use NLP methods to evaluate responses (ex: for sentiment).
 
 The results can provide insight into several questions:
 
@@ -192,6 +188,9 @@ Few-Shot Least-to-Most: 3. A little more detail must be added to chain of though
 \section{Prompts Used}
 
 Below I have listed question and prompt examples for each task and method.
+
+This section needs to be formatted into tables, ideally with one table for each task by method, a format in https://arxiv.org/pdf/2201.11903.pdf starting on p.35.
+
 \subsection{GSM8K}
 
 The sample problem is the first one in the GSM8K test dataset. \cite{cobbe_training_2021}
