@@ -173,13 +173,13 @@ Another good resource for prompt engineering methods and evaluations is the pape
 
 \section{Notes on Ease of Implementation}
 
-Here are my rough evaluations of the difficulty of implementing each method selected for this paper. A 1 is simple to implement, while a 5 is difficult.
+Here are my rough evaluations of the difficulty of implementing each method selected for this paper. Ratings are on a scale from 1-6.
 
 Zero-Shot Methods: 1. These methods append a common string to the prompt that is extremely similar for all tasks.
-Tree-of-Thought: 5. A specific search tree structure and a method for traversing it must be constructed. This can vary a lot depending on the task - considerations are breadth-first versus depth-first, how many nodes/possibilities to consider at each step, etc. It is also necessary to consider how to structure a feedback loop where the LLM takes into account its previous responses. Any instructions must be simple enough for the LLM to follow.
-Self-Refine: 4. Many of the same considerations as the Tree-of-Thought method apply. However, the feedback-refinement loop is somewhat simpler than a tree structure.
+Tree-of-Thought: 6. A specific search tree structure and a method for traversing it must be constructed. This can vary a lot depending on the task - considerations are breadth-first versus depth-first, how many nodes/possibilities to consider at each step, etc. It is also necessary to consider how to structure a feedback loop where the LLM takes into account its previous responses. Any instructions must be simple enough for the LLM to follow.
+Self-Refine: 5. Many of the same considerations as the Tree-of-Thought method apply. However, the feedback-refinement loop is somewhat simpler than a tree structure.
 Few-Shot: 2. A few examples of questions and solutions must be provided, but these are usually relatively easy to find.
-Few-Shot Chain-of-Thought: 3. Worked questions and solutions must be provided, but these are usually not very difficult to find - a good share of provided solutions also include explanations.
+Few-Shot Chain-of-Thought: 4. Worked questions and solutions must be provided, but these are usually not very difficult to find - a good share of provided solutions also include explanations.
 Few-Shot Least-to-Most: 3. A little more detail must be added to chain of thought solutions to demonstrate the structure behind splitting a problem into subproblems.
 
 \section{Prompts Used}
