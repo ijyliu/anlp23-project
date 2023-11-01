@@ -213,6 +213,20 @@ Q: <Question>
 A: Let's work this out in a step by step way to be sure we have the right answer.
 
 Tree-of-Thought: 
+Q: <Question>
+Task: Generate 3 different possible one-step calculations to serve as step 1 in solving the problem. Only work on step 1. Put each calculation on a new line. Do not number them.
+<Response>
+Task: If one of the calculations above fully solves the problem correctly, state the solution to the problem and output the word STOP on a new line. Otherwise, generate 3 different possible one-step calculations to serve as the next step in solving the problem. Only work on the next step. Put each calculation on a new line. Do not number them.
+<Response>
+
+Tree-of-Thought: 
+Q: <Question>
+Task: Generate 3 different possible one-step calculations to serve as step 1 in solving the problem. Only work on step 1. Put each calculation on a new line. Do not number them.
+<Response>
+Task: State the calculation above that is most likely to contribute to solving the problem. If it fully solves the original problem, also output STOP.
+<Response>
+Task: Generate 3 different possible one-step calculations to serve as the next step in solving the problem. Only work on the next step. Put each calculation on a new line. Do not number them.
+<Response>
 
 One reasoning step:
 
