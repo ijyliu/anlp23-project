@@ -110,11 +110,10 @@ I report:
 
 \begin{itemize}
   \item For GSM8K: the number of reasoning steps - linebreaks, periods, "step i" strings, and semicolons serve as separators. \cite{fu_complexity-based_2023}
-  \item For Creative Writing: Number of ideas considered
   \item For Creative Writing: Vocabulary - share of words on the Academic Vocabulary List (AVL) for natural language components of responses. \cite{gardner_new_2014} Presence of contrasting words {'while', 'but', 'though', 'although', 'other', 'others', 'however'}. \cite{bhaskar_prompted_2023}
+  \item For Creative Writing: Number of passage ideas considered
   \item Sentence length and Flesch reading ease (implemented via the textstat Python package) for natural language components of responses. \cite{flesch_how_2016, aggarwal_textstat_nodate}
   \item Ratio or difference of these scores in prompts vs. responses, responses vs. accepted/outside correct answer
-  \item Human assessment of need for specialized knowledge/difficulty of implementation of the technique. This could be task specific (done for some novel real world example questions/prompting scenarios), or it could be done overall based on a pre-existing description of the technique. Perhaps a balance of both is best. The actual metric will be a numeric score and a qualitative description.
   \item Human assessment of output complexity (ease of evaluating results). This could be task specific (done for some novel real world example questions/prompting scenarios), or it could be done overall based on pre-existing examples of the technique. Perhaps a balance of both is best. The actual metric will be a numeric score and a qualitative description.
 \end{itemize}
 
@@ -171,6 +170,17 @@ Another good resource for prompt engineering methods and evaluations is the pape
   \end{centering}
 
 \end{landscape}
+
+\section{Notes on Ease of Implementation}
+
+Here are my rough evaluations of the difficulty of implementing each method selected for this paper. A 1 is simple to implement, while a 5 is difficult.
+
+Zero-Shot Methods: 1. These methods append a common string to the prompt that is extremely similar for all tasks.
+Tree-of-Thought: 5. A specific search tree structure and a method for traversing it must be constructed. This can vary a lot depending on the task - considerations are breadth-first versus depth-first, how many nodes/possibilities to consider at each step, etc. It is also necessary to consider how to structure a feedback loop where the LLM takes into account its previous responses. Any instructions must be simple enough for the LLM to follow.
+Self-Refine: 4. Many of the same considerations as the Tree-of-Thought method apply. However, the feedback-refinement loop is somewhat simpler than a tree structure.
+Few-Shot: 2. A few examples of questions and solutions must be provided, but these are usually relatively easy to find.
+Few-Shot Chain-of-Thought: 3. Worked questions and solutions must be provided, but these are usually not very difficult to find - a good share of provided solutions also include explanations.
+Few-Shot Least-to-Most: 3. A little more detail must be added to chain of thought solutions to demonstrate the structure behind splitting a problem into subproblems.
 
 \section{Prompts Used}
 
