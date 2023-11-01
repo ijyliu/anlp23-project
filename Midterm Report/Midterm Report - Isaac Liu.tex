@@ -216,60 +216,10 @@ Tree-of-Thought:
 Q: <Question>
 Task: Generate 3 different possible one-step calculations to serve as step 1 in solving the problem. Only work on step 1. Put each calculation on a new line. Do not number them.
 <Response>
-Task: If one of the calculations above fully solves the problem correctly, state the solution to the problem and output the word STOP on a new line. Otherwise, generate 3 different possible one-step calculations to serve as the next step in solving the problem. Only work on the next step. Put each calculation on a new line. Do not number them.
-<Response>
-
-Tree-of-Thought: 
-Q: <Question>
-Task: Generate 3 different possible one-step calculations to serve as step 1 in solving the problem. Only work on step 1. Put each calculation on a new line. Do not number them.
-<Response>
 Task: State the calculation above that is most likely to contribute to solving the problem. If it fully solves the original problem, also output STOP.
 <Response>
 Task: Generate 3 different possible one-step calculations to serve as the next step in solving the problem. Only work on the next step. Put each calculation on a new line. Do not number them.
 <Response>
-
-One reasoning step:
-
-Problem:
-<Question>
-Current plan of reasoning:
-<Current Plan>
-Task:
-Generate {k} different possible one-sentence thoughts to serve as step {X} in solving the problem. Only work on step {X}. Put each thought on a new line. Do not number them.
-Response:
-
-Problem:
-<Question> 
-Current plan of reasoning:
-<Current Plan>
-Potential next thoughts:
-<Potential Next Thoughts>
-Task:
-State the thought among "Potential next thoughts" that is most likely to contribute to solving the problem. If one of the thoughts fully solves the problem correctly, instead state the solution to the problem and output the word STOP on a new line. State only a thought or the solution and the word STOP.
-Response:
-
-NOTE: This is very hard for older models to follow! davinci-002 can't really do any form of ToT tried
-
-Baked in calculations:
-
-Problem:
-<Question> 
-Current plan of reasoning:
-<Current Plan>
-Task:
-Generate {k} different possible one-step calculations to serve as step {X} in solving the problem. Only work on step {X}. Put each calculation on a new line. Do not number them.
-Response:
-
-Still hard to follow...
-
-Zero-Shot Tree-of-Thought:
-Imagine three different experts are answering this question.
-All experts will write down 1 step of their thinking,
-then share it with the group.
-Then all experts will go on to the next step, etc.
-If any expert realises they're wrong at any point then they leave.
-The question is...
-<Question>
 
 Self-Refine:
 Q: <Question>
