@@ -70,7 +70,7 @@ This section will be combined with the analyses section to form a single section
 
 \subsection*{Accuracy}
 
-Improved response accuracy can be a benefit of prompt engineering. I report:
+I report:
 
 For GSM8K problems:
 \begin{itemize}
@@ -96,12 +96,14 @@ I report:
   \begin{displaymath}
     \frac{Accuracy_{PE} - Accuracy_{B}}{Tokens_{PE} - Tokens_{B}}
   \end{displaymath}
-  \item Time required to grade responses - a proxy for human review time. Is there really value add here beyond token length?
+  \item Time required to grade responses - a proxy for human review time and ease of evaluating results. Is there really value add here beyond token length?
 \end{itemize}
 
 \subsection*{Complexity}
 
-Similarly to length, complexity could be an indicator of high accuracy. In the case of summarization tasks, increased output complexity achieved by requests for summaries at an "expert" level can improve precision and recall in the face of concerns about named entity hallucination and detection https://aclanthology.org/2023.acl-srw.1.pdf. However, complexity has substantial costs in potentially making review of LLM output more difficult, and on simple questions it may even lead to degraded accuracy https://browse.arxiv.org/pdf/2302.12822.pdf. 
+Similarly to length, complexity could be an indicator of high accuracy. 
+
+However, complexity has substantial costs in potentially making review of LLM output more difficult
 
 Complicated prompts may hurt robustness to irrelevant context: https://proceedings.mlr.press/v202/shi23a/shi23a.pdf
 
@@ -111,9 +113,9 @@ I report:
 
 \begin{itemize}
   \item For GSM8K: the number of reasoning steps - linebreaks, periods, "step i" strings, and semicolons serve as separators. \cite{fu_complexity-based_2023}
-  \item For Creative Writing: Vocabulary - share of words on the Academic Vocabulary List (AVL) for natural language components of responses. \cite{gardner_new_2014} Presence of contrasting words {'while', 'but', 'though', 'although', 'other', 'others', 'however'}. \cite{bhaskar_prompted_2023}
+  \item For Creative Writing: Vocabulary - share of words on the Academic Vocabulary List (AVL) for natural language components of responses (DELETE ME?). \cite{gardner_new_2014} Presence of contrasting words {'while', 'but', 'though', 'although', 'other', 'others', 'however'}. \cite{bhaskar_prompted_2023}
   \item For Creative Writing: Number of passage ideas considered
-  \item Sentence length and Flesch reading ease (implemented via the textstat Python package) for natural language components of responses. \cite{flesch_how_2016, aggarwal_textstat_nodate}
+  \item For Creative Writing: Sentence length and Flesch reading ease (implemented via the textstat Python package) for natural language components of responses. \cite{flesch_how_2016, aggarwal_textstat_nodate}
   \item Ratio or difference of these scores in prompts vs. responses, responses vs. accepted/outside correct answer
   \item Human assessment of output complexity (ease of evaluating results). This could be task specific (done for some novel real world example questions/prompting scenarios), or it could be done overall based on pre-existing examples of the technique. Perhaps a balance of both is best. The actual metric will be a numeric score and a qualitative description.
 \end{itemize}
@@ -121,6 +123,10 @@ I report:
 \section*{Analyses}
 
 I provide accuracy scores as well as summary statistics (mean, standard deviation) of the metrics for each prompting method by model by question/task type.
+
+Statistical inference is uncommon in the prompting literature - most papers simply report accuracy scores. \footnote{Effect sizes and sample sizes are usually sufficiently large to merit confidence in the statistical significance of results.} However, in this work, I do check for differences in metrics between prompting methods. For GSM8K accuracy scores I perform McNemar's test comparing each method to the direct prompting baseline. \footnote{The same questions are administered for each prompting method, so there is dependence that this paired-test accounts for.}
+
+For GSM8K accuracy scores I check 95\% binomial-normal based confidence intervals for the proportions, as well as two-sample proportion tests for the difference between the accuracy of the prompting method and the direct prompting baseline. \footnote{The binomial-normal based confidence intervals require independence for each question and a sufficiently large sample size for approximation. Confidence interval overlap will give the same results as the proportion test is the variance of the proportion and the sample size are similar across methods - in this paper, the variance may differ somewhat, though the sample size is exactly the same.} \footnote{Note that because we administer the same questions for each prompting method, violating independence (in a way such that we would not reject the null of no difference as much as we should with standard testing), a more powerful test - McNemar's test - is actually implementable for differences in accuracy. ACTUALLY ITS MORE COMPLEX THAN THAT AND PROBABLY WANT TO USE DEPENDENT TESTS} For sample means of creative writing scores and other statistics, I check t-statistic-based 95\% confidence intervals and two-sample t-tests for the difference between the prompting method and the direct prompting baseline. \footnote{The t-test requires normality of the data, which is not guaranteed. However, the sample size is large enough that the central limit theorem should hold, and the t-test should be robust to non-normality.}
 
 The results can provide insight into several questions:
 
