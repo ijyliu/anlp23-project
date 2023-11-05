@@ -42,7 +42,7 @@ This paper uses several metrics to evaluate the costs of prompt engineering meth
 
 To evaluate performance, I attempt to use tasks that are general-purpose, close to real-world applications, and standardized in the literature. To this end, I selected the GSM8K dataset, a collection of elementary-level math word problems \cite{cobbe_training_2021}, and a creative writing task involving the generation of a coherent two-paragraph passage with two random, predetermined ending sentences modified from \citealp{yao_tree_2023}. The original creative writing task in \citealp{yao_tree_2023} uses four paragraphs and sentences, but this is too difficult for older models and for the manual production of good answer demonstrations - I simply take the first two sentences for each original question. 
 
-These tasks carry several key benefits. They cover both the mathematical and linguistic domains - two types of tasks that form the foundation of the standardized testing of humans. GSM8K is studied in the majority of the papers introducing techniques I mentioned and is among the most common datasets used in the far larger list of papers I initially surveyed. Text and story generation is a widespread foundational task in NLP. Importantly, these sets of tasks are known to be free of data contamination. The GSM8K test set has been intentionally withheld from the training of OpenAI's models \cite{openai_gpt-4_2023}. The creative writing task was released only in 2023, and the code and data provided with the associated paper includes only questions and not LLM responses. \footnote{It is also relatively simple to find random sentence generators online (such as \url{https://www.thewordfinder.com/random-sentence-generator/}), which would work for this task - at the cost of comparability with the results of \cite{yao_tree_2023}. In any case, the 2-sentence task represents a modification of the original, and the test overall makes use of subjective human evaluations of the coherence of generated stories, limiting comparisons anyway.}
+These tasks carry several key benefits. They cover both the mathematical and linguistic domains - two types of tasks that form the foundation of the standardized testing of humans. GSM8K is studied in the majority of the papers introducing techniques used in this paper and is among the most common datasets used in the far larger list of papers I initially surveyed. Text and story generation is a widespread foundational task in NLP. Importantly, these sets of tasks are known to be free of data contamination. The GSM8K test set has been intentionally withheld from the training of OpenAI's models \cite{openai_gpt-4_2023}. The creative writing task was released only in 2023, and the code and data provided with the associated paper includes only questions and not LLM responses. \footnote{It is also relatively simple to find random sentence generators online (such as \url{https://www.thewordfinder.com/random-sentence-generator/}), which would work for this task - at the cost of comparability with the results of \cite{yao_tree_2023}. In any case, the 2-sentence task represents a modification of the original, and the test overall makes use of subjective human evaluations of the coherence of generated stories, limiting comparisons anyway.}
 
 I perform the analysis on one cutting-edge model and one older model from closer to the time that these techniques were introduced. This provides a picture of the changing costs and benefits of advanced prompting, a trend that may even be extrapolated into the future if current LLM scaling laws continue to hold. As the most widely used models and the ones behind much original work in the field, I select two models from the OpenAI series: GPT-4 and text-davinci-003 on OpenAI playground. These models are available both via the OpenAI API and in web interfaces - where possible I use web interfaces to limit resources required.
 
@@ -58,17 +58,19 @@ The following methods were selected based on their popularity (see Appendix Sect
   \item Zero-Shot Chain of Thought Prompting (Original): Initial advances in chain of thought prompting to improve reasoning were achieved by simply including the following before the question/task: "Let's think step by step." \cite{kojima_large_2023} For the creative writing task, the prompt following the question/task is adapted to: "Plan step-by-step before writing the passage." \footnote{In initial experiments, this modification was found necessary to elicit any sort of step-by-step behavior from the model.}
   \item Zero-Shot Chain of Thought Prompting (Automatic Prompt Engineer): Automated testing has indicated that an optimal zero-shot Chain of Thought prompt is "Let's work this out in a step by step way to be sure we have the right answer." \cite{zhou_large_2022} \footnote{Again, in initial experiments, this modification was found necessary to elicit any sort of step-by-step behavior from the model.}
   \item Tree of Thought Prompting: The language model traverses a tree of decisions - choosing among multiple steps or ideas it has generated to arrive at a conclusion. \cite{yao_tree_2023}
-  \item Self-Refine Prompting: The model produces an initial response, then is prompted for feedback which is used for refinement. \cite{madaan_self-refine_2023}
+  \item Self-Refine Prompting: The model produces an initial response, then is prompted for feedback which it uses for refinement. \cite{madaan_self-refine_2023}
   \item Least-to-most Prompting: The model is given few-shot examples that demonstrate how to first break down the task into smaller and simpler subproblems, then solve them sequentially. \cite{zhou_least--most_2023}
   \item Few-Shot Prompting: The prompter provides a few examples of successfully/answered questions or tasks before the main question/task.
   \item Few-Shot Chain-of-Thought Prompting: The model is provided worked examples of answers in which the reasoning steps are written out. \cite{wei_chain--thought_nodate} Note, however, that such steps are not explicitly planned out or mentioned, as is the case in least-to-most prompting.
 \end{itemize}
 
-\section*{Metrics}
+\section*{Analyses}
 
-This section will be combined with the analyses section to form a single section called Analyses. I will discuss each metric's construction, report the results with a graph or table, discuss the results, as well as any commentary and connections to the literature.
+In this section I will discuss each metric's construction, report the results with a graph or table, and discuss the results as well as any connections to the literature.
 
-\subsection*{Accuracy}
+I provide accuracy scores as well as summary statistics (mean, standard deviation) of the metrics for each prompting method by model by question/task type. Statistical inference is uncommon in the prompting literature - most papers simply report accuracy. \footnote{Effect sizes and sample sizes are usually sufficiently large to merit confidence in the statistical significance of results. All paired t-tests comparing prompting methods and human responses were significant in the one paper I did find with inference, \citealp{pu_chatgpt_2023}.} However, in this work, I do check for differences in metrics between prompting methods, reporting significance at the 95\% level. For GSM8K accuracy scores I perform McNemar's test comparing each method to the direct prompting baseline. \footnote{The same questions are administered for each prompting method, so there is dependence that this paired test accounts for.} For sample means of creative writing scores and other statistics, I perform paired t-tests. \footnote{One other metric remains - the token cost of accuracy or change in accuracy divided by change in tokens for each method versus direct prompting. Bootstrapping confidence intervals for this value seems possible, but the dependent nature of the data poses challenges.}
+
+\subsection*{Quality and Accuracy}
 
 I report:
 
@@ -79,12 +81,16 @@ For GSM8K problems:
 
 For Creative Writing:
 \begin{itemize}
-  \item Assessment of coherence (on a scale of 1 to 10, 1 being incoherent and 10 being very coherent). GPT-4 is known to be capable of producing scalar scores useful for this task \cite{yao_tree_2023}, so I also collect its evaluations as an additional opinion. I report Krippendorff's alpha for these scores. I also collect data on whether or not the task constraints were followed (ending sentences exactly matching those specified), and additionally report scores when the lowest possible rating of 1 assigned to cases where the rules are broken. \footnote{I additionally tried to use GPT-4 to assess adherence to the original instructions - to check if the exact sentences specified in the prompt were used. In my initial experiments - in contrast to \citealp{yao_tree_2023} - I found that GPT-4 was not able to do this, repeatedly missing deviations of one or a few words, even when told to carefully perform the check in a step-by-step manner!}
+  \item Human assessment of coherence (on a scale of 1 to 10, 1 being incoherent and 10 being very coherent). GPT-4 is known to be capable of producing scalar scores useful for this task \cite{yao_tree_2023}, so I also collect its evaluations as an additional opinion. I report Krippendorff's alpha for these scores. I also collect data on whether or not the task constraints were followed (ending sentences exactly matching those specified), and additionally report scores when the lowest possible rating of 1 assigned to cases where the rules are broken. \footnote{I additionally tried to use GPT-4 to assess adherence to the original instructions - to check if the exact sentences specified in the prompt were used. In my initial experiments - in contrast to \citealp{yao_tree_2023} - I found that GPT-4 was not able to do this, repeatedly missing deviations of one or a few words, even when told to carefully perform the check in a step-by-step manner!}
 \end{itemize}
 
-\subsection*{Length}
+General Discussion:
 
-The length of responses and interactions can effect the practicality of prompting. It could indicate that a model is carefully and correctly solving through the steps of a problem (though it may actually be a confounder of other factors in such cases https://browse.arxiv.org/pdf/2210.00720.pdf). It can also impose time and financial costs to users. Importantly, it can become an indicator of degraded performance as models sometimes tend to go off on tangents or repeat themselves (to the extent some platforms have imposed length limitations) \cite{mann_microsoft_nodate}. For language understanding tasks, prompt length has been found to improve model performance, with optimality achieved somewhere in the range of 20-100 tokens \cite{lester_power_2021}.
+Do larger/more modern models benefit more from prompt engineering, or are the techniques becoming obsolete? Earlier evidence demonstrated that gains from few-shot learning increased with scale - has this trend continued to hold? \cite{brown_language_2020} Are the most recent prompt engineering techniques more powerful and useful?
+
+Are improvements from a given method replicable across tasks? Are they replicable within tasks (what is the variance of the indicator for getting a question right)?
+
+\subsection*{Length}
 
 I report:
 
@@ -96,18 +102,13 @@ I report:
   \begin{displaymath}
     \frac{Accuracy_{PE} - Accuracy_{B}}{Tokens_{PE} - Tokens_{B}}
   \end{displaymath}
-  \item Time required to grade responses - a proxy for human review time and ease of evaluating results. Is there really value add here beyond token length?
 \end{itemize}
 
+General Discussion:
+
+Do longer prompt contexts worsen performance? For language understanding tasks, prompt length has been found to improve model performance, with optimality achieved somewhere in the range of 20-100 tokens \cite{lester_power_2021}. On the other hand, evidence shows that models may get distracted, go off on tangents, or get stuck in a loop repeating themselves (to the extent some platforms have imposed length limitations) \cite{shi_large_2023, mann_microsoft_nodate}. 
+
 \subsection*{Complexity}
-
-Similarly to length, complexity could be an indicator of high accuracy. 
-
-However, complexity has substantial costs in potentially making review of LLM output more difficult
-
-Complicated prompts may hurt robustness to irrelevant context: https://proceedings.mlr.press/v202/shi23a/shi23a.pdf
-
-Chaining prompts creates complexity but also enables fluency and transparency - qualitative statements https://arxiv.org/pdf/2110.01691.pdf. In a study of prompt chaining, participants qualitatively reported...
 
 I report:
 
@@ -118,23 +119,26 @@ I report:
   \item For Creative Writing: Sentence length and Flesch reading ease (implemented via the textstat Python package) for natural language components of responses. \cite{flesch_how_2016, aggarwal_textstat_nodate}
   \item Ratio or difference of these scores in prompts vs. responses, responses vs. accepted/outside correct answer
   \item Human assessment of output complexity (ease of evaluating results). This could be task specific (done for some novel real world example questions/prompting scenarios), or it could be done overall based on pre-existing examples of the technique. Perhaps a balance of both is best. The actual metric will be a numeric score and a qualitative description.
+  \item Time required to grade responses - a proxy for human review time and ease of evaluating results.
 \end{itemize}
 
-\section*{Analyses}
+General Discussion:
 
-I provide accuracy scores as well as summary statistics (mean, standard deviation) of the metrics for each prompting method by model by question/task type. Statistical inference is uncommon in the prompting literature - most papers simply report accuracy. \footnote{Effect sizes and sample sizes are usually sufficiently large to merit confidence in the statistical significance of results. All paired t-tests comparing prompting methods and human responses were significant in the one paper I did find with inference, \citealp{pu_chatgpt_2023}.} However, in this work, I do check for differences in metrics between prompting methods, reporting significance at the 95\% level. For GSM8K accuracy scores I perform McNemar's test comparing each method to the direct prompting baseline. \footnote{The same questions are administered for each prompting method, so there is dependence that this paired test accounts for.} For sample means of creative writing scores and other statistics, I perform paired t-tests. \footnote{One other metric remains - the token cost of accuracy or change in accuracy divided by change in tokens for each method versus direct prompting. Bootstrapping confidence intervals for this value seems possible, but the dependent nature of the data poses challenges.}
+As in \citealp{fu_complexity-based_2023}, are any gains in performance coming from reasoning steps as opposed to prompt or question length? A simple logistic regression can check this.
 
-The results can provide insight into several questions:
+Does increased complexity limit creativity and randomness (investigating the creative writing task in particular might be helpful - coherence requires creativity)? 
 
-Finish filling this out with points from the introduction.
+Does increased complexity lead to worse performance on simple questions or overall? Use the length of provided answers or control baseline results to get a measure of how simple the question is. The results from this paper can help resolve debate in the chain-of-thought literature. \cite{fu_complexity-based_2023, shum_automatic_2023}
 
-Do larger/more modern models benefit more from prompt engineering, or are the techniques becoming obsolete? Earlier evidence demonstrated that gains from few-shot learning increased with scale - has this trend continued to hold? \cite{brown_language_2020} Are the most recent prompt engineering techniques more powerful and useful?
-
-Does increased complexity limit creativity and randomness (investigating the creative writing task in particular might be helpful - coherence requires creativity)? Does it lead to worse performance on simple questions?
+If time allows, it might be possible to test prompt alterations to limit output complexity. \cite{pu_chatgpt_2023, imperial_flesch_2023}
 
 \section*{Conclusion}
 
-Overarching conclusions about the practicality of prompt engineering and the tradeoffs between costs and benefits of different techniques.
+Overarching conclusions about the practicality of prompt engineering and the tradeoffs between costs and benefits of specific techniques.
+
+As one example a of tradeoff, chaining prompts creates complexity but may enable transparency, controllability, and sense of human-machine collaboration. \cite{wu_ai_2022}
+
+To what extent does prompting require a special skillset? See notes on the difficulty of implementation in Appendix Section. \ref{sec:difficulty}
 
 \section*{Limitations}
 
@@ -181,6 +185,7 @@ Another good resource for prompt engineering methods and evaluations is the pape
 \end{landscape}
 
 \section{Notes on Ease of Implementation}
+\label{sec:difficulty}
 
 Here are my rough evaluations of the difficulty of implementing each method selected for this paper. Ratings are on a scale from 1-6.
 
