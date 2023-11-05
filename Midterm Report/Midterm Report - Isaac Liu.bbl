@@ -1,4 +1,4 @@
-\begin{thebibliography}{26}
+\begin{thebibliography}{29}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 
 \bibitem[{noa()}]{noauthor_semantic_nodate}
@@ -25,6 +25,15 @@ Griffin Adams, Alexander Fabbri, Faisal Ladhak, Eric Lehman, and Noémie
 Shivam~Bansal Aggarwal, Chaitanya.
 \newblock \href {https://github.com/shivam5992/textstat} {textstat: {Calculate}
   statistical features from text}.
+
+\bibitem[{Bhaskar et~al.(2023)Bhaskar, Fabbri, and
+  Durrett}]{bhaskar_prompted_2023}
+Adithya Bhaskar, Alex Fabbri, and Greg Durrett. 2023.
+\newblock \href {https://doi.org/10.18653/v1/2023.findings-acl.591} {Prompted
+  {Opinion} {Summarization} with {GPT}-3.5}.
+\newblock In \emph{Findings of the {Association} for {Computational}
+  {Linguistics}: {ACL} 2023}, pages 9282--9300, Toronto, Canada. Association
+  for Computational Linguistics.
 
 \bibitem[{Brown et~al.(2020)Brown, Mann, Ryder, Subbiah, Kaplan, Dhariwal,
   Neelakantan, Shyam, Sastry, Askell, Agarwal, Herbert-Voss, Krueger, Henighan,
@@ -84,12 +93,6 @@ Andrew Gao. 2023.
 \newblock \href {https://doi.org/10.2139/ssrn.4504303} {Prompt {Engineering}
   for {Large} {Language} {Models}}.
 
-\bibitem[{Gardner and Davies(2014)}]{gardner_new_2014}
-Dee Gardner and Mark Davies. 2014.
-\newblock \href {https://doi.org/10.1093/applin/amt015} {A {New} {Academic}
-  {Vocabulary} {List}}.
-\newblock \emph{Applied Linguistics}, 35(3):305--327.
-
 \bibitem[{Imperial and Madabushi(2023)}]{imperial_flesch_2023}
 Joseph~Marvin Imperial and Harish~Tayyar Madabushi. 2023.
 \newblock \href {http://arxiv.org/abs/2309.05454} {Flesch or {Fumble}?
@@ -104,6 +107,12 @@ Takeshi Kojima, Shixiang~Shane Gu, Machel Reid, Yutaka Matsuo, and Yusuke
 \newblock \href {https://doi.org/10.48550/arXiv.2205.11916} {Large {Language}
   {Models} are {Zero}-{Shot} {Reasoners}}.
 \newblock ArXiv:2205.11916 [cs].
+
+\bibitem[{Lester et~al.(2021)Lester, Al-Rfou, and Constant}]{lester_power_2021}
+Brian Lester, Rami Al-Rfou, and Noah Constant. 2021.
+\newblock \href {http://arxiv.org/abs/2104.08691} {The {Power} of {Scale} for
+  {Parameter}-{Efficient} {Prompt} {Tuning}}.
+\newblock ArXiv:2104.08691 [cs].
 
 \bibitem[{Madaan et~al.(2023)Madaan, Tandon, Gupta, Hallinan, Gao, Wiegreffe,
   Alon, Dziri, Prabhumoye, Yang, Gupta, Majumder, Hermann, Welleck,
@@ -128,6 +137,14 @@ Kim Martineau. 2021.
 \newblock \href {https://research.ibm.com/blog/what-is-ai-prompt-tuning} {What
   is prompt tuning?}
 
+\bibitem[{Min et~al.(2022)Min, Lyu, Holtzman, Artetxe, Lewis, Hajishirzi, and
+  Zettlemoyer}]{min_rethinking_2022}
+Sewon Min, Xinxi Lyu, Ari Holtzman, Mikel Artetxe, Mike Lewis, Hannaneh
+  Hajishirzi, and Luke Zettlemoyer. 2022.
+\newblock \href {http://arxiv.org/abs/2202.12837} {Rethinking the {Role} of
+  {Demonstrations}: {What} {Makes} {In}-{Context} {Learning} {Work}?}
+\newblock ArXiv:2202.12837 [cs].
+
 \bibitem[{OpenAI(2023)}]{openai_gpt-4_2023}
 OpenAI. 2023.
 \newblock \href {http://arxiv.org/abs/2303.08774} {{GPT}-4 {Technical}
@@ -150,6 +167,17 @@ Cameron Shackell. 2023.
   {http://theconversation.com/prompt-engineering-is-being-an-ai-whisperer-the-job-of-the-future-or-a-short-lived-fad-211833}
   {Prompt engineering: is being an {AI} 'whisperer' the job of the future or a
   short-lived fad?}
+
+\bibitem[{Shi et~al.(2023)Shi, Chen, Misra, Scales, Dohan, Chi, Schärli, and
+  Zhou}]{shi_large_2023}
+Freda Shi, Xinyun Chen, Kanishka Misra, Nathan Scales, David Dohan, Ed~H. Chi,
+  Nathanael Schärli, and Denny Zhou. 2023.
+\newblock \href {https://proceedings.mlr.press/v202/shi23a.html} {Large
+  {Language} {Models} {Can} {Be} {Easily} {Distracted} by {Irrelevant}
+  {Context}}.
+\newblock In \emph{Proceedings of the 40th {International} {Conference} on
+  {Machine} {Learning}}, pages 31210--31227. PMLR.
+\newblock ISSN: 2640-3498.
 
 \bibitem[{Shum et~al.(2023)Shum, Diao, and Zhang}]{shum_automatic_2023}
 KaShun Shum, Shizhe Diao, and Tong Zhang. 2023.
