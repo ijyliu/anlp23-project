@@ -261,7 +261,7 @@ Task: Generate 3 different possible one-step calculations to serve as step 1 in 
 
 <Response>
 
-Task: State the calculation above that is most likely to contribute to solving the problem. If it fully solves the original problem, also output STOP.
+Task: State the calculation above that is most likely to contribute to solving the problem. If it fully solves the original problem, also output STOP and the solution to the problem. If none of the calculations are correct, output ERROR and generate three new ones.
 
 <Response>
 
@@ -418,6 +418,10 @@ Your Task: Write 3 drafts of the 2-paragraph passage based on this plan.
 <Response>
 
 Your Task: Select the most coherent draft that follows the rules of the task and write it out.
+
+<Response>
+
+Your Task: If the draft is correct and coherent to the extent you would award a 10 on a scale of 1 to 10, output STOP. If it is not, select a new draft or a new one-sentence plan for a potential passage.
 
 <Response>
 
