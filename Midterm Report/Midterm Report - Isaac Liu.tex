@@ -95,7 +95,7 @@ Are improvements from a given method replicable across tasks? Are they replicabl
 I report:
 
 \begin{itemize}
-  \item Length of the entire interaction in tokens
+  \item Length of the entire interaction in tokens (using OpenAI's tiktoken tokenizer for the appropriate model)
   \item Financial cost of the entire interaction using per-token prices
   \item Length of the entire interaction in tokens relative to the length of the task/question + a baseline answer. For GSM8K, the baselines are the provided (OpenAI) solution and the answer achieved via direct prompting. For the Creative Writing task, the baseline is the answer achieved via direct prompting. How much is prompt engineering stretching the interaction out? The ratio of engineered answer length to baseline lengths can be informative.
   \item The change in accuracy (in percentage points, 0 to 100) divided by the change in tokens (difference in token counts), between the prompt engineering technique and direct prompting. Is any stretching of output adding value/improving accuracy? This is the token cost of accuracy.
