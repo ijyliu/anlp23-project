@@ -98,9 +98,9 @@ I report:
   \item Length of the entire interaction in tokens (using OpenAI's tiktoken tokenizer for the appropriate model)
   \item Financial cost of the entire interaction using per-token prices
   \item Length of the entire interaction in tokens relative to the length of the task/question + a baseline answer. For GSM8K, the baselines are the provided (OpenAI) solution and the answer achieved via direct prompting. For the Creative Writing task, the baseline is the answer achieved via direct prompting. How much is prompt engineering stretching the interaction out? The ratio of engineered answer length to baseline lengths can be informative.
-  \item The change in accuracy (in percentage points, 0 to 100) divided by the change in tokens (difference in token counts), between the prompt engineering technique and direct prompting. Is any stretching of output adding value/improving accuracy? This is the token cost of accuracy.
+  \item The change in accuracy (in percentage points, 0 to 100) or quality (coherence scale points) divided by the change in tokens (difference in token counts), between the prompt engineering technique and direct prompting. Is any stretching of output adding value/improving accuracy/quality? This is the token cost of accuracy/quality.
   \begin{displaymath}
-    \frac{Accuracy_{PE} - Accuracy_{B}}{Tokens_{PE} - Tokens_{B}}
+    \frac{AQ_{PE} - AQ_{B}}{Tokens_{PE} - Tokens_{B}}
   \end{displaymath}
 \end{itemize}
 
@@ -117,7 +117,7 @@ I report:
   \item For GSM8K: Presence of contrasting words {'while', 'but', 'though', 'although', 'other', 'others', 'however'} in the response \cite{bhaskar_prompted_2023}
   \item For Creative Writing: Number of passage ideas considered in the response
   \item For Creative Writing: Sentence length (NLTK word and sentence tokenizers) and Flesch reading ease (implemented via the textstat Python package) in the response \cite{noauthor_nltk_nodate, flesch_how_2016, aggarwal_textstat_nodate}
-  \item Difference of these scores in prompts vs. responses, responses vs. accepted/outside correct answer
+  \item Difference of these scores in responses vs. prompts, responses vs. baseline (direct prompting and provided answer for GSM8K, direct prompting for creative writing)
   \item Human assessment of output complexity (ease of evaluating results). This could be task specific (done for some novel real world example questions/prompting scenarios), or it could be done overall based on pre-existing examples of the technique. Perhaps a balance of both is best. The actual metric will be a numeric score and a qualitative description.
 \end{itemize}
 
