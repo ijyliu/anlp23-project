@@ -44,7 +44,7 @@ To evaluate performance, I attempt to use tasks that are general-purpose, close 
 
 These tasks carry several key benefits. They cover both the mathematical and linguistic domains - two types of tasks that form the foundation of the standardized testing of humans. GSM8K is studied in the majority of the papers introducing techniques used in this paper and is among the most common datasets used in the far larger list of papers I initially surveyed. Text and story generation is a widespread foundational task in NLP. Importantly, these sets of tasks are known to be free of data contamination. The GSM8K test set has been intentionally withheld from the training of OpenAI's models \cite{openai_gpt-4_2023}. The creative writing task was released only in 2023, and the code and data provided with the associated paper includes only questions and not LLM responses. \footnote{It is also relatively simple to find random sentence generators online (such as \url{https://www.thewordfinder.com/random-sentence-generator/}), which would work for this task - at the cost of comparability with the results of \cite{yao_tree_2023}. In any case, the 2-sentence task represents a modification of the original, and the test overall makes use of subjective human evaluations of the coherence of generated stories, limiting comparisons anyway.}
 
-I perform the analysis on one cutting-edge model and one older model from closer to the time that these techniques were introduced. This provides a picture of the changing costs and benefits of advanced prompting, a trend that may even be extrapolated into the future if current LLM scaling laws continue to hold. As the most widely used models and the ones behind much original work in the field, I select two models from the OpenAI series: GPT-4 and text-davinci-003. All conversations were conducted programatically via the OpenAI API.
+I perform the analysis on one cutting-edge model and one older model from closer to the time that these techniques were introduced. This provides a picture of the changing costs and benefits of advanced prompting, a trend that may even be extrapolated into the future if current LLM scaling laws continue to hold. As the most widely used models and the ones behind much original work in the field, I select two models from the OpenAI series: GPT-4 (June 13th, 2023 version: 'gpt-4-0613') and text-davinci-003. All conversations were conducted programatically via the OpenAI API.
 
 %To the extent possible, I report accuracy scores on the domain dataset as they are in the original paper introducing each technique. It is possible to use any prompts, LLM responses, and correct responses provided along with original papers to calculate other simple metrics such as response lengths and complexity. However, some metrics (time taken, human assessments of complexity) require my own evaluations.
 % Note - this can be a part of any accuracy discussions
@@ -113,11 +113,11 @@ Do longer prompt contexts worsen performance? For language understanding tasks, 
 I report:
 
 \begin{itemize}
-  \item For GSM8K: Number of reasoning steps - linebreaks, periods \cite{fu_complexity-based_2023}
-  \item For GSM8K: Presence of contrasting words {'while', 'but', 'though', 'although', 'other', 'others', 'however'} \cite{bhaskar_prompted_2023}
-  \item For Creative Writing: Number of passage ideas considered
-  \item For Creative Writing: Sentence length and Flesch reading ease (implemented via the textstat Python package) \cite{flesch_how_2016, aggarwal_textstat_nodate}
-  \item Ratio or difference of these scores in prompts vs. responses, responses vs. accepted/outside correct answer
+  \item For GSM8K: Number of reasoning steps - linebreaks, periods (taking care to skip decimals) in the response \cite{fu_complexity-based_2023}
+  \item For GSM8K: Presence of contrasting words {'while', 'but', 'though', 'although', 'other', 'others', 'however'} in the response \cite{bhaskar_prompted_2023}
+  \item For Creative Writing: Number of passage ideas considered in the response
+  \item For Creative Writing: Sentence length (NLTK word and sentence tokenizers) and Flesch reading ease (implemented via the textstat Python package) in the response \cite{noauthor_nltk_nodate, flesch_how_2016, aggarwal_textstat_nodate}
+  \item Difference of these scores in prompts vs. responses, responses vs. accepted/outside correct answer
   \item Human assessment of output complexity (ease of evaluating results). This could be task specific (done for some novel real world example questions/prompting scenarios), or it could be done overall based on pre-existing examples of the technique. Perhaps a balance of both is best. The actual metric will be a numeric score and a qualitative description.
 \end{itemize}
 
