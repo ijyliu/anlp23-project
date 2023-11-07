@@ -1,0 +1,7 @@
+Q: Janet’s ducks lay 16 eggs per day. She eats three for breakfast every morning and bakes muffins for her friends every day with four. She sells the remainder at the farmers' market daily for $2 per fresh duck egg. How much in dollars does she make every day at the farmers' market?
+Task: Generate 3 different possible one-step calculations to serve as step 1 in solving the problem. Only work on step 1. Put each calculation on a new line. Do not number them.
+Add 16 and 4 and multiply by 2 
+Subtract 3 from 16 and multiply by 2 
+Multiply 16 and 2 and subtract 7
+Task: State the calculation above that is most likely to contribute to solving the problem. If it fully solves the original problem, also output STOP and the solution to the problem. If none of the calculations are correct, output ERROR and generate three new ones.
+Subtract 3 from 16 and multiply by 2 - STOP - 28 x 2 = $56
