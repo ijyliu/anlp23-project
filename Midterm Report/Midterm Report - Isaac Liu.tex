@@ -99,9 +99,10 @@ I report:
 
 \begin{itemize}
   \item Length of the entire interaction in tokens (using OpenAI's tiktoken tokenizer for the appropriate model)
-  \item Financial cost of the entire interaction using per-token prices
-  \item Length of the entire interaction in tokens relative to the length of the task/question + a baseline answer. For GSM8K, the baselines are the provided (OpenAI) solution and the answer achieved via direct prompting. For the Creative Writing task, the baseline is the answer achieved via direct prompting. How much is prompt engineering stretching the interaction out? The ratio of engineered answer length to baseline lengths can be informative.
-  \item The change in accuracy (in percentage points, 0 to 100) or quality (coherence scale points) divided by the change in tokens (difference in token counts), between the prompt engineering technique and direct prompting. Is any stretching of output adding value/improving accuracy/quality? This is the token cost of accuracy/quality.
+  \item Length of all prompts (all input) in tokens
+  \item Financial cost of the entire interaction using OpenAI's prices per 1,000 tokens (accounting for different input/output prices with GPT-4)
+  \item Length of the entire interaction in tokens relative to the length of the task/question + a baseline answer. For GSM8K, the baselines are the provided (OpenAI) solution and the answer achieved via direct prompting. For the Creative Writing task, the baseline is the answer achieved via direct prompting. How much is prompt engineering stretching the interaction out? The ratio of engineered answer length to baseline lengths can be informative. \footnote{I report a ratio as a difference in token counts would be harder to interpret directly - though it could easily be calculated by the reader using the length metrics.}
+  \item The change in accuracy (in percentage points, 0 to 100) or quality (coherence scale points) divided by the change in tokens (difference in token counts), between the prompt engineering technique and direct prompting. The change in tokens will be computed in terms of tokens for the overall interaction and prompt tokens. Is any stretching of output adding value/improving accuracy/quality?
   \begin{displaymath}
     \frac{AQ_{PE} - AQ_{B}}{Tokens_{PE} - Tokens_{B}}
   \end{displaymath}
@@ -109,7 +110,7 @@ I report:
 
 General Discussion:
 
-Do longer prompt contexts worsen performance? For language understanding tasks, prompt length has been found to improve model performance, with optimality achieved somewhere in the range of 20-100 tokens \cite{lester_power_2021}. On the other hand, evidence shows that models may get distracted, go off on tangents, or get stuck in a loop repeating themselves (to the extent some platforms have imposed length limitations) \cite{shi_large_2023, mann_microsoft_nodate}. 
+There may be competing or non-linear effects of length on accuracy. For language understanding tasks, prompt length has been found to improve model performance, with optimality achieved somewhere in the range of 20-100 tokens \cite{lester_power_2021}. On the other hand, evidence shows that models may get distracted, go off on tangents, or get stuck in a loop repeating themselves (to the extent some platforms have imposed length limitations) \cite{shi_large_2023, mann_microsoft_nodate}. Examining the change in accuracy per change in tokens at the question level with overall and prompt tokens may be informative.
 
 \subsection*{Complexity}
 
