@@ -130,13 +130,11 @@ Does increased complexity lead to worse performance on simple questions or overa
 
 Does increased complexity and structure limit creativity and randomness? Investigating complexity and scores on the creative writing task in particular might be helpful - coherence requires creativity.
 
+To what extent does prompting require a special skillset? Complexity metrics can give insight into this question, and ease of review scores may be particularly informative. Appendix Section \ref{sec:difficulty} also offers some observations on the difficulty of implementing each method covered in this paper.
+
 \section*{Conclusion}
 
 Overarching conclusions about the practicality of prompt engineering and the tradeoffs between costs and benefits of specific techniques.
-
-As one example of a tradeoff that applies to a variety of techniques, chaining prompts creates complexity but may enable transparency, controllability, and sense of human-machine collaboration. \cite{wu_ai_2022}
-
-To what extent does prompting require a special skillset? Appendix Section \ref{sec:difficulty} offers some observations on the difficulty of implementing each method covered in this paper. Patience and the ability to find ways to adapt methods, general skills are important factors. Ease of review scores may also be informative.
 
 \section*{Limitations}
 
@@ -147,8 +145,6 @@ Though I believe that the evaluation tasks I selected represent a wide range of 
 Just as my evaluation comes at a time with significantly more capable LLMs relative to those available when much work began on prompting, I expect the underlying calculus concerning prompting to continue to change in the future. However, I again only expect relative costs of complex engineering to increase as models get better.
 
 Another potential problem is the extent that prompting techniques have been absorbed into default LLM behavior, likely through reinforcement learning. GPT-4 in particular does seem to automatically implement chain-of-thought methods when presented with a sufficiently complex problem. In this environment, this paper become less of an evaluation of prompting techniques themselves, but more of an evaluation of their intentional and manual implementation.
-
-Though I have taken steps to limit it, data contamination remains a real concern. The questions/tasks I have not been used model in pretraining, but they may have been introduced to LLMs through reinforcement learning and other evaluations. On the other hand, this seems unlikely to bias the results for any one particular prompting method relative to the others or versus the control/direct prompting - comparisons internal to this paper are still likely to be useful.
 
 Due to the inherently unstable nature of LLM performance even in a fixed environment, and their broad and critical implications for society, there is great value even in testing models with exactly the same questions and prompts repeatedly. The statistical robustness of results from this paper and others should be tested repeatedly in future research.
 
