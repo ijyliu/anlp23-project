@@ -126,7 +126,9 @@ I report:
 
 General Discussion:
 
-Does increased prompted complexity lead to worse performance on simple questions or overall? We can use the complexity of provided answers to get a measure of how simple the question is. The results from this paper can help resolve debate in the chain-of-thought literature. \cite{fu_complexity-based_2023, shum_automatic_2023}
+As in \citealp{fu_complexity-based_2023}, are any gains in performance coming from reasoning steps as opposed to length (of the prompt or overall interaction, in tokens)? For language understanding tasks, prompt length has been found to improve model performance, with optimality achieved somewhere in the range of 20-100 tokens \cite{lester_power_2021}. Evidence shows that in longer conversations models may get distracted, go off on tangents, or get stuck in a loop repeating themselves (to the extent some platforms have imposed length limitations) \cite{shi_large_2023, mann_microsoft_nodate}. A logistic regression (with quadratic terms to model non-linearity) controlling for length and complexity at the question level can check this. Standard errors should be clustered by the identity of the question.
+
+Does increased prompted complexity lead to worse performance on simple questions or overall? We can use the complexity of provided answers to get a measure of how simple the question is, and add this as an interaction in the regression. The results from this paper can help resolve debate in the chain-of-thought literature. \cite{fu_complexity-based_2023, shum_automatic_2023}
 
 To what extent does prompting require a special skillset? Complexity metrics can give insight into this question, and ease of review scores may be particularly informative. Appendix Section \ref{sec:difficulty} also offers some observations on the difficulty of implementing each method covered in this paper.
 
