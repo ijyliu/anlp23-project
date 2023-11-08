@@ -82,7 +82,7 @@ For GSM8K problems:
 
 For Creative Writing:
 \begin{itemize}
-  \item Human assessment of coherence (on a scale of 1 to 10, 1 being incoherent and 10 being very coherent). GPT-4 is known to be capable of producing scalar scores useful for this task \cite{yao_tree_2023}, so I also collect its evaluations as an additional opinion. I report Krippendorff's alpha to compare these assessments. I also collect data on whether or not the task constraints were followed (whether ending sentences exactly match those specified), and additionally report scores when the lowest possible rating of 1 is assigned to cases where the rules are broken. \footnote{I additionally tried to use GPT-4 to assess adherence to the original instructions - to check if the exact sentences specified in the prompt were used. In my initial experiments - in contrast to \citealp{yao_tree_2023} - I found that GPT-4 was not able to do this, repeatedly missing deviations of one or a few words, even when told to carefully perform the check in a step-by-step manner!}
+  \item Human assessment of coherence (on a scale of 1 to 10, 1 being incoherent and 10 being very coherent). GPT-4 is known to be capable of producing scalar scores useful for this task \cite{yao_tree_2023}, so I also collect its evaluations as an additional opinion (see Appendix Section \ref{sec:evaluating_creative_writing}). I report Krippendorff's alpha to compare these assessments. I also collect data on whether or not the task constraints were followed (whether ending sentences exactly match those specified), and additionally report scores when the lowest possible rating of 1 is assigned to cases where the rules are broken. \footnote{I additionally tried to use GPT-4 to assess adherence to the original instructions - to check if the exact sentences specified in the prompt were used. In my initial experiments - in contrast to \citealp{yao_tree_2023} - I found that GPT-4 was not able to do this, repeatedly missing deviations of one or a few words, even when told to carefully perform the check in a step-by-step manner!}
 \end{itemize}
 
 General Discussion:
@@ -117,21 +117,21 @@ There may be competing or non-linear effects of length on accuracy. For language
 I report:
 
 \begin{itemize}
-  \item For GSM8K: Number of reasoning steps - linebreaks, periods (taking care to skip decimals) in the response \cite{fu_complexity-based_2023}
-  \item For GSM8K: Presence of contrasting words {'while', 'but', 'though', 'although', 'other', 'others', 'however'} in the response \cite{bhaskar_prompted_2023}
-  \item For Creative Writing: Number of passage ideas considered in the response
-  \item For Creative Writing: Sentence length (NLTK word and sentence tokenizers) and Flesch reading ease (implemented via the textstat Python package) in the response \cite{noauthor_nltk_nodate, flesch_how_2016, aggarwal_textstat_nodate}
-  \item Difference of these scores in responses vs. prompts, responses vs. baseline (direct prompting and provided answer for GSM8K, direct prompting for creative writing)
-  \item Human assessment of output complexity (ease of evaluating results). This could be task specific (done for some novel real world example questions/prompting scenarios), or it could be done overall based on pre-existing examples of the technique. Perhaps a balance of both is best. The actual metric will be a numeric score and a qualitative description.
+  \item For GSM8K: Number of reasoning steps - linebreaks, sentences (NLTK sentence tokenizer), strings "step i" and "1. ", "2. ", "3. ", etc. in the response \cite{noauthor_nltk_nodate, fu_complexity-based_2023} \footnote{Sentences seem to be a better measure of complexity than just periods as were used in prior work (decimals, abbreviations, etc. present challenges though the problems can be mitigated somewhat with regex). Semicolons were also considered, but in experiments these did not appear unless models were specifically prompted towards including them. "step i" comes from \citealp{fu_complexity-based_2023}, but "1. ", "2. " etc. are novel metrics, to the best of my knowledge.}
+  \item For GSM8K: Presence of contrasting words {'while', 'but', 'though', 'although', 'other', 'others', 'however'} in the response \cite{bhaskar_prompted_2023} \footnote{These words did not seem to appear very often in testing, so this metric may not be very useful and might not be reported.}
+  \item For Creative Writing: Sentence length (NLTK word and sentence tokenizers) in the response \cite{noauthor_nltk_nodate} 
+  \item For Creative Writing: Flesch reading ease (implemented via the textstat Python package) in the response \cite{flesch_how_2016, aggarwal_textstat_nodate}
+  \item Difference of the scores above in responses vs. prompts, additionally responses vs. provided answer for GSM8K
+  \item For GSM8K: Human assessment of ease of review - on a scale of 1-10, how difficult is it to check the steps followed? GPT-4 can produce scalar scores on this, so I also collect its evaluations as an additional opinion (see Appendix Section \ref{sec:evaluating_ease_of_review}). Again, I report Krippendorff's alpha to compare these assessments. 
 \end{itemize}
 
 General Discussion:
 
 As in \citealp{fu_complexity-based_2023}, are any gains in performance coming from reasoning steps as opposed to prompt or question length? A simple logistic regression can check this.
 
-Does increased complexity limit creativity and randomness (investigating the creative writing task in particular might be helpful - coherence requires creativity)? 
+Does increased complexity limit creativity and randomness? Investigating complexity and scores on the creative writing task in particular might be helpful - coherence requires creativity. 
 
-Does increased complexity lead to worse performance on simple questions or overall? Use the length of provided answers or control baseline results to get a measure of how simple the question is. The results from this paper can help resolve debate in the chain-of-thought literature. \cite{fu_complexity-based_2023, shum_automatic_2023}
+Does increased complexity lead to worse performance on simple questions or overall? We can use the length of provided answers to get a measure of how simple the question is. The results from this paper can help resolve debate in the chain-of-thought literature. \cite{fu_complexity-based_2023, shum_automatic_2023}
 
 If time allows, it might be possible to test prompt alterations to limit output complexity. \cite{pu_chatgpt_2023, imperial_flesch_2023}
 
@@ -141,13 +141,13 @@ Overarching conclusions about the practicality of prompt engineering and the tra
 
 As one example of a tradeoff that applies to a variety of techniques, chaining prompts creates complexity but may enable transparency, controllability, and sense of human-machine collaboration. \cite{wu_ai_2022}
 
-To what extent does prompting require a special skillset? Appendix Section \ref{sec:difficulty} offers some observations on the difficulty of implementing each method covered in this paper. Patience and the ability to find ways to adapt methods, general skills are important factors.
+To what extent does prompting require a special skillset? Appendix Section \ref{sec:difficulty} offers some observations on the difficulty of implementing each method covered in this paper. Patience and the ability to find ways to adapt methods, general skills are important factors. Ease of review scores may also be informative.
 
 \section*{Limitations}
 
-It was difficult to select prompt engineering methods to try for this paper, and there is potential for my choice of methods to be somewhat biased. I mostly picked methods based my perception of their popularity and ease of implementation. If anything, this may lead to an underestimation of costs if easy-to-implement and high quality methods are likely to be popular. 
+It was difficult to select prompt engineering methods to try for this paper, and there is potential for my choice of methods to be somewhat biased. I mostly picked methods based my perception of their popularity and ease of implementation. If anything, this may lead to an underestimation of net costs if easy-to-implement and high quality methods are likely to be popular. 
 
-Though I believe that the evaluation tasks I selected represent a wide range of areas in which LLM may be useful - logical reasoning/problem solving, and creativity - they are not comprehensive, and different adaptations of prompting methods to different tasks may lead to different results.
+Though I believe that the evaluation tasks I selected represent a wide range of areas in which LLMs may be useful - logical reasoning/problem solving, and creativity - they are not comprehensive, and different adaptations of prompting methods to different tasks may lead to different results.
 
 Just as my evaluation comes at a time with significantly more capable LLMs relative to those available when much work began on prompting, I expect the underlying calculus concerning prompting to continue to change in the future. However, I again only expect relative costs of complex engineering to increase as models get better.
 
@@ -551,6 +551,7 @@ Response:
 Note \citealp{yao_tree_2023} prompts the model for a plan in what is considered the Chain-of-Thought method adaptation for the Creative Writing task.
 
 \section{Evaluating Creative Writing Responses}
+\label{sec:evaluating_creative_writing}
 
 GPT-4 was prompted with the following to elucidate a scalar score of passage coherence:
 
@@ -559,5 +560,14 @@ GPT-4 was prompted with the following to elucidate a scalar score of passage coh
 <Passage>
 
 Rate the coherence of the answer on a scale of 1 to 10, 1 being incoherent and 10 being very coherent.
+
+\section{Evaluating Ease of Review}
+\label{sec:evaluating_ease_of_review}
+
+GPT-4 was prompted with the following to elucidate a scalar score of the ease of evaluating the reasoning behind a response:
+
+On a scale of 1-10, how difficult is it to check the reasoning behind the following conversation?
+
+<Conversation>
 
 \end{document}
