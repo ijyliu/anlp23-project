@@ -118,7 +118,6 @@ I report:
 
 \begin{itemize}
   \item For GSM8K: Number of reasoning steps - linebreaks, sentences (NLTK sentence tokenizer), strings "step i" and "1. ", "2. ", "3. ", etc. in the response \cite{noauthor_nltk_nodate, fu_complexity-based_2023} \footnote{Sentences seem to be a better measure of complexity than just periods as were used in prior work (decimals, abbreviations, etc. present challenges though the problems can be mitigated somewhat with regex). Semicolons were also considered, but in experiments these did not appear unless models were specifically prompted towards including them. "step i" comes from \citealp{fu_complexity-based_2023}, but "1. ", "2. " etc. are novel metrics, to the best of my knowledge.}
-  \item For GSM8K: Presence of contrasting words {'while', 'but', 'though', 'although', 'other', 'others', 'however'} in the response \cite{bhaskar_prompted_2023} \footnote{These words did not seem to appear very often in testing, so this metric may not be very useful and might not be reported.}
   \item For Creative Writing: Sentence length (NLTK word and sentence tokenizers) in the response \cite{noauthor_nltk_nodate} 
   \item For Creative Writing: Flesch reading ease (implemented via the textstat Python package) in the response \cite{flesch_how_2016, aggarwal_textstat_nodate}
   \item Difference of the scores above in responses vs. prompts, additionally responses vs. provided answer for GSM8K

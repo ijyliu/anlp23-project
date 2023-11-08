@@ -1,8 +1,13 @@
-\begin{thebibliography}{29}
+\begin{thebibliography}{30}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 
-\bibitem[{noa()}]{noauthor_semantic_nodate}
+\bibitem[{noa({\natexlab{a}})}]{noauthor_nltk_nodate}
+ {\natexlab{a}}.
+\newblock \href {https://www.nltk.org/index.html} {{NLTK} :: {Natural}
+  {Language} {Toolkit}}.
 
+\bibitem[{noa({\natexlab{b}})}]{noauthor_semantic_nodate}
+ {\natexlab{b}}.
 \newblock \href {https://www.semanticscholar.org/} {Semantic {Scholar}
   {\textbar} {AI}-{Powered} {Research} {Tool}}.
 
