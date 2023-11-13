@@ -84,7 +84,8 @@ def td3_gsm8k_tree_of_thought(question):
         if "STOP" in response:
             break
         # If last step was initial step of tot_prompt_3 need tot_prompt_2
-        if last_step == "initial" or last_step == "tot_prompt_3":
+        # Also run this step if the response from tot_prompt_2 contains ERROR
+        if last_step == "initial" or last_step == "tot_prompt_3" or (last_step == "tot_prompt_2" and "ERROR" in response):
             conversation.append(tot_prompt_2)
             last_step = "tot_prompt_2"
         # If last step was tot_prompt_2 need tot_prompt_3
@@ -194,6 +195,199 @@ def td3_gsm8k_manual_cot(question):
     conversation = [formatted_question]
     # Get response
     conversation.append(davinci_completion(formatted_question))
+    return conversation
+
+####################################################################################################
+
+# text-davinci-003
+# Creative Writing
+
+# Zero-Shot Control Baseline/Direct Prompting
+def td3_cw_direct_prompting(sentences):
+    # Create task
+    task = "Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph must be: " + sentences
+    # Storing conversation elements
+    conversation = [task]
+    # Get response
+    conversation.append(davinci_completion(task))
+    return conversation
+
+# Zero-shot Chain-of-Thought
+def td3_cw_zero_shot_cot(sentences):
+    # Create task
+    task = "Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph must be: " + sentences
+    # Format task by adding to it
+    formatted_task = task + " Plan step-by-step before writing the passage."
+    # Storing conversation elements
+    conversation = [formatted_task]
+    # Get response
+    conversation.append(davinci_completion(formatted_task))
+    return conversation
+
+# APE Improved Zero-Shot Chain-of-Thought
+def td3_cw_ape_zero_shot_cot(sentences):
+    # Create task
+    task = "Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph must be: " + sentences
+    # Format task by adding to it
+    formatted_task = task + " Plan step-by-step before writing the passage to be sure we have a correct and coherent answer."
+    # Storing conversation elements
+    conversation = [formatted_task]
+    # Get response
+    conversation.append(davinci_completion(formatted_task))
+    return conversation
+
+# Tree-of-Thought
+def td3_cw_tree_of_thought(sentences):
+    # Create task - note that this is not the same as other methods
+    task = "Goal: A coherent passage of 2 short paragraphs. The end sentence of each paragraph, respectively, must be: " + sentences
+    # Tree-of-Thoughts prompts
+    tot_initial = "Your Task: Generate 3 one-sentence plans for potential passages. Only generate one-sentence plans - do not write the passage."
+    tot_prompt_2 = "Your Task: Select the most coherent plan that follows the rules of the task. Only state the plan - do not write the passage."
+    tot_prompt_3 = "Your Task: Write 3 drafts of the 2-paragraph passage based on this plan."
+    tot_prompt_4 = "Your Task: Select the most coherent draft that follows the rules of the task and write it out."
+    tot_prompt_5 = "Your Task: If the draft is correct and coherent to the extent you would award a 10 on a scale of 1 to 10, output STOP. If it is not, write out a different one-sentence plan for a potential passage from among those considered and output PLAN."
+    # Begin conversation
+    conversation = [task, tot_initial]
+    last_step = "initial"
+    # Maximum of 16 items in the conversation
+    for _ in range(16):
+        # Create prompt
+        prompt = "\n".join(conversation)
+        # Get the response
+        response = davinci_completion(prompt)
+        conversation.append(response)
+        # If the response contains STOP, stop
+        if "STOP" in response:
+            break
+        # If last step was initial step of tot_prompt_3 need tot_prompt_2
+        if last_step == "initial" or last_step == "tot_prompt_3":
+            conversation.append(tot_prompt_2)
+            last_step = "tot_prompt_2"
+        # If last step was tot_prompt_2 need tot_prompt_3
+        # Also return to this step if the response from tot_prompt_5 contains PLAN
+        elif last_step == "tot_prompt_2" or (last_step == "tot_prompt_5" and "PLAN" in response):
+            conversation.append(tot_prompt_3)
+            last_step = "tot_prompt_3"
+        # If last step was tot_prompt_3 need tot_prompt_4
+        elif last_step == "tot_prompt_3":
+            conversation.append(tot_prompt_4)
+            last_step = "tot_prompt_4"
+        # If last step was tot_prompt_4 need tot_prompt_5
+        elif last_step == "tot_prompt_4":
+            conversation.append(tot_prompt_5)
+            last_step = "tot_prompt_5"
+    return conversation
+
+# Self-Refine
+def td3_cw_self_refine(sentences):
+    # Create task
+    task = "Task: Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph must be: " + sentences + "\nResponse: "
+    # Self-Refine prompts
+    self_refine_2 = "Your Task: Provide feedback on the correctness and coherence of the response and a rating on a scale of 1-10. If it is already coherent and correct to the extent you would award a 10, output 10 and the word STOP.\nResponse: "
+    self_refine_3 = "Your Task: Rewrite the passage based on the most recent feedback.\nResponse: "
+    # Self-refinement loop
+    # Storing conversation elements
+    updated_convo = []
+    new_last_step = ""
+    # Maximum of 16 items in the conversation
+    for i in range(16):
+        last_step_this_loop = new_last_step
+        # Get the response
+        if i == 0:
+            updated_convo.append(davinci_completion(task))
+            new_last_step = "initial"
+        # If the response contains STOP, stop
+        if "STOP" in updated_convo[-1]:
+            break
+        # If last step was initial step or self_refine_3 need self_refine_2
+        if last_step_this_loop == "initial" or last_step_this_loop == "self_refine_3":
+            updated_convo.append(self_refine_2)
+            feeder_string = "\n".join(updated_convo)
+            updated_convo.append(davinci_completion(feeder_string))
+            new_last_step = "self_refine_2"
+        # If last step was self_refine_2 need self_refine_3
+        if last_step_this_loop == "self_refine_2":
+            updated_convo.append(self_refine_3)
+            feeder_string = "\n".join(updated_convo)
+            updated_convo.append(davinci_completion(feeder_string))
+            new_last_step = "self_refine_3"
+    return updated_convo
+
+# Least-to-Most
+def td3_cw_least_to_most(sentences):
+    # Create examples
+    examples = """Task: Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph, respectively, must be: 1. She couldn't get a job because she didn't have a permanent address. 2. He didn't have any hidden talents.
+    Response: Let's break down this problem into steps: First, we will write a few ideas for the passage. Second, draft the passage.
+    Ideas:
+    1. Make the passage about travelling circus performers looking for other work as their circus shuts down.
+    2. Make the passage about the struggles of a homeless person who is trying to get a job. 
+    3. Make the passage about perceptions and preconceptions of people's skills and social status as factors in hiring.
+    Passage: 
+    Laura sat on the park bench, watching the people walk by. She was homeless, and had been for a few months now. She couldn't get a job because she didn't have a permanent address.
+    She had tried to talk to career counselors about her situation, but the conversations often seemed fruitless. She didn't feel she had any marketable skills. Her situation was similar to that of her friend, Rodrigo, who openly shared a similar attitude with counselors in his meetings. He didn't have any hidden talents.
+    Task: Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph, respectively, must be: 1. He had always wanted to be a Youtuber but never thought it would actually happen. 2. My sweater got caught on the door hinge.
+    Response: Let's break down this problem into steps: First, we will write a few ideas for the passage. Second, draft the passage.
+    Ideas:
+    1. Make the passage about a sister visiting her brother; the brother has recently become a successful Youtuber - she excitedly gets her sweater caught leaving a meeting with him.
+    2. Make the passage about a men's fashion reviewer who is working on a video review of a sweater.
+    3. Make the passage about a Youtuber preparing for a video shoot - as they hurry through things, their sweater gets caught but this becomes an amusing part of their vlog.
+    Passage:
+    My brother, John, had been making home videos for years, but they never got much attention. He was always disappointed when he saw other people's videos getting thousands of views. Then one day, he got a call from a company that wanted to sponsor him. They offered him a lot of money to make videos for them. He was so excited that he couldn't sleep that night. He had always wanted to be a Youtuber but never thought it would actually happen.
+    As it turned out, John would need his own production staff to help with script writing and video editing. As I lived in the area and had prior experience in these fields, I was a natural choice for a part-time role on his channel. The company's sponsorship was very generous, and I would get a large portion of the profits. I was glad to finally be able to earn a substantial income in a more exciting and engaging role than my current position as a barista. I was smiling for most of our first business meeting, and strutted with pride out of our new studio. My sweater got caught on the door hinge."""
+    # Create task
+    task = examples + "\nTask: Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph must be: " + sentences + "\nResponse: "
+    # Storing conversation elements
+    conversation = [task]
+    # Get response
+    conversation.append(davinci_completion(task))
+    return conversation
+
+# Manual Few-Shot
+def td3_cw_manual_few_shot(sentences):
+    # Create examples
+    examples = """Task: Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph, respectively, must be: 1. She couldn't get a job because she didn't have a permanent address. 2. He didn't have any hidden talents.
+    Response: 
+    Laura sat on the park bench, watching the people walk by. She was homeless, and had been for a few months now. She couldn't get a job because she didn't have a permanent address.
+    She had tried to talk to career counselors about her situation, but the conversations often seemed fruitless. She didn't feel she had any marketable skills. Her situation was similar to that of her friend, Rodrigo, who openly shared a similar attitude with counselors in his meetings. He didn't have any hidden talents.
+    Task: Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph, respectively, must be: 1. He had always wanted to be a Youtuber but never thought it would actually happen. 2. My sweater got caught on the door hinge.
+    Response: 
+    My brother, John, had been making home videos for years, but they never got much attention. He was always disappointed when he saw other people's videos getting thousands of views. Then one day, he got a call from a company that wanted to sponsor him. They offered him a lot of money to make videos for them. He was so excited that he couldn't sleep that night. He had always wanted to be a Youtuber but never thought it would actually happen.
+    As it turned out, John would need his own production staff to help with script writing and video editing. As I lived in the area and had prior experience in these fields, I was a natural choice for a part-time role on his channel. The company's sponsorship was very generous, and I would get a large portion of the profits. I was glad to finally be able to earn a substantial income in a more exciting and engaging role than my current position as a barista. I was smiling for most of our first business meeting, and strutted with pride out of our new studio. My sweater got caught on the door hinge."""
+    # Create task
+    task = examples + "\nTask: Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph must be: " + sentences + "\nResponse: "
+    # Storing conversation elements
+    conversation = [task]
+    # Get response
+    conversation.append(davinci_completion(task))
+    return conversation
+
+# Manual Chain-of-Thought
+def td3_cw_manual_chain_of_thought(sentences):
+    # Create examples
+    examples = """Task: Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph, respectively, must be: 1. She couldn't get a job because she didn't have a permanent address. 2. He didn't have any hidden talents.
+    Response: 
+    Ideas:
+    1. Make the passage about travelling circus performers looking for other work as their circus shuts down.
+    2. Make the passage about the struggles of a homeless person who is trying to get a job. 
+    3. Make the passage about perceptions and preconceptions of people's skills and social status as factors in hiring.
+    Passage: 
+    Laura sat on the park bench, watching the people walk by. She was homeless, and had been for a few months now. She couldn't get a job because she didn't have a permanent address.
+    She had tried to talk to career counselors about her situation, but the conversations often seemed fruitless. She didn't feel she had any marketable skills. Her situation was similar to that of her friend, Rodrigo, who openly shared a similar attitude with counselors in his meetings. He didn't have any hidden talents.
+    Task: Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph, respectively, must be: 1. He had always wanted to be a Youtuber but never thought it would actually happen. 2. My sweater got caught on the door hinge.
+    Response:
+    Ideas:
+    1. Make the passage about a sister visiting her brother; the brother has recently become a successful Youtuber - she excitedly gets her sweater caught leaving a meeting with him.
+    2. Make the passage about a men's fashion reviewer who is working on a video review of a sweater.
+    3. Make the passage about a Youtuber preparing for a video shoot - as they hurry through things, their sweater gets caught but this becomes an amusing part of their vlog.
+    Passage:
+    My brother, John, had been making home videos for years, but they never got much attention. He was always disappointed when he saw other people's videos getting thousands of views. Then one day, he got a call from a company that wanted to sponsor him. They offered him a lot of money to make videos for them. He was so excited that he couldn't sleep that night. He had always wanted to be a Youtuber but never thought it would actually happen.
+    As it turned out, John would need his own production staff to help with script writing and video editing. As I lived in the area and had prior experience in these fields, I was a natural choice for a part-time role on his channel. The company's sponsorship was very generous, and I would get a large portion of the profits. I was glad to finally be able to earn a substantial income in a more exciting and engaging role than my current position as a barista. I was smiling for most of our first business meeting, and strutted with pride out of our new studio. My sweater got caught on the door hinge."""
+    # Create task
+    task = examples + "\nTask: Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph must be: " + sentences + "\nResponse: "
+    # Storing conversation elements
+    conversation = [task]
+    # Get response
+    conversation.append(davinci_completion(task))
     return conversation
 
 ####################################################################################################
