@@ -1,6 +1,13 @@
 
 # Basic infrastructure for conversations, by type of model
 
+import openai
+
+# Get and set API key
+with open('C:/Users/ijyli/Documents/OpenAI/anlp23-project.txt', 'r') as file:
+    api_key = file.read()
+openai.api_key = api_key
+
 # GPT-4
 # Send the current conversation as well as a new prompt and get a response
 def prompt_gpt_4_and_get_convo(messages, prompt):
