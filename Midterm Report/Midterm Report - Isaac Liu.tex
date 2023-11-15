@@ -538,15 +538,30 @@ GPT-4 was prompted with the following to elucidate a scalar score of passage coh
 
 <Passage>
 
-Rate the coherence of the answer on a scale of 1 to 10, 1 being incoherent and 10 being very coherent.
+Rate the coherence of the final answer on a scale of 1 to 10, 1 being incoherent and 10 being very coherent. Write your justification and then put the numeric rating on its own line as the last line of your response.
 
 \section{Evaluating Ease of Review}
 \label{sec:evaluating_ease_of_review}
 
 GPT-4 was prompted with the following to elucidate a scalar score of the ease of evaluating the reasoning behind a response:
 
-On a scale of 1-10, how difficult is it to check the reasoning behind the following conversation?
+<Conversation>
+
+On a scale of 1-10 (1 being easy and 10 being difficult), how difficult is it to check the reasoning behind the above conversation? Write your justification then put the numeric rating on its own line as the last line of your response.
+
+\section{Experimental: Automated GSM8K Grading}
+\label{sec:automated_gsm8k_grading}
 
 <Conversation>
+
+Provided Answer:
+
+<Answer>
+
+Task:
+
+Output 0 if the final answer does not match the provided answer and 1 if it matches the final answer.
+
+\footnote{One way to get automatic GSM8K grades would be requiring the model to output a final answer on a new line in the course of prompt interactions. I did not implement this in order to keep conversations natural and because errors here would not be errors in reasoning per se.}
 
 \end{document}
