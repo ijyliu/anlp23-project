@@ -26,8 +26,7 @@ def prompt_gpt_4_and_get_convo(messages, prompt):
 def davinci_completion(prompt):
     response = openai.Completion.create(
         engine='text-davinci-003',
-        prompt=prompt,
-        max_tokens=3000
+        prompt=prompt
     )
     return response.choices[0].text.strip()
 
@@ -212,7 +211,7 @@ def td3_gsm8k_manual_cot(question):
 # Zero-Shot Control Baseline/Direct Prompting
 def td3_cw_direct_prompting(sentences):
     # Create task
-    task = "Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph must be: " + sentences
+    task = "Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph must be: " + " ".join(sentences)
     # Storing conversation elements
     conversation = [task]
     # Get response
@@ -222,7 +221,7 @@ def td3_cw_direct_prompting(sentences):
 # Zero-shot Chain-of-Thought
 def td3_cw_zero_shot_cot(sentences):
     # Create task
-    task = "Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph must be: " + sentences
+    task = "Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph must be: " + " ".join(sentences)
     # Format task by adding to it
     formatted_task = task + " Plan step-by-step before writing the passage."
     # Storing conversation elements
@@ -234,7 +233,7 @@ def td3_cw_zero_shot_cot(sentences):
 # APE Improved Zero-Shot Chain-of-Thought
 def td3_cw_ape_zero_shot_cot(sentences):
     # Create task
-    task = "Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph must be: " + sentences
+    task = "Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph must be: " + " ".join(sentences)
     # Format task by adding to it
     formatted_task = task + " Plan step-by-step before writing the passage to be sure we have a correct and coherent answer."
     # Storing conversation elements
@@ -246,7 +245,7 @@ def td3_cw_ape_zero_shot_cot(sentences):
 # Tree-of-Thought
 def td3_cw_tree_of_thought(sentences):
     # Create task - note that this is not the same as other methods
-    task = "Goal: A coherent passage of 2 short paragraphs. The end sentence of each paragraph, respectively, must be: " + sentences
+    task = "Goal: A coherent passage of 2 short paragraphs. The end sentence of each paragraph, respectively, must be: " + " ".join(sentences)
     # Tree-of-Thoughts prompts
     tot_initial = "Your Task: Generate 3 one-sentence plans for potential passages. Only generate one-sentence plans - do not write the passage."
     tot_prompt_2 = "Your Task: Select the most coherent plan that follows the rules of the task. Only state the plan - do not write the passage."
@@ -288,7 +287,7 @@ def td3_cw_tree_of_thought(sentences):
 # Self-Refine
 def td3_cw_self_refine(sentences):
     # Create task
-    task = "Task: Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph must be: " + sentences + "\nResponse: "
+    task = "Task: Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph must be: " + " ".join(sentences) + "\nResponse: "
     # Self-Refine prompts
     self_refine_2 = "Your Task: Provide feedback on the correctness and coherence of the response and a rating on a scale of 1-10. If it is already coherent and correct to the extent you would award a 10, output 10 and the word STOP.\nResponse: "
     self_refine_3 = "Your Task: Rewrite the passage based on the most recent feedback.\nResponse: "
@@ -342,7 +341,7 @@ def td3_cw_least_to_most(sentences):
     My brother, John, had been making home videos for years, but they never got much attention. He was always disappointed when he saw other people's videos getting thousands of views. Then one day, he got a call from a company that wanted to sponsor him. They offered him a lot of money to make videos for them. He was so excited that he couldn't sleep that night. He had always wanted to be a Youtuber but never thought it would actually happen.
     As it turned out, John would need his own production staff to help with script writing and video editing. As I lived in the area and had prior experience in these fields, I was a natural choice for a part-time role on his channel. The company's sponsorship was very generous, and I would get a large portion of the profits. I was glad to finally be able to earn a substantial income in a more exciting and engaging role than my current position as a barista. I was smiling for most of our first business meeting, and strutted with pride out of our new studio. My sweater got caught on the door hinge."""
     # Create task
-    task = examples + "\nTask: Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph must be: " + sentences + "\nResponse: "
+    task = examples + "\nTask: Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph must be: " + " ".join(sentences) + "\nResponse: "
     # Storing conversation elements
     conversation = [task]
     # Get response
@@ -361,7 +360,7 @@ def td3_cw_manual_few_shot(sentences):
     My brother, John, had been making home videos for years, but they never got much attention. He was always disappointed when he saw other people's videos getting thousands of views. Then one day, he got a call from a company that wanted to sponsor him. They offered him a lot of money to make videos for them. He was so excited that he couldn't sleep that night. He had always wanted to be a Youtuber but never thought it would actually happen.
     As it turned out, John would need his own production staff to help with script writing and video editing. As I lived in the area and had prior experience in these fields, I was a natural choice for a part-time role on his channel. The company's sponsorship was very generous, and I would get a large portion of the profits. I was glad to finally be able to earn a substantial income in a more exciting and engaging role than my current position as a barista. I was smiling for most of our first business meeting, and strutted with pride out of our new studio. My sweater got caught on the door hinge."""
     # Create task
-    task = examples + "\nTask: Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph must be: " + sentences + "\nResponse: "
+    task = examples + "\nTask: Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph must be: " + " ".join(sentences) + "\nResponse: "
     # Storing conversation elements
     conversation = [task]
     # Get response
@@ -369,7 +368,7 @@ def td3_cw_manual_few_shot(sentences):
     return conversation
 
 # Manual Chain-of-Thought
-def td3_cw_manual_chain_of_thought(sentences):
+def td3_cw_manual_cot(sentences):
     # Create examples
     examples = """Task: Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph, respectively, must be: 1. She couldn't get a job because she didn't have a permanent address. 2. He didn't have any hidden talents.
     Response: 
@@ -390,7 +389,7 @@ def td3_cw_manual_chain_of_thought(sentences):
     My brother, John, had been making home videos for years, but they never got much attention. He was always disappointed when he saw other people's videos getting thousands of views. Then one day, he got a call from a company that wanted to sponsor him. They offered him a lot of money to make videos for them. He was so excited that he couldn't sleep that night. He had always wanted to be a Youtuber but never thought it would actually happen.
     As it turned out, John would need his own production staff to help with script writing and video editing. As I lived in the area and had prior experience in these fields, I was a natural choice for a part-time role on his channel. The company's sponsorship was very generous, and I would get a large portion of the profits. I was glad to finally be able to earn a substantial income in a more exciting and engaging role than my current position as a barista. I was smiling for most of our first business meeting, and strutted with pride out of our new studio. My sweater got caught on the door hinge."""
     # Create task
-    task = examples + "\nTask: Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph must be: " + sentences + "\nResponse: "
+    task = examples + "\nTask: Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph must be: " + " ".join(sentences) + "\nResponse: "
     # Storing conversation elements
     conversation = [task]
     # Get response
@@ -470,7 +469,7 @@ def gpt4_gsm8k_tree_of_thought(question):
     return updated_convo
 
 # Self-Refine
-def gpt_gsm8k_self_refine(question):
+def gpt4_gsm8k_self_refine(question):
     # Format question
     formatted_question = "Q: " + question
     formatted_question = formatted_question + "\nA:"
@@ -577,7 +576,7 @@ def gpt4_gsm8k_manual_cot(question):
 # Zero-Shot Control Baseline/Direct Prompting
 def gpt4_cw_direct_prompting(sentences):
     # Create task
-    task = "Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph must be: " + sentences
+    task = "Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph must be: " + " ".join(sentences)
     # Storing conversation elements
     conversation = []
     # Get response
@@ -587,7 +586,7 @@ def gpt4_cw_direct_prompting(sentences):
 # Zero-shot Chain-of-Thought
 def gpt4_cw_zero_shot_cot(sentences):
     # Create task
-    task = "Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph must be: " + sentences
+    task = "Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph must be: " + " ".join(sentences)
     # Format task by adding to it
     formatted_task = task + " Plan step-by-step before writing the passage."
     # Storing conversation elements
@@ -599,7 +598,7 @@ def gpt4_cw_zero_shot_cot(sentences):
 # APE Improved Zero-Shot Chain-of-Thought
 def gpt4_cw_ape_zero_shot_cot(sentences):
     # Create task
-    task = "Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph must be: " + sentences
+    task = "Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph must be: " + " ".join(sentences)
     # Format task by adding to it
     formatted_task = task + " Plan step-by-step before writing the passage to be sure we have a correct and coherent answer."
     # Storing conversation elements
@@ -611,7 +610,7 @@ def gpt4_cw_ape_zero_shot_cot(sentences):
 # Tree-of-Thought
 def gpt4_cw_tree_of_thought(sentences):
     # Create task - note that this is not the same as other methods
-    task = "Goal: A coherent passage of 2 short paragraphs. The end sentence of each paragraph, respectively, must be: " + sentences
+    task = "Goal: A coherent passage of 2 short paragraphs. The end sentence of each paragraph, respectively, must be: " + " ".join(sentences)
     # Tree-of-Thoughts prompts
     tot_initial = "Your Task: Generate 3 one-sentence plans for potential passages. Only generate one-sentence plans - do not write the passage."
     tot_prompt_2 = "Your Task: Select the most coherent plan that follows the rules of the task. Only state the plan - do not write the passage."
@@ -651,7 +650,7 @@ def gpt4_cw_tree_of_thought(sentences):
 # Self-Refine
 def gpt4_cw_self_refine(sentences):
     # Create task
-    task = "Task: Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph must be: " + sentences + "\nResponse: "
+    task = "Task: Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph must be: " + " ".join(sentences) + "\nResponse: "
     # Self-Refine prompts
     self_refine_2 = "Your Task: Provide feedback on the correctness and coherence of the response and a rating on a scale of 1-10. If it is already coherent and correct to the extent you would award a 10, output 10 and the word STOP.\nResponse: "
     self_refine_3 = "Your Task: Rewrite the passage based on the most recent feedback.\nResponse: "
@@ -703,7 +702,7 @@ def gpt4_cw_least_to_most(sentences):
     My brother, John, had been making home videos for years, but they never got much attention. He was always disappointed when he saw other people's videos getting thousands of views. Then one day, he got a call from a company that wanted to sponsor him. They offered him a lot of money to make videos for them. He was so excited that he couldn't sleep that night. He had always wanted to be a Youtuber but never thought it would actually happen.
     As it turned out, John would need his own production staff to help with script writing and video editing. As I lived in the area and had prior experience in these fields, I was a natural choice for a part-time role on his channel. The company's sponsorship was very generous, and I would get a large portion of the profits. I was glad to finally be able to earn a substantial income in a more exciting and engaging role than my current position as a barista. I was smiling for most of our first business meeting, and strutted with pride out of our new studio. My sweater got caught on the door hinge."""
     # Create task
-    task = examples + "\nTask: Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph must be: " + sentences + "\nResponse: "
+    task = examples + "\nTask: Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph must be: " + " ".join(sentences) + "\nResponse: "
     # Storing conversation elements
     conversation = []
     # Get response
@@ -722,7 +721,7 @@ def gpt4_cw_manual_few_shot(sentences):
     My brother, John, had been making home videos for years, but they never got much attention. He was always disappointed when he saw other people's videos getting thousands of views. Then one day, he got a call from a company that wanted to sponsor him. They offered him a lot of money to make videos for them. He was so excited that he couldn't sleep that night. He had always wanted to be a Youtuber but never thought it would actually happen.
     As it turned out, John would need his own production staff to help with script writing and video editing. As I lived in the area and had prior experience in these fields, I was a natural choice for a part-time role on his channel. The company's sponsorship was very generous, and I would get a large portion of the profits. I was glad to finally be able to earn a substantial income in a more exciting and engaging role than my current position as a barista. I was smiling for most of our first business meeting, and strutted with pride out of our new studio. My sweater got caught on the door hinge."""
     # Create task
-    task = examples + "\nTask: Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph must be: " + sentences + "\nResponse: "
+    task = examples + "\nTask: Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph must be: " + " ".join(sentences) + "\nResponse: "
     # Storing conversation elements
     conversation = []
     # Get response
@@ -730,7 +729,7 @@ def gpt4_cw_manual_few_shot(sentences):
     return updated_convo
 
 # Manual Chain-of-Thought
-def gpt4_cw_manual_chain_of_thought(sentences):
+def gpt4_cw_manual_cot(sentences):
     # Create examples
     examples = """Task: Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph, respectively, must be: 1. She couldn't get a job because she didn't have a permanent address. 2. He didn't have any hidden talents.
     Response: 
@@ -751,7 +750,7 @@ def gpt4_cw_manual_chain_of_thought(sentences):
     My brother, John, had been making home videos for years, but they never got much attention. He was always disappointed when he saw other people's videos getting thousands of views. Then one day, he got a call from a company that wanted to sponsor him. They offered him a lot of money to make videos for them. He was so excited that he couldn't sleep that night. He had always wanted to be a Youtuber but never thought it would actually happen.
     As it turned out, John would need his own production staff to help with script writing and video editing. As I lived in the area and had prior experience in these fields, I was a natural choice for a part-time role on his channel. The company's sponsorship was very generous, and I would get a large portion of the profits. I was glad to finally be able to earn a substantial income in a more exciting and engaging role than my current position as a barista. I was smiling for most of our first business meeting, and strutted with pride out of our new studio. My sweater got caught on the door hinge."""
     # Create task
-    task = examples + "\nTask: Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph must be: " + sentences + "\nResponse: "
+    task = examples + "\nTask: Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph must be: " + " ".join(sentences) + "\nResponse: "
     # Storing conversation elements
     conversation = []
     # Get response
