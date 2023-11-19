@@ -2,6 +2,7 @@
 # Basic infrastructure for conversations, by type of model
 
 import openai
+import tiktoken
 
 # Get and set API key
 with open('C:/Users/ijyli/Documents/OpenAI/anlp23-project.txt', 'r') as file:
@@ -24,10 +25,20 @@ def prompt_gpt_4_and_get_convo(messages, prompt):
 # text-davinci-003
 # Send a message and get a response
 def davinci_completion(prompt):
+    # Setting up max tokens
+    enc = tiktoken.encoding_for_model("text-davinci-003")
+    prompt_length = len(enc.encode(prompt))
+    if 4096 - prompt_length < 0:
+        return "Conversation truncated due to prompt length."
+    # Getting a response, being careful with the token setting
+    #try:
     response = openai.Completion.create(
         engine='text-davinci-003',
-        prompt=prompt
+        prompt=prompt,
+        max_tokens = 4096 - prompt_length
     )
+    #except:
+     #   return "Conversation truncated due to prompt length."
     return response.choices[0].text.strip()
 
 ####################################################################################################
@@ -88,7 +99,7 @@ def td3_gsm8k_tree_of_thought(question):
         conversation.append(response)
         # If the response contains STOP, stop
         if "STOP" in response:
-            break
+            return conversation
         # If last step was initial step or tot_prompt_3 need tot_prompt_2
         # Also run this step if the response from tot_prompt_2 contains ERROR
         if last_step == "initial" or last_step == "tot_prompt_3" or (last_step == "tot_prompt_2" and "ERROR" in response):
@@ -122,7 +133,7 @@ def td3_gsm8k_self_refine(question):
         #print(updated_convo)
         # If the response contains STOP, stop
         if "STOP" in updated_convo[-1]:
-            break
+            return updated_convo
         # If last step was initial step or self_refine_3 need self_refine_2
         if last_step_this_loop == "initial" or last_step_this_loop == "self_refine_3":
             updated_convo.append(self_refine_2)
@@ -263,8 +274,8 @@ def td3_cw_tree_of_thought(sentences):
         response = davinci_completion(prompt)
         conversation.append(response)
         # If the response contains STOP, stop
-        if "STOP" in response:
-            break
+        if "STOP" in response or "Conversation truncated due to prompt length." in response:
+            return conversation
         # If last step was initial step of tot_prompt_3 need tot_prompt_2
         if last_step == "initial" or last_step == "tot_prompt_3":
             conversation.append(tot_prompt_2)
@@ -303,8 +314,8 @@ def td3_cw_self_refine(sentences):
             updated_convo.append(davinci_completion(task))
             new_last_step = "initial"
         # If the response contains STOP, stop
-        if "STOP" in updated_convo[-1]:
-            break
+        if "STOP" in updated_convo[-1] or "Conversation truncated due to prompt length." in updated_convo[-1]:
+            return updated_convo
         # If last step was initial step or self_refine_3 need self_refine_2
         if last_step_this_loop == "initial" or last_step_this_loop == "self_refine_3":
             updated_convo.append(self_refine_2)
@@ -456,7 +467,7 @@ def gpt4_gsm8k_tree_of_thought(question):
             new_last_step = "initial"
         # If the response contains STOP, stop
         if "STOP" in updated_convo[-1]['content']:
-            break
+            return updated_convo
         # If last step was initial step or tot_prompt_3 need tot_prompt_2
         # Also run this step if the response from tot_prompt_2 contains ERROR
         if last_step_this_loop == "initial" or last_step_this_loop == "tot_prompt_3" or (last_step_this_loop == "tot_prompt_2" and "ERROR" in updated_convo[-1]['content']):
@@ -491,7 +502,7 @@ def gpt4_gsm8k_self_refine(question):
             new_last_step = "initial"
         # If the response contains STOP, stop
         if "STOP" in updated_convo[-1]['content']:
-            break
+            return updated_convo
         # If last step was initial step or self_refine_3 need self_refine_2
         if last_step_this_loop == "initial" or last_step_this_loop == "self_refine_3":
             updated_convo = prompt_gpt_4_and_get_convo(convo_to_feed, self_refine_2)
@@ -627,7 +638,7 @@ def gpt4_cw_tree_of_thought(sentences):
         updated_convo = prompt_gpt_4_and_get_convo(conversation, initial_prompt)
         # If the response contains STOP, stop
         if "STOP" in updated_convo[-1]['content']:
-            break
+            return updated_convo
         # If last step was initial step of tot_prompt_3 need tot_prompt_2
         if last_step == "initial" or last_step == "tot_prompt_3":
             updated_convo = prompt_gpt_4_and_get_convo(updated_convo, tot_prompt_2)
@@ -645,6 +656,7 @@ def gpt4_cw_tree_of_thought(sentences):
         elif last_step == "tot_prompt_4":
             updated_convo = prompt_gpt_4_and_get_convo(updated_convo, tot_prompt_5)
             last_step = "tot_prompt_5"
+    print(updated_convo)
     return updated_convo
 
 # Self-Refine
@@ -669,7 +681,7 @@ def gpt4_cw_self_refine(sentences):
             new_last_step = "initial"
         # If the response contains STOP, stop
         if "STOP" in updated_convo[-1]['content']:
-            break
+            return updated_convo
         # If last step was initial step or self_refine_3 need self_refine_2
         if last_step_this_loop == "initial" or last_step_this_loop == "self_refine_3":
             updated_convo = prompt_gpt_4_and_get_convo(convo_to_feed, self_refine_2)
