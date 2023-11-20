@@ -128,13 +128,13 @@ def td3_gsm8k_tree_of_thought(question):
             response = davinci_completion(prompt)
             updated_convo.append(response)
             #updated_convo = prompt_gpt_4_and_get_convo(conversation, tot_initial)
-            print('initial response')
-            print(updated_convo)
+            # print('initial response')
+            # print(updated_convo)
             new_last_step = "initial"
         # If the response contains STOP, stop
         if "STOP" in updated_convo[-1]:
-            print('STOPPING')
-            print(updated_convo)
+            # print('STOPPING')
+            # print(updated_convo)
             return updated_convo
         # If last step was initial step or tot_prompt_3 need tot_prompt_2
         # Also run this step if the response from tot_prompt_2 contains ERROR
@@ -143,8 +143,8 @@ def td3_gsm8k_tree_of_thought(question):
             prompt = "\n".join(updated_convo)
             response = davinci_completion(prompt)
             updated_convo.append(response)
-            print('added tot2')
-            print(updated_convo)
+            # print('added tot2')
+            # print(updated_convo)
             new_last_step = "tot_prompt_2"
         # If last step was tot_prompt_2 need tot_prompt_3
         if last_step_this_loop == "tot_prompt_2":
@@ -152,8 +152,8 @@ def td3_gsm8k_tree_of_thought(question):
             prompt = "\n".join(updated_convo)
             response = davinci_completion(prompt)
             updated_convo.append(response)
-            print('added tot3')
-            print(updated_convo)
+            # print('added tot3')
+            # print(updated_convo)
             new_last_step = "tot_prompt_3"
     return updated_convo
 
@@ -176,34 +176,34 @@ def td3_gsm8k_self_refine(question):
         if i == 0:
             updated_convo.append(formatted_question)
             updated_convo.append(davinci_completion(formatted_question))
-            print('initial response')
-            print(updated_convo)
+            # print('initial response')
+            # print(updated_convo)
             new_last_step = "initial"
         #print(updated_convo)
         # If the response contains STOP, stop
         if "STOP" in updated_convo[-1]:
-            print('STOPPING')
-            print(updated_convo)
+            # print('STOPPING')
+            # print(updated_convo)
             return updated_convo
         # If last step was initial step or self_refine_3 need self_refine_2
         if last_step_this_loop == "initial" or last_step_this_loop == "self_refine_3":
             updated_convo.append(self_refine_2)
-            print('added srt2')
-            print(updated_convo)
+            # print('added srt2')
+            # print(updated_convo)
             feeder_string = "\n".join(updated_convo)
             updated_convo.append(davinci_completion(feeder_string))
-            print('added response')
-            print(updated_convo)
+            # print('added response')
+            # print(updated_convo)
             new_last_step = "self_refine_2"
         # If last step was self_refine_2 need self_refine_3
         if last_step_this_loop == "self_refine_2":
             updated_convo.append(self_refine_3)
-            print('added srt3')
-            print(updated_convo)
+            # print('added srt3')
+            # print(updated_convo)
             feeder_string = "\n".join(updated_convo)
             updated_convo.append(davinci_completion(feeder_string))
-            print('added response')
-            print(updated_convo)
+            # print('added response')
+            # print(updated_convo)
             new_last_step = "self_refine_3"
     return updated_convo
 
@@ -374,8 +374,8 @@ def td3_cw_tree_of_thought(sentences):
             new_last_step = "initial"
         # If the response contains STOP, stop
         if "STOP" in updated_convo[-1]:
-            print('STOPPING')
-            print(updated_convo)
+            # print('STOPPING')
+            # print(updated_convo)
             return updated_convo
         # If last step was initial step need tot_prompt_2
         if last_step_this_loop == "initial":
@@ -383,8 +383,8 @@ def td3_cw_tree_of_thought(sentences):
             prompt = "\n".join(updated_convo)
             response = davinci_completion(prompt)
             updated_convo.append(response)
-            print('added tot2')
-            print(updated_convo)
+            # print('added tot2')
+            # print(updated_convo)
             new_last_step = "tot_prompt_2"
         # If last step was tot_prompt_2 need tot_prompt_3
         # Also return to this step if the response from tot_prompt_5 contains PLAN
@@ -394,8 +394,8 @@ def td3_cw_tree_of_thought(sentences):
             prompt = "\n".join(updated_convo)
             response = davinci_completion(prompt)
             updated_convo.append(response)
-            print('added tot3')
-            print(updated_convo)
+            # print('added tot3')
+            # print(updated_convo)
             new_last_step = "tot_prompt_3"
         # If last step was tot_prompt_3 need tot_prompt_4
         if last_step_this_loop == "tot_prompt_3":
@@ -404,8 +404,8 @@ def td3_cw_tree_of_thought(sentences):
             prompt = "\n".join(updated_convo)
             response = davinci_completion(prompt)
             updated_convo.append(response)
-            print('added tot4')
-            print(updated_convo)
+            # print('added tot4')
+            # print(updated_convo)
             new_last_step = "tot_prompt_4"
         # If last step was tot_prompt_4 need tot_prompt_5
         if last_step_this_loop == "tot_prompt_4":
@@ -414,10 +414,10 @@ def td3_cw_tree_of_thought(sentences):
             prompt = "\n".join(updated_convo)
             response = davinci_completion(prompt)
             updated_convo.append(response)
-            print('added tot5')
-            print(updated_convo)
+            # print('added tot5')
+            # print(updated_convo)
             new_last_step = "tot_prompt_5"
-    print(updated_convo)
+    # print(updated_convo)
     return updated_convo
 
 # Self-Refine
@@ -590,26 +590,26 @@ def gpt4_gsm8k_tree_of_thought(question):
         # Get the response
         if i == 0:
             updated_convo = prompt_gpt_4_and_get_convo(conversation, tot_initial)
-            print('initial response')
-            print(updated_convo)
+            # print('initial response')
+            # print(updated_convo)
             new_last_step = "initial"
         # If the response contains STOP, stop
         if "STOP" in updated_convo[-1]['content']:
-            print('STOPPING')
-            print(updated_convo)
+            # print('STOPPING')
+            # print(updated_convo)
             return updated_convo
         # If last step was initial step or tot_prompt_3 need tot_prompt_2
         # Also run this step if the response from tot_prompt_2 contains ERROR
         if last_step_this_loop == "initial" or last_step_this_loop == "tot_prompt_3" or (last_step_this_loop == "tot_prompt_2" and "ERROR" in updated_convo[-1]['content']):
             updated_convo = prompt_gpt_4_and_get_convo(convo_to_feed, tot_prompt_2)
-            print('added tot2')
-            print(updated_convo)
+            # print('added tot2')
+            # print(updated_convo)
             new_last_step = "tot_prompt_2"
         # If last step was tot_prompt_2 need tot_prompt_3
         if last_step_this_loop == "tot_prompt_2":
             updated_convo = prompt_gpt_4_and_get_convo(convo_to_feed, tot_prompt_3)
-            print('added tot3')
-            print(updated_convo)
+            # print('added tot3')
+            # print(updated_convo)
             new_last_step = "tot_prompt_3"
     return updated_convo
 
@@ -778,35 +778,35 @@ def gpt4_cw_tree_of_thought(sentences):
             new_last_step = "initial"
         # If the response contains STOP, stop
         if "STOP" in updated_convo[-1]['content']:
-            print('STOPPING')
-            print(updated_convo)
+            # print('STOPPING')
+            # print(updated_convo)
             return updated_convo
         # If last step was initial step need tot_prompt_2
         if last_step == "initial":
             updated_convo = prompt_gpt_4_and_get_convo(updated_convo, tot_prompt_2)
-            print('added tot2')
-            print(updated_convo)
+            # print('added tot2')
+            # print(updated_convo)
             new_last_step = "tot_prompt_2"
         # If last step was tot_prompt_2 need tot_prompt_3
         # Also return to this step if the response from tot_prompt_5 contains PLAN
         if last_step == "tot_prompt_2" or (last_step == "tot_prompt_5" and "PLAN" in updated_convo[-1]['content']):
             updated_convo = prompt_gpt_4_and_get_convo(updated_convo, tot_prompt_3)
-            print('added tot3')
-            print(updated_convo)
+            # print('added tot3')
+            # print(updated_convo)
             new_last_step = "tot_prompt_3"
         # If last step was tot_prompt_3 need tot_prompt_4
         if last_step == "tot_prompt_3":
             updated_convo = prompt_gpt_4_and_get_convo(updated_convo, tot_prompt_4)
-            print('added tot4')
-            print(updated_convo)
+            # print('added tot4')
+            # print(updated_convo)
             new_last_step = "tot_prompt_4"
         # If last step was tot_prompt_4 need tot_prompt_5
         if last_step == "tot_prompt_4":
             updated_convo = prompt_gpt_4_and_get_convo(updated_convo, tot_prompt_5)
-            print('added tot5')
-            print(updated_convo)
+            # print('added tot5')
+            # print(updated_convo)
             new_last_step = "tot_prompt_5"
-    print(updated_convo)
+    # print(updated_convo)
     return updated_convo
 
 # Self-Refine
