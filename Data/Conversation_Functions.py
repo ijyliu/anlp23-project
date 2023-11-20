@@ -119,13 +119,12 @@ def td3_gsm8k_tree_of_thought(question):
     new_last_step = ""
     # Maximum of 16 items in the conversation
     for i in range(16):
-        convo_to_feed = updated_convo.copy()
         last_step_this_loop = new_last_step
         # Get the response
         if i == 0:
-            convo_to_feed.append(formatted_question)
-            convo_to_feed.append(tot_initial)
-            prompt = "\n".join(convo_to_feed)
+            updated_convo.append(formatted_question)
+            updated_convo.append(tot_initial)
+            prompt = "\n".join(updated_convo)
             response = davinci_completion(prompt)
             updated_convo.append(response)
             #updated_convo = prompt_gpt_4_and_get_convo(conversation, tot_initial)
@@ -140,8 +139,8 @@ def td3_gsm8k_tree_of_thought(question):
         # If last step was initial step or tot_prompt_3 need tot_prompt_2
         # Also run this step if the response from tot_prompt_2 contains ERROR
         if last_step_this_loop == "initial" or last_step_this_loop == "tot_prompt_3" or (last_step_this_loop == "tot_prompt_2" and "ERROR" in updated_convo[-1]):
-            convo_to_feed.append(tot_prompt_2)
-            prompt = "\n".join(convo_to_feed)
+            updated_convo.append(tot_prompt_2)
+            prompt = "\n".join(updated_convo)
             response = davinci_completion(prompt)
             updated_convo.append(response)
             print('added tot2')
@@ -149,8 +148,8 @@ def td3_gsm8k_tree_of_thought(question):
             new_last_step = "tot_prompt_2"
         # If last step was tot_prompt_2 need tot_prompt_3
         if last_step_this_loop == "tot_prompt_2":
-            convo_to_feed.append(tot_prompt_3)
-            prompt = "\n".join(convo_to_feed)
+            updated_convo.append(tot_prompt_3)
+            prompt = "\n".join(updated_convo)
             response = davinci_completion(prompt)
             updated_convo.append(response)
             print('added tot3')
@@ -175,6 +174,7 @@ def td3_gsm8k_self_refine(question):
         last_step_this_loop = new_last_step
         # Get the response
         if i == 0:
+            updated_convo.append(formatted_question)
             updated_convo.append(davinci_completion(formatted_question))
             print('initial response')
             print(updated_convo)
@@ -436,6 +436,7 @@ def td3_cw_self_refine(sentences):
         last_step_this_loop = new_last_step
         # Get the response
         if i == 0:
+            updated_convo.append(task)
             updated_convo.append(davinci_completion(task))
             new_last_step = "initial"
         # If the response contains STOP, stop
