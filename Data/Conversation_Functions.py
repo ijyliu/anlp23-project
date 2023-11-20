@@ -3,6 +3,8 @@
 
 import openai
 import tiktoken
+import textwrap
+import inspect
 
 # Get and set API key
 with open('C:/Users/ijyli/Documents/OpenAI/anlp23-project.txt', 'r') as file:
@@ -238,6 +240,8 @@ def td3_gsm8k_manual_few_shot(question):
     A: 3982
     Q: The price of buying a wooden toy at the new Craftee And Best store is $20, and the cost of buying a hat is $10. If Kendra went to the shop with a $100 bill and bought two wooden toys and three hats, calculate the change she received.
     A: 30\n"""
+    # Fix indentation
+    examples = inspect.cleandoc(examples)
     formatted_question = examples + "Q: " + question
     formatted_question = formatted_question + "\nA:"
     # Storing conversation elements
@@ -265,6 +269,8 @@ def td3_gsm8k_manual_cot(question):
     A: Michael started with 58 golf balls. After losing 23 on tuesday, he had 58 - 23 = 35. After losing 2 more, he had 35 - 2 = 33 golf balls. The answer is 33.
     Q: Olivia has \$23. She bought five bagels for \$3 each. How much money does she have left?
     A: Olivia had 23 dollars. 5 bagels for 3 dollars each will be 5 x 3 = 15 dollars. So she has 23 - 15 dollars left. 23 - 15 is 8. The answer is 8.\n"""
+    # Fix indentation
+    examples = inspect.cleandoc(examples)
     formatted_question = examples + "Q: " + question
     formatted_question = formatted_question + "\nA:"
     # Storing conversation elements
@@ -477,6 +483,8 @@ def td3_cw_least_to_most(sentences):
     Passage:
     My brother, John, had been making home videos for years, but they never got much attention. He was always disappointed when he saw other people's videos getting thousands of views. Then one day, he got a call from a company that wanted to sponsor him. They offered him a lot of money to make videos for them. He was so excited that he couldn't sleep that night. He had always wanted to be a Youtuber but never thought it would actually happen.
     As it turned out, John would need his own production staff to help with script writing and video editing. As I lived in the area and had prior experience in these fields, I was a natural choice for a part-time role on his channel. The company's sponsorship was very generous, and I would get a large portion of the profits. I was glad to finally be able to earn a substantial income in a more exciting and engaging role than my current position as a barista. I was smiling for most of our first business meeting, and strutted with pride out of our new studio. My sweater got caught on the door hinge."""
+    # Fix indentation
+    examples = inspect.cleandoc(examples)
     # Create task
     task = examples + "\nTask: Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph must be: " + " ".join(sentences) + "\nResponse: "
     # Storing conversation elements
@@ -496,6 +504,8 @@ def td3_cw_manual_few_shot(sentences):
     Response: 
     My brother, John, had been making home videos for years, but they never got much attention. He was always disappointed when he saw other people's videos getting thousands of views. Then one day, he got a call from a company that wanted to sponsor him. They offered him a lot of money to make videos for them. He was so excited that he couldn't sleep that night. He had always wanted to be a Youtuber but never thought it would actually happen.
     As it turned out, John would need his own production staff to help with script writing and video editing. As I lived in the area and had prior experience in these fields, I was a natural choice for a part-time role on his channel. The company's sponsorship was very generous, and I would get a large portion of the profits. I was glad to finally be able to earn a substantial income in a more exciting and engaging role than my current position as a barista. I was smiling for most of our first business meeting, and strutted with pride out of our new studio. My sweater got caught on the door hinge."""
+    # Fix indentation
+    examples = inspect.cleandoc(examples)
     # Create task
     task = examples + "\nTask: Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph must be: " + " ".join(sentences) + "\nResponse: "
     # Storing conversation elements
@@ -525,6 +535,8 @@ def td3_cw_manual_cot(sentences):
     Passage:
     My brother, John, had been making home videos for years, but they never got much attention. He was always disappointed when he saw other people's videos getting thousands of views. Then one day, he got a call from a company that wanted to sponsor him. They offered him a lot of money to make videos for them. He was so excited that he couldn't sleep that night. He had always wanted to be a Youtuber but never thought it would actually happen.
     As it turned out, John would need his own production staff to help with script writing and video editing. As I lived in the area and had prior experience in these fields, I was a natural choice for a part-time role on his channel. The company's sponsorship was very generous, and I would get a large portion of the profits. I was glad to finally be able to earn a substantial income in a more exciting and engaging role than my current position as a barista. I was smiling for most of our first business meeting, and strutted with pride out of our new studio. My sweater got caught on the door hinge."""
+    # Fix indentation
+    examples = inspect.cleandoc(examples)
     # Create task
     task = examples + "\nTask: Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph must be: " + " ".join(sentences) + "\nResponse: "
     # Storing conversation elements
@@ -678,6 +690,8 @@ def gpt4_gsm8k_manual_few_shot(question):
     A: 3982
     Q: The price of buying a wooden toy at the new Craftee And Best store is $20, and the cost of buying a hat is $10. If Kendra went to the shop with a $100 bill and bought two wooden toys and three hats, calculate the change she received.
     A: 30\n"""
+    # Fix indentation
+    examples = inspect.cleandoc(examples)
     formatted_question = examples + "Q: " + question
     formatted_question = formatted_question + "\nA:"
     # Storing conversation elements
@@ -705,6 +719,8 @@ def gpt4_gsm8k_manual_cot(question):
     A: Michael started with 58 golf balls. After losing 23 on tuesday, he had 58 - 23 = 35. After losing 2 more, he had 35 - 2 = 33 golf balls. The answer is 33.
     Q: Olivia has \$23. She bought five bagels for \$3 each. How much money does she have left?
     A: Olivia had 23 dollars. 5 bagels for 3 dollars each will be 5 x 3 = 15 dollars. So she has 23 - 15 dollars left. 23 - 15 is 8. The answer is 8.\n"""
+    # Fix indentation
+    examples = inspect.cleandoc(examples)
     formatted_question = examples + "Q: " + question
     formatted_question = formatted_question + "\nA:"
     # Storing conversation elements
@@ -863,6 +879,8 @@ def gpt4_cw_least_to_most(sentences):
     Passage:
     My brother, John, had been making home videos for years, but they never got much attention. He was always disappointed when he saw other people's videos getting thousands of views. Then one day, he got a call from a company that wanted to sponsor him. They offered him a lot of money to make videos for them. He was so excited that he couldn't sleep that night. He had always wanted to be a Youtuber but never thought it would actually happen.
     As it turned out, John would need his own production staff to help with script writing and video editing. As I lived in the area and had prior experience in these fields, I was a natural choice for a part-time role on his channel. The company's sponsorship was very generous, and I would get a large portion of the profits. I was glad to finally be able to earn a substantial income in a more exciting and engaging role than my current position as a barista. I was smiling for most of our first business meeting, and strutted with pride out of our new studio. My sweater got caught on the door hinge."""
+    # Fix indentation
+    examples = inspect.cleandoc(examples)
     # Create task
     task = examples + "\nTask: Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph must be: " + " ".join(sentences) + "\nResponse: "
     # Storing conversation elements
@@ -882,6 +900,8 @@ def gpt4_cw_manual_few_shot(sentences):
     Response: 
     My brother, John, had been making home videos for years, but they never got much attention. He was always disappointed when he saw other people's videos getting thousands of views. Then one day, he got a call from a company that wanted to sponsor him. They offered him a lot of money to make videos for them. He was so excited that he couldn't sleep that night. He had always wanted to be a Youtuber but never thought it would actually happen.
     As it turned out, John would need his own production staff to help with script writing and video editing. As I lived in the area and had prior experience in these fields, I was a natural choice for a part-time role on his channel. The company's sponsorship was very generous, and I would get a large portion of the profits. I was glad to finally be able to earn a substantial income in a more exciting and engaging role than my current position as a barista. I was smiling for most of our first business meeting, and strutted with pride out of our new studio. My sweater got caught on the door hinge."""
+    # Fix indentation
+    examples = inspect.cleandoc(examples)
     # Create task
     task = examples + "\nTask: Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph must be: " + " ".join(sentences) + "\nResponse: "
     # Storing conversation elements
@@ -911,6 +931,8 @@ def gpt4_cw_manual_cot(sentences):
     Passage:
     My brother, John, had been making home videos for years, but they never got much attention. He was always disappointed when he saw other people's videos getting thousands of views. Then one day, he got a call from a company that wanted to sponsor him. They offered him a lot of money to make videos for them. He was so excited that he couldn't sleep that night. He had always wanted to be a Youtuber but never thought it would actually happen.
     As it turned out, John would need his own production staff to help with script writing and video editing. As I lived in the area and had prior experience in these fields, I was a natural choice for a part-time role on his channel. The company's sponsorship was very generous, and I would get a large portion of the profits. I was glad to finally be able to earn a substantial income in a more exciting and engaging role than my current position as a barista. I was smiling for most of our first business meeting, and strutted with pride out of our new studio. My sweater got caught on the door hinge."""
+    # Fix indentation
+    examples = inspect.cleandoc(examples)
     # Create task
     task = examples + "\nTask: Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph must be: " + " ".join(sentences) + "\nResponse: "
     # Storing conversation elements
