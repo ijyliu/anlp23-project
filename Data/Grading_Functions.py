@@ -1,6 +1,8 @@
 
 # Functions useful for grading responses
 
+import re
+
 ####################################################################################################
 
 # Basic infrastructure for conversations
@@ -42,6 +44,21 @@ def grade_creative_writing_coherence(conversation):
     # Get "Content" of last message and extract rating as the last line of the response
     rating = int(conversation_with_grading[-1]['content'])
     return rating
+
+# Function to grade coherence of a creative writing passage - message only, not entire conversation
+def grade_creative_writing_coherence_message(message):
+    # Create task
+    task = message + "\nYour Task: Rate the coherence of this passage on a scale of 1 to 10, 1 being incoherent and 10 being very coherent. Write your justification and then put the numeric rating on its own line as the last line of your response. The last line should include only an integer, 1 or 2 or 3 or 4 or 5 or 6 or 7 or 8 or 9 or 10, and no other characters."
+    # Storing conversation elements
+    conversation_with_grading = []
+    # Get response
+    conversation_with_grading = prompt_gpt_4_and_get_convo(conversation_with_grading, task)
+    # Get "Content" of last message and extract rating as the last line of the response
+    rating_line = conversation_with_grading[-1]['content'].split("\n")[-1]
+    # Keep only number characters and "." using regex
+    rating = re.findall(r'[0-9.]+', rating_line)[0]
+    comments = conversation_with_grading[-1]['content']
+    return rating, comments
 
 # Function to grade ease of evaluation of a conversation
 def grade_ease_of_evaluation(conversation):
