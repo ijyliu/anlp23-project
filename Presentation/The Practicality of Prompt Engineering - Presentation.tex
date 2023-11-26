@@ -53,11 +53,31 @@
     \begin{frame}
         \frametitle{The Practicality of Prompt Engineering}
         \begin{itemize}
-            \item Questions
-            \begin{itemize}
-                \item Finetuning or prompting for a second opinion on passage coherence, ease of evaluation - have my own ratings to use as examples, or create new ones from random sentences
-            \end{itemize}
+            \item What prompt engineering methods are most effective for a given cost (financial, length, complexity)?
+            \item Data: 100 programatically-conducted conversations
+            % \item Questions
+            % \begin{itemize}
+            %     \item Finetuning or prompting for a second opinion on passage coherence, ease of evaluation - have my own ratings to use as examples, or create new ones from random sentences
+            % \end{itemize}
+            \item Statistically Significant Improvements (Paired Tests): GSM8K All, Creative Writing GPT-4 Manual CoT, Zero-Shot CoT
         \end{itemize}
+
+        \begin{figure}[h]
+
+            \begin{subfigure}[h]{0.4925\textwidth}
+                \centering
+                %\includegraphics[width=0.95\hsize]{../Output/gsm8k_change_in_accuracy_quality_per_change_in_conversation_length.png} 
+                \includegraphics[width=1.1\hsize]{../Output/gsm8k_change_in_accuracy_quality_per_change_in_conversation_length.png} 
+            \end{subfigure}
+            \hfill
+            \begin{subfigure}[h]{0.4925\textwidth}
+                \centering
+                %\includegraphics[width=0.95\hsize]{../Output/cw_change_in_accuracy_quality_per_change_in_conversation_length.png}
+                \includegraphics[width=1.1\hsize]{../Output/cw_change_in_accuracy_quality_per_change_in_conversation_length.png}
+            \end{subfigure}
+
+        \end{figure}
+
     \end{frame}
 
     % \begin{frame}
