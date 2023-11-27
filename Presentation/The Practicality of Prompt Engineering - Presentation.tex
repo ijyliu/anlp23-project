@@ -61,20 +61,24 @@
             \item TD3 to GPT-4 - GSM8K gains down, CW gains up
             \item A few pennies per 1K tokens - cheap GSM8K, expensive CW improvements
         \end{itemize}
-        \begin{figure}[h]
-            \begin{subfigure}[h]{0.4925\textwidth}
-                \centering
-                %\includegraphics[width=0.95\hsize]{../Output/gsm8k_change_in_accuracy_quality_per_change_in_conversation_length.png} 
-                \includegraphics[width=1.1\hsize]{../Output/gsm8k_change_in_accuracy_quality_per_change_in_conversation_length_sorted_by_technique_age.png} 
-                %\subcaption*{GSM8K Math Word Problems}
-            \end{subfigure}
-            %\hfill
-            \begin{subfigure}[h]{0.4925\textwidth}
-                \centering
-                %\includegraphics[width=0.95\hsize]{../Output/cw_change_in_accuracy_quality_per_change_in_conversation_length.png}
-                \includegraphics[width=1.1\hsize]{../Output/cw_change_in_accuracy_quality_per_change_in_conversation_length_sorted_by_technique_age_transformed.png}
-                %\subcaption*{Fixed-End-Sentence Creative Writing}
-            \end{subfigure}
-        \end{figure}
+        %\vspace*{-0.25cm}
+        \begin{minipage}{1.1\textwidth}
+            \begin{figure}[h]
+                \begin{subfigure}[h]{0.4925\textwidth}
+                    \centering
+                    %\includegraphics[width=0.95\hsize]{../Output/gsm8k_change_in_accuracy_quality_per_change_in_conversation_length.png} 
+                    \makebox[\columnwidth][r]{\includegraphics[width=1.1\hsize]{../Output/gsm8k_change_in_accuracy_quality_per_change_in_conversation_length_sorted_by_technique_age.png}}
+                    %\subcaption*{GSM8K Math Word Problems}
+                \end{subfigure}
+                %\hfill
+                \begin{subfigure}[h]{0.4925\textwidth}
+                    \centering
+                    %\includegraphics[width=0.95\hsize]{../Output/cw_change_in_accuracy_quality_per_change_in_conversation_length.png}
+                    \makebox[\columnwidth][r]{\includegraphics[width=1.1\hsize]{../Output/cw_change_in_accuracy_quality_per_change_in_conversation_length_sorted_by_technique_age_transformed.png}}
+                    %\subcaption*{Fixed-End-Sentence Creative Writing}
+                \end{subfigure}
+                \hfill
+            \end{figure}
+        \end{minipage}
     \end{frame}
 \end{document}
