@@ -2,13 +2,13 @@ The Practicality of Prompt Engineering
 
 - Studying the cost efficacy of prompting
 - 100 conversations - math word problems, creative writing task
-- Creative Writing Example: 2 paragraphs with fixed ending sentences:
+- Creative Writing Example: Write a coherent passage of 2 paragraphs with fixed ending sentences:
 1. He had always wanted to be a Youtuber but never thought it would actually happen. 
 2. My sweater got caught on the door hinge.
-- Contribution - new metrics, significance testing, run on new and old models
+- Contribution - quantify w/ new metrics, significance testing, run on new and old models
 - Here are results on gains versus no prompt engineering - improvement per token or 1K tokens
 - All the positive gains on the left are significant
-- Chain of thought with GPT-4 is on the right
+- Chain of thought methods with GPT-4 are on the right
 - Three eras of prompting
 - Early few shot examples - not super cost effective or effective overall
 - Zero shot CoT is the big innovation
