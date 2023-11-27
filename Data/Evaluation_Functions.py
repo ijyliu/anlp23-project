@@ -23,6 +23,25 @@ def strip_gpt4_meta(conversation):
         no_meta.append(stripped)
     return no_meta
 
+# Strip GPT-4 related metadata from a conversation
+# DO NOT remove extra whitespace in this version
+def strip_gpt4_meta_no_ew_removal(conversation):
+    # Strip some material from each line
+    # Get rid of "{'role': 'user', 'content': "
+    # Get rid of "{'role': 'assistant', 'content': "
+    # Get rid of "}"
+    # Remove extra whitespace
+    # Remove first and last character
+    no_meta = []
+    for message_and_metadata in conversation:
+        stripped = message_and_metadata.replace("{'role': 'user', 'content': ", "")
+        stripped = stripped.replace("{'role': 'assistant', 'content': ", "")
+        stripped = stripped.replace("}", "")
+        #stripped = stripped.strip()
+        stripped = stripped[1:-1]
+        no_meta.append(stripped)
+    return no_meta
+
 # Get length using the tokenizer for the appropriate model
 def get_length(string, model):
     enc = tiktoken.encoding_for_model(model)

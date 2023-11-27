@@ -60,6 +60,23 @@ def grade_creative_writing_coherence_message(message):
     comments = conversation_with_grading[-1]['content']
     return rating, comments
 
+# # Function to grade creative writing task adherence
+# def grade_creative_writing_task_adherence(message, sentence_1, sentence_2):
+#     # Search the message for:
+#     # Sentence 1 + '\n'
+#     # Sentence 2 + end of message
+#     # Return 1 if both are found, 0 otherwise
+#     # Regex detection
+#     print(message)
+#     print(sentence_1)
+#     print(sentence_2)
+#     print(bool(re.search(sentence_1 + '\n', message)))
+#     print(bool(re.search(sentence_2 + '$', message)))
+#     if bool(re.search(sentence_1 + '\n', message)) and bool(re.search(sentence_2 + '$', message)):
+#         return 1
+#     else:
+#         return 0
+
 # Function to grade ease of evaluation of a conversation
 def grade_ease_of_evaluation(conversation):
     # Collapse conversation into a single string with newlines
