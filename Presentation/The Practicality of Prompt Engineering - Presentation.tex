@@ -49,78 +49,32 @@
 \setbeamertemplate{navigation symbols}{}
 
 \begin{document}
-
     \begin{frame}
         \frametitle{The Practicality of Prompt Engineering}
         \begin{itemize}
-            \item What prompt engineering methods are most effective for a given cost (length/complexity, financial)?
+            \scriptsize
+            \item Cost (length/complexity, financial) efficacy of prompt engineering
             \item 100 programmatically-conducted conversations
-            \item Contribution - quantify with metrics, significance testing, run on new and old models
-            \item Statistically Significant Improvements (Paired Tests): GSM8K All, Creative Writing GPT-4 Manual CoT, Zero-Shot CoT
-            \item Gains on CW are growing but gains on GSM8K are shrinking in transition from TD3 to GPT-4 % Better with examples in CW, but better to leave to its own on GSM8K
-            \item GPT-4 - \$0.03/1K tokens input, \$0.06/1K tokens output
-            \item TD3 - \$0.02/1K tokens.
+            \item Contribution - quantification, statistical tests, old + new models
+            \item Statistically significant improvements (paired tests): GSM8K all, creative writing GPT-4 manual CoT, zero-shot CoT
+            \item Zero-Shot CoT cheaper, more powerful than few-shotting that came before, complicated techniques that came after
+            \item TD3 to GPT-4 - GSM8K gains down, CW gains up
+            \item A few pennies per 1K tokens - cheap GSM8K, expensive CW improvements
         \end{itemize}
-
-        % \begin{figure}[h]
-        %     \centering
-        %     \includegraphics[width=\hsize]{cw_example.png}
-        % \end{figure}
-
         \begin{figure}[h]
-
             \begin{subfigure}[h]{0.4925\textwidth}
                 \centering
                 %\includegraphics[width=0.95\hsize]{../Output/gsm8k_change_in_accuracy_quality_per_change_in_conversation_length.png} 
                 \includegraphics[width=1.1\hsize]{../Output/gsm8k_change_in_accuracy_quality_per_change_in_conversation_length_sorted_by_technique_age.png} 
+                %\subcaption*{GSM8K Math Word Problems}
             \end{subfigure}
-            \hfill
+            %\hfill
             \begin{subfigure}[h]{0.4925\textwidth}
                 \centering
                 %\includegraphics[width=0.95\hsize]{../Output/cw_change_in_accuracy_quality_per_change_in_conversation_length.png}
                 \includegraphics[width=1.1\hsize]{../Output/cw_change_in_accuracy_quality_per_change_in_conversation_length_sorted_by_technique_age_transformed.png}
+                %\subcaption*{Fixed-End-Sentence Creative Writing}
             \end{subfigure}
-
         \end{figure}
-
     \end{frame}
-
-    % \begin{frame}
-    %     \frametitle{Theory}
-    %     \begin{itemize}
-    %         \item Potential theories:
-    %         \begin{itemize}
-    %             \item Net Welfare Benefits
-    %             \begin{itemize}
-    %                 \item Inflation time inconsistency problem solved
-    %                 \item Increased political efficacy, access to capital
-    %             \end{itemize}
-    %         \end{itemize}
-    %     \end{itemize}
-
-    %     \begin{figure}[h]
-    
-    %         \begin{subfigure}[h]{0.475\textwidth}
-    %             \centering
-    %             \includegraphics[width=0.95\hsize]{../../Output/Figures/Fire_JP_Headline.png} 
-    %         \end{subfigure}
-    %         \hfill
-    %         \begin{subfigure}[h]{0.475\textwidth}
-    %             \centering
-    %             \includegraphics[width=0.95\hsize]{../../Output/Figures/Trump_and_JP.png}
-    %         \end{subfigure}
-    
-    %     \end{figure}
-
-    % \end{frame}
-
-    % \begin{frame}
-    %     \frametitle{Ordered Logit Mean Marginal Effects}
-    %     {
-    %         \let\oldcentering\centering
-    %         \renewcommand\centering{\tiny\oldcentering}
-    %         \input{../../Output/Tables/ordLogDJ.tex}
-    %     }
-    % \end{frame}
-
 \end{document}
