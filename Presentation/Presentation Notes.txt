@@ -11,7 +11,7 @@ The Practicality of Prompt Engineering
 - Chain of thought with GPT-4 is on the right
 - Three eras of prompting
 - Early few shot examples - not super cost effective or effective overall
-- Zero shot COT is the big innovation
+- Zero shot CoT is the big innovation
 - More recent complex, dialogue techniques are complicated and have uncertain gains
 - Newer model - GSM8K gains down, creative writing gains up. Task + Instruction difficulty may be the key
 - A few pennies per 1K tokens - math + reasoning cheap improvements, CW not so much
