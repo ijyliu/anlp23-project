@@ -41,6 +41,13 @@ def gpt4_cw_cleanup(conversation):
         stripped = stripped.replace("}", "")
         # Replace any number of spaces and then a newline with a newline
         stripped = re.sub(r'\s+\n', '\n', stripped)
+        # Remove all \r
+        stripped = stripped.replace("\r", "")
+        stripped = stripped.replace("\\r", "")
+        # Replace ".  \n" with ".\n"
+        stripped = stripped.replace(".  \\n", ".\\n")
+        # Replace ". \n" with ".\n"
+        stripped = stripped.replace(". \n", ".\n")
         # Replace any number of spaces and then literal \n with literal \n
         #stripped = re.sub(r' \\n', '\\n', stripped)
         # Convert to ascii
