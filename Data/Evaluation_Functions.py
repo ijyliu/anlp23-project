@@ -41,12 +41,22 @@ def gpt4_cw_cleanup(conversation):
         stripped = stripped.replace("}", "")
         # Replace any number of spaces and then a newline with a newline
         stripped = re.sub(r'\s+\n', '\n', stripped)
+        # Replace any number of spaces and then literal \n with literal \n
+        #stripped = re.sub(r'\s+\\n', '\\n', stripped)
         # Convert to ascii
         stripped = unidecode(stripped)
         #stripped = stripped.strip()
         stripped = stripped[1:-1]
         # Strip newlines or spaces at the very end of the string
         stripped = re.sub(r'[\s\n]+$', '', stripped)
+        # If last character is a newline, remove it
+        if stripped[-1] == '\n':
+            stripped = stripped[:-1]
+        # If last character is literal "\n", remove it
+        if stripped[-2:] == '\\n':
+            stripped = stripped[:-2]
+        # Replace "\'" with "'"
+        stripped = stripped.replace("\\'", "'")
         no_meta.append(stripped)
     return no_meta
 
