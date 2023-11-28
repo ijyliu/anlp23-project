@@ -120,6 +120,8 @@ For complexity, I report:
   \item For GSM8K: Human assessment of ease of review - on a scale of 1-10, how difficult is it to check the steps followed? GPT-4 can produce scalar scores on this, so I also collect its evaluations as an additional opinion (see Appendix Section \ref{sec:evaluating_ease_of_review}). Again, I report human scores, GPT-4 scores, the average of them, and Krippendorff's alpha.
 \end{itemize}
 
+%\input{../Output/avg_fres_pivot.tex}
+
 General Discussion:
 
 As is the case for chain-of-thought prompting in the setting of \citealp{fu_complexity-based_2023}, are any gains in performance coming from reasoning steps as opposed to length (of the prompt or overall interaction, in tokens)? This question is central to our understanding of if and how prompt engineering works. Relationships may be complex. For language understanding tasks, prompt length has been found to improve model performance, with optimality achieved somewhere in the range of 20-100 tokens \cite{lester_power_2021}. Evidence shows that in longer conversations models may get distracted, go off on tangents, or get stuck in a loop repeating themselves (to the extent some platforms have imposed length limitations) \cite{shi_large_2023, mann_microsoft_nodate}. A conversation level logistic regression (with quadratic terms to model non-linearity) controlling for length and complexity can provide insight. Standard errors should be clustered by the identity of the question and method.
