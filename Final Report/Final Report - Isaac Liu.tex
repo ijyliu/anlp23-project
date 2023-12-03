@@ -12,6 +12,11 @@
 \usepackage{booktabs}
 \usepackage{longtable}
 \usepackage{graphicx}
+\usepackage{subcaption}
+
+% Centered fixed width column type
+\usepackage{array}
+\newcolumntype{x}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 
 % Set math text size
 \DeclareMathSizes{8}{8}{8}{8}
@@ -167,6 +172,33 @@ For length, I report:
     \frac{AQ_{PE} - AQ_{B}}{Tokens_{PE} - Tokens_{B}}
   \end{displaymath}
 \end{itemize}
+
+\onecolumn
+
+\begin{figure}[h]
+  \caption{Average Length vs. Provided Length - GSM8K}
+  \centering
+  \includegraphics[width=\textwidth]{../Output/gsm8k_length_vs_provided_means.png}
+  \label{fig:gsm8k_len_v_prov}
+\end{figure}
+
+\begin{figure}[h]
+  \caption{Average Length vs. Direct Prompting Length}
+  \begin{subfigure}[h]{0.4925\textwidth}
+      \centering
+      \includegraphics[width=0.95\hsize]{../Output/gsm8k_length_vs_direct_prompting_means.png} 
+      \subcaption*{GSM8K}
+  \end{subfigure}
+  %\hfill
+  \begin{subfigure}[h]{0.4925\textwidth}
+      \centering
+      \includegraphics[width=0.95\hsize]{../Output/cw_length_vs_direct_prompting_means.png}
+      \subcaption*{Creative Writing}
+  \end{subfigure}
+  \hfill
+\end{figure}
+
+\twocolumn
 
 For complexity, I report:
 
