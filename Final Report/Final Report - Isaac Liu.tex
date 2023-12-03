@@ -21,6 +21,9 @@
   University of California, Berkeley \\
   \texttt{ijyliu@berkeley.edu}}
 
+% stattotex loading
+\input{../Output/cw_preference_stattotex.tex}
+
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -88,6 +91,10 @@ For Creative Writing:
 
 %\input{../Output/avg_accuracy_quality_pivot_with_date.tex}
 
+These coherence scores are inherently noisy, but I take several measures to ameliorate this problem. First, I limit reported results to information concerning which method was preferred for each model and selection of ending sentences. This limits demands on the data to only the ordinal ranking of methods. Second, I check the consistency of my methodology and results by soliciting a secondary opinion. I fine-tuned GPT-3.5 to learn my methodology for grading passage coherence - a difficult task, given the wide variety of LLM responses and associated formats resulting from different models and methods. I created two fine-tuned models, each trained and validated on a randomly selected 50\% fold of responses and human coherence scores and deployed on the other 50\% fold. The results demonstrate the consistency of human preferences. For \pAtlOneHumanEqAggPct~of model-sentence pairings, at least human and automated scores agree on at least one of the methods as among the top-preferred. Simulations using empirical probabilities of scores under independence indicate that this would occur in only \simProbAgmtCmplStr~of cases by chance.
+
+Figure \ref{fig:cw_preference_plot_ca} shows the number of conversations where each method was one of the most preferred.
+
 \begin{centering}
 
   \onecolumn
@@ -111,6 +118,7 @@ For Creative Writing:
   % \end{figure}
 
   \begin{figure}[h]
+    \label{fig:cw_preference_plot_ca}
     \caption{Human-Preferred Method by Model - Creative Writing Coherence - Adjust for Non-Compliance}
     \centering
     \includegraphics[width=\textwidth]{../Output/cw_preference_plot_coherence_1_incoherent_10_very_coherent_compliance_adjusted.png}
