@@ -332,25 +332,57 @@ Here are my rough evaluations of the difficulty of implementing each method sele
 
 Rating: 1. These methods append a common string to the prompt that is extremely similar for all tasks.
 
-\subsubsection*{Tree-of-Thought}
+\subsubsection*{Manual Few-Shot}
 
-Rating: 6. A specific search tree structure and a method for traversing it must be constructed. This can vary a lot depending on the task - considerations are breadth-first versus depth-first, how many nodes/possibilities to consider at each step, etc. It is also necessary to consider how to structure a feedback loop where the LLM takes into account its previous responses. Any instructions must be simple enough for the LLM to follow.
+Rating: 2. A few examples of questions and solutions must be provided, but these are usually relatively easy to find.
+
+\subsubsection*{Few-Shot Least-to-Most}
+
+Rating: 3. A little more detail must be added to chain of thought solutions to demonstrate the structure behind splitting a problem into subproblems.
+
+\subsubsection*{Manual Chain-of-Thought}
+
+Rating: 4. Worked questions and solutions must be provided, but these are usually not very difficult to find - a good share of provided solutions also include explanations.
 
 \subsubsection*{Self-Refine}
 
 Rating: 5. Many of the same considerations as the Tree-of-Thought method apply. However, the feedback-refinement loop is somewhat simpler than a tree structure.
 
-\subsubsection*{Few-Shot}
+\subsubsection*{Tree-of-Thought}
 
-Rating: 2. A few examples of questions and solutions must be provided, but these are usually relatively easy to find.
+Rating: 6. A specific search tree structure and a method for traversing it must be constructed. This can vary a lot depending on the task - considerations are breadth-first versus depth-first, how many nodes/possibilities to consider at each step, etc. It is also necessary to consider how to structure a feedback loop where the LLM takes into account its previous responses. Any instructions must be simple enough for the LLM to follow.
 
-\subsubsection*{Few-Shot Chain-of-Thought}
+\clearpage
+\newpage
 
-Rating: 4. Worked questions and solutions must be provided, but these are usually not very difficult to find - a good share of provided solutions also include explanations.
+\section{Notes on Ease of Review}
+\label{sec:ease_of_review}
 
-\subsubsection*{Few-Shot Least-to-Most}
+Here are my rough evaluations of the difficulty of reviewing the output of each method selected for this paper. Ratings are on a scale from 1-6, with 1 being the easiest.
 
-Rating: 3. A little more detail must be added to chain of thought solutions to demonstrate the structure behind splitting a problem into subproblems.
+\subsubsection*{Manual Few-Shot, Manual Chain-of-Thought}
+
+Rating: 1. The prompt design and examples provided intentionally make it extremely easy to check the final answer - output is consistently formatted.
+
+\subsubsection*{Direct Prompting}
+
+Rating: 2. The LLM responses are usually direct and the lack of extra instructions makes the output simple. 
+
+\subsubsection*{Zero-Shot Chain-of-Thought, APE Improved Zero-Shot Chain-of-Thought}
+
+Rating: 3. The steps the model takes for each individual problem and their formatting can be inconsistent. On the other hand, the steps are usually clearly spelled out, and the final answer or passage is usually fairly clear.
+
+\subsubsection*{Self-Refine}
+
+Rating: 4. Self-Refine is an iterative process across several pieces of dialogue, though they do follow a simple structure.
+
+\subsubsection*{Least-to-Most Prompting}
+
+Rating: 5. The planning and execution sets of steps of Least-to-Most Prompting can be hard to untangle and piece back together.
+
+\subsubsection*{Tree-of-Thought}
+
+Rating: 6. Specific steps are split up across many pieces of dialogue and many potential tree branches, potentially with backtracking, and it is difficult to reconstruct the entire chain of logic and actions.
 
 \clearpage
 \newpage
