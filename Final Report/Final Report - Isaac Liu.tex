@@ -142,6 +142,7 @@ For my main results, however, I introduce more objective measures of passage coh
     \tiny
     \input{../Output/avg_accuracy_quality_pivot_with_date.tex}  
     \label{tab:accuracy_quality}
+    \newline \newline \footnotesize Stars indicate a significant difference from the direct prompting baseline from McNemar's test at the 95\% level for GSM8K accuracy scores and creative writing task compliance scores and paired t-tests at the 95\% level for all other metrics.
   \end{table}
 
   \clearpage
@@ -175,6 +176,15 @@ For length, I report:
 
 \onecolumn
 
+\begin{table}
+  \caption{Mean and Variance of Length Metrics}
+  \centering
+  \tiny
+  \input{../Output/avg_length_metrics_pivot.tex}  
+  \label{tab:avg_length_metrics_pivot}
+  \newline \newline \footnotesize Stars indicate a significant difference from the direct prompting baseline from paired t-tests at the 95\% level.
+\end{table}
+
 \begin{figure}[h]
   \caption{Average Length vs. Provided Length - GSM8K}
   \centering
@@ -186,14 +196,14 @@ For length, I report:
   \caption{Average Length vs. Direct Prompting Length}
   \begin{subfigure}[h]{0.4925\textwidth}
       \centering
+      \subcaption{GSM8K}
       \includegraphics[width=0.95\hsize]{../Output/gsm8k_length_vs_direct_prompting_means.png} 
-      \subcaption*{GSM8K}
   \end{subfigure}
   %\hfill
   \begin{subfigure}[h]{0.4925\textwidth}
       \centering
+      \subcaption{Creative Writing}
       \includegraphics[width=0.95\hsize]{../Output/cw_length_vs_direct_prompting_means.png}
-      \subcaption*{Creative Writing}
   \end{subfigure}
   \hfill
 \end{figure}
@@ -211,6 +221,21 @@ For complexity, I report:
 \end{itemize}
 
 %\input{../Output/avg_fres_pivot.tex}
+
+\onecolumn
+
+\begin{table}
+  \caption{Mean and Variance of Complexity Metrics}
+  \centering
+  \tiny
+  \input{../Output/avg_complexity_metrics_pivot.tex}  
+  \label{tab:avg_complexity_metrics_pivot}
+  \newline \newline \footnotesize Stars indicate a significant difference from the direct prompting baseline from paired t-tests at the 95\% level.
+\end{table}
+
+\clearpage
+
+\twocolumn
 
 General Discussion:
 
