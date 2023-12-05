@@ -1,0 +1,18 @@
+\begin{tabular}{x{1.5cm}|x{0.75cm}|x{0.75cm}|x{0.75cm}|x{0.75cm}|x{0.75cm}|x{0.75cm}|x{0.75cm}|x{0.75cm}|x{0.75cm}|x{0.75cm}|x{0.75cm}|x{0.75cm}|x{0.75cm}|x{0.75cm}}
+\toprule
+\hline
+Model & Conversation Length * Model = TD3 & Number of Steps/Ideas * Model = TD3 & Conversation Length Squared * Model = TD3 & Number of Steps/Ideas Squared * Model = TD3 & Flesch Reading Ease * Model = TD3 & Flesch Reading Ease Squared * Model = TD3 & Conversation Length & Number of Steps/Ideas & Conversation Length Squared & Number of Steps/Ideas Squared & Flesch Reading Ease & Flesch Reading Ease Squared & Model = TD3 \\
+\hline
+\midrule
+GSM8K Correct, Logit & -0.403 (0.401) & 0.003 (0.014) & 1.081* (0.439) & 0.0 (0.001) &  &  & -0.196 (0.236) & 0.031* (0.01) & -0.229 (0.181) & -0.002* (0.001) &  &  & -0.453* (0.076) \\
+\hline
+GSM8K Correct, Linear & -0.449 (0.365) & 0.009 (0.012) & 1.092* (0.439) & -0.0 (0.001) &  &  & -0.076 (0.146) & 0.043* (0.007) & -0.228* (0.104) & -0.002* (0.0) &  &  & -0.469* (0.059) \\
+\hline
+Creative Writing Cosine Similarity & 0.277* (0.123) & -0.02 (0.012) & -0.108 (0.095) & 0.004 (0.003) & -0.003 (0.012) & 0.0 (0.0) & -0.053 (0.064) & 0.014* (0.005) & 0.018 (0.039) & -0.001 (0.001) & -0.013* (0.006) & 0.0* (0.0) & 0.025 (0.438) \\
+\hline
+Creative Writing Compliance, Logit & -0.166 (0.467) & -0.023 (0.041) & -0.071 (0.365) & 0.002 (0.009) & -0.0 (0.047) & 0.0 (0.0) & -0.118 (0.256) & -0.009 (0.022) & 0.004 (0.153) & 0.003 (0.004) & 0.056 (0.029) & -0.0 (0.0) & -0.231 (1.627) \\
+\hline
+Creative Writing Compliance, Linear & -0.276 (0.424) & 0.003 (0.042) & 0.01 (0.321) & -0.005 (0.009) & -0.003 (0.046) & 0.0 (0.0) & -0.058 (0.248) & -0.023 (0.02) & -0.012 (0.149) & 0.006* (0.003) & 0.053* (0.026) & -0.0 (0.0) & 0.35 (1.628) \\
+\hline
+\bottomrule
+\end{tabular}

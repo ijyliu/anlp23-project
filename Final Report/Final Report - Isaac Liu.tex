@@ -271,6 +271,37 @@ Does increased prompted complexity lead to worse performance on simple questions
 
 To what extent does prompting require specialized skills and time investment? Appendix Section \ref{sec:difficulty} offers some observations on the difficulty of implementing each method covered in this paper. Length and metrics for the output and ease of review scores in particular may provide insight into checking results - the other part of the prompting process.
 
+\onecolumn
+
+\begin{table}
+  \caption{Regression Results}
+  \centering
+  \tiny
+  \input{../Output/regressions.tex}  
+  \label{tab:regressions}
+  \newline \newline \footnotesize For logit regressions, the average of marginal effects are reported. Standard errors in parentheses. For linear models, standard errors are clustered by task question by method. Stars indicate significance at the 95\% level.
+\end{table}
+
+\begin{table}
+  \caption{Regressions with GSM8K Provided Answer Length Interaction}
+  \centering
+  \tiny
+  \input{../Output/regressions_provided_interaction.tex}  
+  \label{tab:regressions_provided_interaction}
+  \newline \newline \footnotesize For logit regressions, the average of marginal effects are reported. Standard errors in parentheses. For linear models, standard errors are clustered by task question by method. Stars indicate significance at the 95\% level.
+\end{table}
+
+\begin{table}
+  \caption{Regressions with Model Interaction}
+  \centering
+  \tiny
+  \input{../Output/regressions_model_interaction.tex}  
+  \label{tab:regressions_model_interaction}
+  \newline \newline \footnotesize For logit regressions, the average of marginal effects are reported. Standard errors in parentheses. For linear models, standard errors are clustered by task question by method. Stars indicate significance at the 95\% level.
+\end{table}
+
+\twocolumn
+
 \section*{Conclusion}
 
 Overarching conclusions about the practicality of prompt engineering and the tradeoffs between costs and benefits of specific techniques.
