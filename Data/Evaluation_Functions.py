@@ -5,6 +5,8 @@ import re
 import nltk
 import numpy as np
 from unidecode import unidecode
+#from tiktoken import *
+import tiktoken
 
 # Strip GPT-4 related metadata from a conversation
 def strip_gpt4_meta(conversation):
