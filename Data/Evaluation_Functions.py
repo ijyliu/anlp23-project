@@ -90,5 +90,7 @@ def get_nltk_sentence_length(string):
     sentences = nltk.sent_tokenize(string)
     sen_lengths = []
     for sen in sentences:
+        # Strip punctuation using regex - non-word or space
+        sen = re.sub(r'[^\w\s]', '', sen)
         sen_lengths.append(len(nltk.word_tokenize(sen)))
     return np.mean(sen_lengths)
