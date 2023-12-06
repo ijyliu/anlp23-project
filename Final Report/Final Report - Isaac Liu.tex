@@ -328,7 +328,7 @@ This document was created from a template made by Jordan Boyd-Graber, Naoaki Oka
 \clearpage
 \newpage
 
-%\onecolumn
+\onecolumn
 \setlength{\parindent}{0cm}
 \setlength\parskip{1em plus 0.1em minus 0.2em}
 \appendix
@@ -344,16 +344,56 @@ Another good resource for prompt engineering methods and evaluations is the pape
 
   \begin{centering}
 
-    \begin{table*}[h]
+    \begin{table}[h]
       \caption{Popularity of Selected Prompt Engineering Methods}
       \small
       \input{../Selection of Prompt Engineering Methods/selected_methods_popularity.tex}
       \label{tab:method_pop}
-    \end{table*}
+    \end{table}
 
   \end{centering}
 
 \end{landscape}
+
+\clearpage
+\newpage
+
+\section{Average Inter-Paragraph Cosine Similarity Examples}
+\label{sec:avg_inter_pragraph_cosine_sim_ex}
+
+\subsection*{Inter-Paragraph Cosine Simlarity: 0.01} %0.0096024028634174
+
+Learning to do a handstand is a fun activity for people of all ages. It takes practice to master, but once you get the hang of it, you'll learn to balance your body in an upside-down position. It isn't difficult to do a handstand if you just stand on your hands.
+
+John, a space explorer, felt excited when he first stepped on the moon. It was a unique experience that he thought he would never forget. To his surprise, a smell of seared steak followed him up the mountain of dust. It caught him off guard that space smelled of seared steak.
+
+\subsection*{Inter-Paragraph Cosine Simlarity: 0.25} %0.250084849757387
+
+The explorers were fascinated in equal parts fear and curiosity as they surveyed the unfamiliar terrain of this new planet. A unique alien species of flora, turning the water around it a shocking ochre, was the planet's highlight, causing a stark contrast to the otherwise jade green surroundings. Trembling hands reached out towards the phenomenon, a capsule took a sample, and rigorous testing was conducted. Initial concerns turned to relieved laughter when the tests ran positive. Just because the water is red doesn't mean you can't drink it.
+
+The day ended, and the crew retreated to the layered confines of their habitat module. The walls were littered with mission updates and data charts, each element portraying the organized chaos of their voyage. In the space assigned for leisure, a small wooden table, reminiscent of Earth, was cluttered with mugs and a single book. Earlier discussions and laughter started to die out, replaced by the hum of computers and machines as each of them turned to their individual activities. Amidst this controlled mayhem, the book lay untouched, a visual metaphor of their longing for home and comfort. The book is in front of the table.
+
+\subsection*{Inter-Paragraph Cosine Simlarity: 0.5} %0.504750327816827
+
+The sun beat down heavily on the sandy beach, and the smell of the salty ocean air mixed with the humidity. Suddenly, thick rain clouds appeared overhead and the looking sky filled with a dark shade of grey. The rain came in quickly, quickly, washing the thick sand into the ocean with a powerful force. Just as the storm intensified, she peered out over the horizon and saw something unexpected--a few crocodiles were launched into the water by the mass of the flooding rain. The sudden rainstorm washed crocodiles into the ocean.
+
+She watched in appreciation as the creatures navigated the swells of the ocean, slipping out and in of view as the waves rose and fell. There was something meditative about it--the way the rain mixed with the sky--and she was mesmerized. Her gaze eventually fell on the man a few feet from her, watching the same scene unfold. She wondered what his eyes were saying beneath his mirrored sunglasses.
+
+\subsection*{Inter-Paragraph Cosine Simlarity: 0.75} %0.746425791603845
+
+Elsa had been feeling lost since she graduated college. She hadn't found her passion in life yet and was looking for a way to feel purposeful and fulfilled. She decided to spend some of her savings on a road trip. She wanted to reclaim the feeling of being free that she had when she was a child, and the open road seemed like the way to do that. So, she grabbed her map and a duffle bag, and hit the highway. Her hair was windswept as she rode in the black convertible.
+
+It took her to a small village in the mountains far from the city. She had days filled with new people, food, and experiences. She even took the time to learn some new skills and hobbies. She traveled because it cost the same as therapy and was a lot more enjoyable. As the miles rolled by, she came to understand that by living intentionally and being courageous, one can find a second chance at life.
+
+\begin{figure}[h]
+  \caption{Histogram - Average Inter-Paragraph Cosine Similarity}
+  \centering
+  \includegraphics[width=\textwidth]{../Output/avg_inter_paragraph_cosine_sim_hist.png}
+  \label{fig:avg_inter_paragraph_cosine_sim_hist}
+\end{figure}
+
+\clearpage
+\newpage
 
 \section{Notes on Ease of Implementation}
 \label{sec:difficulty}
