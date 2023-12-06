@@ -13,6 +13,7 @@
 \usepackage{longtable}
 \usepackage{graphicx}
 \usepackage{subcaption}
+\usepackage{dblfloatfix}
 
 % Centered fixed width column type
 \usepackage{array}
@@ -109,45 +110,45 @@ For my main results, however, I introduce more objective measures of passage coh
 
 \begin{centering}
 
-  \onecolumn
+  %\onecolumn
 
-  % \begin{table}
+  % \begin{table*}
   %   \caption{Human-Preferred Method by Model - Creative Writing Coherence}
   %   \centering
   %   \input{../Output/cw_preference_table_coherence_1_incoherent_10_very_coherent.tex}  
-  % \end{table}
+  % \end{table*}
   
-  % \begin{table}
+  % \begin{table*}
   %   \caption{Human-Preferred Method by Model - Creative Writing Coherence - Adjust for Non-Compliance}
   %   \centering
   %   \input{../Output/cw_preference_table_coherence_1_incoherent_10_very_coherent_compliance_adjusted.tex}  
-  % \end{table}
+  % \end{table*}
 
-  % \begin{figure}
+  % \begin{figure*}
   %   \caption{Human-Preferred Method by Model - Creative Writing Coherence}
   %   \centering
   %   \includegraphics[width=\textwidth]{../Output/cw_preference_plot_coherence_1_incoherent_10_very_coherent_coherence_1_incoherent_10_very_coherent.png}
-  % \end{figure}
+  % \end{figure*}
 
-  \begin{figure}[h]
+  \begin{figure*}
     \caption{Human-Preferred Method by Model - Creative Writing Coherence - Adjust for Non-Compliance}
     \centering
     \includegraphics[width=\textwidth]{../Output/cw_preference_plot_coherence_1_incoherent_10_very_coherent_compliance_adjusted.png}
     \label{fig:cw_preference_plot_ca}
-  \end{figure}
+  \end{figure*}
 
-  \begin{table}
+  \begin{table*}
     \caption{Mean and Variance of Accuracy/Quality Scores}
     \centering
     \tiny
     \input{../Output/avg_accuracy_quality_pivot_with_date.tex}  
     \label{tab:accuracy_quality}
     \newline \newline \footnotesize Stars indicate a significant difference from the direct prompting baseline from McNemar's test at the 95\% level for GSM8K accuracy scores and creative writing task compliance scores and paired t-tests at the 95\% level for all other metrics.
-  \end{table}
+  \end{table*}
 
-  \clearpage
+  %\clearpage
 
-  \twocolumn
+  %\twocolumn
 
 \end{centering}
 
@@ -174,25 +175,25 @@ For length, I report:
   \end{displaymath}
 \end{itemize}
 
-\onecolumn
+%\onecolumn
 
-\begin{table}
+\begin{table*}
   \caption{Mean and Variance of Length Metrics}
   \centering
   \tiny
   \input{../Output/avg_length_metrics_pivot.tex}  
   \label{tab:avg_length_metrics_pivot}
   \newline \newline \footnotesize Stars indicate a significant difference from the direct prompting baseline from paired t-tests at the 95\% level.
-\end{table}
+\end{table*}
 
-\begin{figure}[h]
+\begin{figure*}
   \caption{Average Length vs. Provided Length - GSM8K}
   \centering
   \includegraphics[width=\textwidth]{../Output/gsm8k_length_vs_provided_means.png}
   \label{fig:gsm8k_len_v_prov}
-\end{figure}
+\end{figure*}
 
-\begin{figure}[h]
+\begin{figure*}
   \caption{Average Length vs. Direct Prompting Length}
   \begin{subfigure}[h]{0.4925\textwidth}
       \centering
@@ -206,9 +207,9 @@ For length, I report:
       \includegraphics[width=0.95\hsize]{../Output/cw_length_vs_direct_prompting_means.png}
   \end{subfigure}
   \hfill
-\end{figure}
+\end{figure*}
 
-\begin{figure}[h]
+\begin{figure*}
   \caption{Gains v. Direct Prompting}
   \begin{subfigure}[h]{0.4925\textwidth}
       \centering
@@ -222,9 +223,9 @@ For length, I report:
       \includegraphics[width=0.95\hsize]{../Output/cw_change_in_accuracy_quality_per_change_in_conversation_length_sorted_by_technique_age_transformed.png}
   \end{subfigure}
   \hfill
-\end{figure}
+\end{figure*}
 
-\twocolumn
+%\twocolumn
 
 For complexity, I report:
 
@@ -238,28 +239,28 @@ For complexity, I report:
 
 %\input{../Output/avg_fres_pivot.tex}
 
-\onecolumn
+%\onecolumn
 
-\begin{table}
+\begin{table*}
   \caption{Mean and Variance of Complexity Metrics}
   \centering
   \tiny
   \input{../Output/avg_complexity_metrics_pivot.tex}  
   \label{tab:avg_complexity_metrics_pivot}
   \newline \newline \footnotesize Stars indicate a significant difference from the direct prompting baseline from paired t-tests at the 95\% level.
-\end{table}
+\end{table*}
 
-\begin{table}
+\begin{table*}
   \caption{Differences of Complexity Metrics}
   \centering
   \tiny
   \input{../Output/avg_complexity_diff_metrics_pivot.tex}  
   \label{tab:avg_complexity_diff_metrics_pivot}
-\end{table}
+\end{table*}
 
-\clearpage
+%\clearpage
 
-\twocolumn
+%\twocolumn
 
 General Discussion:
 
@@ -271,36 +272,36 @@ Does increased prompted complexity lead to worse performance on simple questions
 
 To what extent does prompting require specialized skills and time investment? Appendix Section \ref{sec:difficulty} offers some observations on the difficulty of implementing each method covered in this paper. Length and metrics for the output and ease of review scores in particular may provide insight into checking results - the other part of the prompting process.
 
-\onecolumn
+%\onecolumn
 
-\begin{table}
+\begin{table*}
   \caption{Regression Results}
   \centering
   \tiny
   \input{../Output/regressions.tex}  
   \label{tab:regressions}
   \newline \newline \footnotesize For logit regressions, the average of marginal effects are reported. Standard errors in parentheses. For linear models, standard errors are clustered by task question by method. Stars indicate significance at the 95\% level.
-\end{table}
+\end{table*}
 
-\begin{table}
+\begin{table*}
   \caption{Regressions with GSM8K Provided Answer Length Interaction}
   \centering
   \tiny
   \input{../Output/regressions_provided_interaction.tex}  
   \label{tab:regressions_provided_interaction}
   \newline \newline \footnotesize For logit regressions, the average of marginal effects are reported. Standard errors in parentheses. For linear models, standard errors are clustered by task question by method. Stars indicate significance at the 95\% level.
-\end{table}
+\end{table*}
 
-\begin{table}
+\begin{table*}
   \caption{Regressions with Model Interaction}
   \centering
   \tiny
   \input{../Output/regressions_model_interaction.tex}  
   \label{tab:regressions_model_interaction}
   \newline \newline \footnotesize For logit regressions, the average of marginal effects are reported. Standard errors in parentheses. For linear models, standard errors are clustered by task question by method. Stars indicate significance at the 95\% level.
-\end{table}
+\end{table*}
 
-\twocolumn
+%\twocolumn
 
 \section*{Conclusion}
 
@@ -327,7 +328,7 @@ This document was created from a template made by Jordan Boyd-Graber, Naoaki Oka
 \clearpage
 \newpage
 
-\onecolumn
+%\onecolumn
 \setlength{\parindent}{0cm}
 \setlength\parskip{1em plus 0.1em minus 0.2em}
 \appendix
@@ -343,12 +344,12 @@ Another good resource for prompt engineering methods and evaluations is the pape
 
   \begin{centering}
 
-    \begin{table}[h]
+    \begin{table*}[h]
       \caption{Popularity of Selected Prompt Engineering Methods}
       \small
       \input{../Selection of Prompt Engineering Methods/selected_methods_popularity.tex}
       \label{tab:method_pop}
-    \end{table}
+    \end{table*}
 
   \end{centering}
 
