@@ -65,17 +65,17 @@ I perform the analysis on one cutting-edge model and one older model from closer
 
 \section*{Prompting Methods Assessed}
 
-The following methods were selected based on their popularity (see Appendix Section \ref{sec:popularity}) and ease of implementation. A full list of all prompts for each task can be found in Appendix Section \ref{sec:prompts}.
+The following methods were selected based on their popularity (see Appendix Section \ref{sec:popularity}) and ease of implementation. They are listed in order of initial paper release/discovery date below (according to Semantic Scholar - citation publication dates below may be for revisions). A full list of all prompts for each task can be found in Appendix Section \ref{sec:prompts}.
 
 \begin{itemize}
-  \item Zero-Shot Control Baseline/Direct Prompting: This method consists of just providing the question/task directly.
+  \item Few-Shot Prompting: The prompter provides a few examples of successfully answered questions or tasks before the main question/task. Notably featured in \citealp{brown_language_2020}.
+  \item Few-Shot Chain-of-Thought Prompting: The model is provided worked examples of answers in which the reasoning steps are written out. \cite{wei_chain--thought_nodate} Note, however, that such steps are not explicitly planned out or mentioned, as is the case in least-to-most prompting.
+  \item Least-to-most Prompting: The model is given few-shot examples that demonstrate how to first break down the task into smaller and simpler subproblems, then solve them sequentially. \cite{zhou_least--most_2023}
   \item Zero-Shot Chain of Thought Prompting (Original): Initial advances in chain of thought prompting to improve reasoning were achieved by simply including the following before the question/task: "Let's think step by step." \cite{kojima_large_2023} For the creative writing task, the prompt following the question/task is adapted to: "Plan step-by-step before writing the passage." \footnote{In initial experiments, this modification was found necessary to elicit any sort of step-by-step behavior from the model.}
   \item Zero-Shot Chain of Thought Prompting (Automatic Prompt Engineer): Automated testing has indicated that an optimal zero-shot Chain of Thought prompt is "Let's work this out in a step by step way to be sure we have the right answer." \cite{zhou_large_2022} For the creative writing task, the prompt following the question/task is adapted to: "Plan step-by-step before writing the passage to be sure we have a correct and coherent answer." \footnote{Again, in initial experiments, this modification was found necessary to elicit any sort of step-by-step behavior from the model.}
-  \item Tree of Thought Prompting: The language model traverses a tree of decisions - choosing among multiple steps or ideas it has generated to arrive at a conclusion. Backtracking is possible. \cite{yao_tree_2023}
   \item Self-Refine Prompting: The model produces an initial response, then is prompted for feedback which it uses for refinement. \cite{madaan_self-refine_2023}
-  \item Least-to-most Prompting: The model is given few-shot examples that demonstrate how to first break down the task into smaller and simpler subproblems, then solve them sequentially. \cite{zhou_least--most_2023}
-  \item Few-Shot Prompting: The prompter provides a few examples of successfully answered questions or tasks before the main question/task.
-  \item Few-Shot Chain-of-Thought Prompting: The model is provided worked examples of answers in which the reasoning steps are written out. \cite{wei_chain--thought_nodate} Note, however, that such steps are not explicitly planned out or mentioned, as is the case in least-to-most prompting.
+  \item Tree of Thought Prompting: The language model traverses a tree of decisions - choosing among multiple steps or ideas it has generated to arrive at a conclusion. Backtracking is possible. \cite{yao_tree_2023}
+  \item Zero-Shot Control Baseline/Direct Prompting: This method consists of just providing the question/task directly.
 \end{itemize}
 
 \section*{Analyses}
@@ -472,68 +472,6 @@ The sample problem below is the first one in the GSM8K test dataset. \cite{cobbe
 
 All prompt examples for few-shot methods come from the training dataset.
 
-\subsubsection*{Zero-Shot Control Baseline/Direct Prompting}
-
-Q: <Question>
-
-A:
-
-\subsubsection*{Zero-Shot Chain-of-Thought}
-
-Q: <Question>
-
-A: Let's think step by step.
-
-\subsubsection*{APE Improved Zero-Shot Chain-of-Thought}
-
-Q: <Question>
-
-A: Let's work this out in a step by step way to be sure we have the right answer.
-
-\subsubsection*{Tree-of-Thought}
-
-Q: <Question>
-
-Task: Generate 3 different possible one-step calculations to serve as step 1 in solving the problem. Only work on step 1. Put each calculation on a new line. Do not number them.
-
-<Response>
-
-Task: State the calculation above that is most likely to contribute to solving the problem. If it fully solves the original problem, also output STOP and the solution to the problem. If none of the calculations are correct, output ERROR and generate three new ones.
-
-<Response>
-
-Task: Generate 3 different possible one-step calculations to serve as the next step in solving the problem. Only work on the next step. Put each calculation on a new line. Do not number them.
-
-<Response>
-
-\subsubsection*{Self-Refine}
-
-Q: <Question>
-
-A: <Response>
-
-Task: Please check the answer above. If there is an error, state what the error is, but don't fix it. If there are no errors, output STOP.
-
-Feedback: <Feedback>
-
-Task: Redo the entire problem based on the most recent feedback.
-
-A: <Response>
-
-\subsubsection*{Least-to-most Prompting (1-shot; taken from p.58 of \citealp{zhou_least--most_2023})}
-
-Q: Elsa has 5 apples. Anna has 2 more apples than Elsa. How many apples do they have together?
-
-A: Let's break down this problem: 1. How many apples does Anna have? 2. How many apples do Elsa and Anna have together?
-
-1. Anna has 2 more apples than Elsa. So Anna has 2 + 5 = 7 apples.
-
-2. Elsa and Anna have 5 + 7 = 12 apples together.
-
-Q: <Question>
-
-A: Let's break down this problem:
-
 \subsubsection*{Manual Few-Shot (randomly drawn questions and final answers from the training set - following the methodology on p.10 \citealp{brown_language_2020}. 8 examples were chosen, so as to enable comparison with the Chain-of-Thought exemplars below, and in light of evidence that this is around the optimal number of exemplars \cite{min_rethinking_2022}. Explanations were removed from the answers.)}
 
 Q: For every 12 cans you recycle, you receive \$0.50, and for every 5 kilograms of newspapers, you receive \$1.50. If your family collected 144 cans and 20 kilograms of newspapers, how much money would you receive?
@@ -610,6 +548,68 @@ Q: <Question>
 
 A:
 
+\subsubsection*{Least-to-most Prompting (1-shot; taken from p.58 of \citealp{zhou_least--most_2023})}
+
+Q: Elsa has 5 apples. Anna has 2 more apples than Elsa. How many apples do they have together?
+
+A: Let's break down this problem: 1. How many apples does Anna have? 2. How many apples do Elsa and Anna have together?
+
+1. Anna has 2 more apples than Elsa. So Anna has 2 + 5 = 7 apples.
+
+2. Elsa and Anna have 5 + 7 = 12 apples together.
+
+Q: <Question>
+
+A: Let's break down this problem:
+
+\subsubsection*{Zero-Shot Chain-of-Thought}
+
+Q: <Question>
+
+A: Let's think step by step.
+
+\subsubsection*{APE Improved Zero-Shot Chain-of-Thought}
+
+Q: <Question>
+
+A: Let's work this out in a step by step way to be sure we have the right answer.
+
+\subsubsection*{Self-Refine}
+
+Q: <Question>
+
+A: <Response>
+
+Task: Please check the answer above. If there is an error, state what the error is, but don't fix it. If there are no errors, output STOP.
+
+Feedback: <Feedback>
+
+Task: Redo the entire problem based on the most recent feedback.
+
+A: <Response>
+
+\subsubsection*{Tree-of-Thought}
+
+Q: <Question>
+
+Task: Generate 3 different possible one-step calculations to serve as step 1 in solving the problem. Only work on step 1. Put each calculation on a new line. Do not number them.
+
+<Response>
+
+Task: State the calculation above that is most likely to contribute to solving the problem. If it fully solves the original problem, also output STOP and the solution to the problem. If none of the calculations are correct, output ERROR and generate three new ones.
+
+<Response>
+
+Task: Generate 3 different possible one-step calculations to serve as the next step in solving the problem. Only work on the next step. Put each calculation on a new line. Do not number them.
+
+<Response>
+
+\subsubsection*{Zero-Shot Control Baseline/Direct Prompting}
+
+Q: <Question>
+
+A:
+
 \subsection{Creative Writing}
 
 The sample task below is the first one in the Creative Writing dataset. \cite{yao_tree_2023}
@@ -618,98 +618,6 @@ The sample task below is the first one in the Creative Writing dataset. \cite{ya
 
 No training data was provided, so I used random sentences courtesy of \url{https://www.thewordfinder.com/random-sentence-generator/} and my own answers in the construction of few-shot examples.
 
-\subsubsection*{Zero-Shot Control Baseline/Direct Prompting}
-
-<Task>
-
-\subsubsection*{Zero-Shot Chain-of-Thought}
-
-<Task>. Plan step-by-step before writing the passage.
-
-\subsubsection*{APE Improved Zero-Shot Chain-of-Thought}
-
-<Task>. Plan step-by-step before writing the passage to be sure we have a correct and coherent answer.
-
-\subsubsection*{Tree-of-Thought}
-
-<Modified Task. Example: Goal: A coherent passage of 2 short paragraphs. The end sentence of each paragraph, respectively, must be: 1. It isn't difficult to do a handstand if you just stand on your hands. 2. It caught him off guard that space smelled of seared steak.>
-
-Your Task: Generate 3 one-sentence plans for potential passages. Only generate one-sentence plans - do not write the passage.
-
-<Response>
-
-Your Task: Select the most coherent plan that follows the rules of the task. Only state the plan - do not write the passage.
-
-<Response>
-
-Your Task: Write 3 drafts of the 2-paragraph passage based on this plan.
-
-<Response>
-
-Your Task: Select the most coherent draft that follows the rules of the task and write it out.
-
-<Response>
-
-Your Task: If the draft is correct and coherent to the extent you would award a 10 on a scale of 1 to 10, output STOP. If it is not, write out a different one-sentence plan for a potential passage from among those considered and output PLAN.
-
-<Response>
-
-\subsubsection*{Self-Refine}
-
-Task: <Task>
-
-Response: <Response>
-
-Your Task: Provide feedback on the correctness and coherence of the response and a rating on a scale of 1-10. If it is already coherent and correct to the extent you would award a 10, output 10 and the word STOP.
-
-Feedback: <Feedback>
-
-Your Task: Rewrite the passage based on the most recent feedback.
-
-Response: <Response>
-
-\subsubsection*{Least-to-most Prompting}
-
-Task: Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph, respectively, must be: 1. She couldn't get a job because she didn't have a permanent address. 2. He didn't have any hidden talents.
-
-Response: Let's break down this problem into steps: First, we will write a few ideas for the passage. Second, draft the passage.
-
-Ideas:
-
-1. Make the passage about travelling circus performers looking for other work as their circus shuts down.
-
-2. Make the passage about the struggles of a homeless person who is trying to get a job. 
-
-3. Make the passage about perceptions and preconceptions of people's skills and social status as factors in hiring.
-
-Passage: 
-
-Laura sat on the park bench, watching the people walk by. She was homeless, and had been for a few months now. She couldn't get a job because she didn't have a permanent address.
-
-She had tried to talk to career counselors about her situation, but the conversations often seemed fruitless. She didn't feel she had any marketable skills. Her situation was similar to that of her friend, Rodrigo, who openly shared a similar attitude with counselors in his meetings. He didn't have any hidden talents.
-
-Task: Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph, respectively, must be: 1. He had always wanted to be a Youtuber but never thought it would actually happen. 2. My sweater got caught on the door hinge.
-
-Response: Let's break down this problem into steps: First, we will write a few ideas for the passage. Second, draft the passage.
-
-Ideas:
-
-1. Make the passage about a sister visiting her brother; the brother has recently become a successful Youtuber - she excitedly gets her sweater caught leaving a meeting with him.
-
-2. Make the passage about a men's fashion reviewer who is working on a video review of a sweater.
-
-3. Make the passage about a Youtuber preparing for a video shoot - as they hurry through things, their sweater gets caught but this becomes an amusing part of their vlog.
-
-Passage:
-
-My brother, John, had been making home videos for years, but they never got much attention. He was always disappointed when he saw other people's videos getting thousands of views. Then one day, he got a call from a company that wanted to sponsor him. They offered him a lot of money to make videos for them. He was so excited that he couldn't sleep that night. He had always wanted to be a Youtuber but never thought it would actually happen.
-
-As it turned out, John would need his own production staff to help with script writing and video editing. As I lived in the area and had prior experience in these fields, I was a natural choice for a part-time role on his channel. The company's sponsorship was very generous, and I would get a large portion of the profits. I was glad to finally be able to earn a substantial income in a more exciting and engaging role than my current position as a barista. I was smiling for most of our first business meeting, and strutted with pride out of our new studio. My sweater got caught on the door hinge.
-
-Task: <Task>
-
-Response: 
-  
 \subsubsection*{Manual Few-Shot}
 
 Task: Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph, respectively, must be: 1. She couldn't get a job because she didn't have a permanent address. 2. He didn't have any hidden talents.
@@ -775,6 +683,98 @@ Task: <Task>
 Response:
 
 \footnote{Note \citealp{yao_tree_2023} prompts the model for a plan in what is considered the Chain-of-Thought method adaptation for the Creative Writing task.}
+
+\subsubsection*{Least-to-most Prompting}
+
+Task: Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph, respectively, must be: 1. She couldn't get a job because she didn't have a permanent address. 2. He didn't have any hidden talents.
+
+Response: Let's break down this problem into steps: First, we will write a few ideas for the passage. Second, draft the passage.
+
+Ideas:
+
+1. Make the passage about travelling circus performers looking for other work as their circus shuts down.
+
+2. Make the passage about the struggles of a homeless person who is trying to get a job. 
+
+3. Make the passage about perceptions and preconceptions of people's skills and social status as factors in hiring.
+
+Passage: 
+
+Laura sat on the park bench, watching the people walk by. She was homeless, and had been for a few months now. She couldn't get a job because she didn't have a permanent address.
+
+She had tried to talk to career counselors about her situation, but the conversations often seemed fruitless. She didn't feel she had any marketable skills. Her situation was similar to that of her friend, Rodrigo, who openly shared a similar attitude with counselors in his meetings. He didn't have any hidden talents.
+
+Task: Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph, respectively, must be: 1. He had always wanted to be a Youtuber but never thought it would actually happen. 2. My sweater got caught on the door hinge.
+
+Response: Let's break down this problem into steps: First, we will write a few ideas for the passage. Second, draft the passage.
+
+Ideas:
+
+1. Make the passage about a sister visiting her brother; the brother has recently become a successful Youtuber - she excitedly gets her sweater caught leaving a meeting with him.
+
+2. Make the passage about a men's fashion reviewer who is working on a video review of a sweater.
+
+3. Make the passage about a Youtuber preparing for a video shoot - as they hurry through things, their sweater gets caught but this becomes an amusing part of their vlog.
+
+Passage:
+
+My brother, John, had been making home videos for years, but they never got much attention. He was always disappointed when he saw other people's videos getting thousands of views. Then one day, he got a call from a company that wanted to sponsor him. They offered him a lot of money to make videos for them. He was so excited that he couldn't sleep that night. He had always wanted to be a Youtuber but never thought it would actually happen.
+
+As it turned out, John would need his own production staff to help with script writing and video editing. As I lived in the area and had prior experience in these fields, I was a natural choice for a part-time role on his channel. The company's sponsorship was very generous, and I would get a large portion of the profits. I was glad to finally be able to earn a substantial income in a more exciting and engaging role than my current position as a barista. I was smiling for most of our first business meeting, and strutted with pride out of our new studio. My sweater got caught on the door hinge.
+
+Task: <Task>
+
+Response: 
+
+\subsubsection*{Zero-Shot Chain-of-Thought}
+
+<Task>. Plan step-by-step before writing the passage.
+
+\subsubsection*{APE Improved Zero-Shot Chain-of-Thought}
+
+<Task>. Plan step-by-step before writing the passage to be sure we have a correct and coherent answer.
+
+\subsubsection*{Self-Refine}
+
+Task: <Task>
+
+Response: <Response>
+
+Your Task: Provide feedback on the correctness and coherence of the response and a rating on a scale of 1-10. If it is already coherent and correct to the extent you would award a 10, output 10 and the word STOP.
+
+Feedback: <Feedback>
+
+Your Task: Rewrite the passage based on the most recent feedback.
+
+Response: <Response>
+
+\subsubsection*{Tree-of-Thought}
+
+<Modified Task. Example: Goal: A coherent passage of 2 short paragraphs. The end sentence of each paragraph, respectively, must be: 1. It isn't difficult to do a handstand if you just stand on your hands. 2. It caught him off guard that space smelled of seared steak.>
+
+Your Task: Generate 3 one-sentence plans for potential passages. Only generate one-sentence plans - do not write the passage.
+
+<Response>
+
+Your Task: Select the most coherent plan that follows the rules of the task. Only state the plan - do not write the passage.
+
+<Response>
+
+Your Task: Write 3 drafts of the 2-paragraph passage based on this plan.
+
+<Response>
+
+Your Task: Select the most coherent draft that follows the rules of the task and write it out.
+
+<Response>
+
+Your Task: If the draft is correct and coherent to the extent you would award a 10 on a scale of 1 to 10, output STOP. If it is not, write out a different one-sentence plan for a potential passage from among those considered and output PLAN.
+
+<Response>
+
+\subsubsection*{Zero-Shot Control Baseline/Direct Prompting}
+
+<Task>
 
 \section{Evaluating Creative Writing Responses}
 \label{sec:evaluating_creative_writing}
