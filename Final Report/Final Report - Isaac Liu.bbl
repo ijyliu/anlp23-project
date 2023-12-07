@@ -1,5 +1,11 @@
-\begin{thebibliography}{27}
+\begin{thebibliography}{29}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+
+\bibitem[{noa()}]{noauthor_sentence-transformersall-distilroberta-v1_nodate}
+
+\newblock \href
+  {https://huggingface.co/sentence-transformers/all-distilroberta-v1}
+  {sentence-transformers/all-distilroberta-v1 · {Hugging} {Face}}.
 
 \bibitem[{Acar(2023)}]{acar_ai_2023}
 Oguz~A. Acar. 2023.
@@ -93,6 +99,13 @@ Takeshi Kojima, Shixiang~Shane Gu, Machel Reid, Yutaka Matsuo, and Yusuke
 \newblock \href {https://doi.org/10.48550/arXiv.2205.11916} {Large {Language}
   {Models} are {Zero}-{Shot} {Reasoners}}.
 \newblock ArXiv:2205.11916 [cs].
+
+\bibitem[{Landauer et~al.(1998)Landauer, Foltz, and
+  Laham}]{landauer_introduction_1998}
+Thomas~K Landauer, Peter~W. Foltz, and Darrell Laham. 1998.
+\newblock \href {https://doi.org/10.1080/01638539809545028} {An introduction to
+  latent semantic analysis}.
+\newblock \emph{Discourse Processes}, 25(2-3):259--284.
 
 \bibitem[{Lester et~al.(2021)Lester, Al-Rfou, and Constant}]{lester_power_2021}
 Brian Lester, Rami Al-Rfou, and Noah Constant. 2021.

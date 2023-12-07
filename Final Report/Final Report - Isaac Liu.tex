@@ -80,33 +80,31 @@ The following methods were selected based on their popularity (see Appendix Sect
 
 \section*{Analyses}
 
-In this section I will discuss each metric's construction, report the results with a graph or table, and discuss the results as well as any connections to the literature.
+In this section I discuss each metric's construction, report the results with a graph or table, and discuss the results as well as any connections to the literature.
 
-I provide accuracy scores as well as summary statistics (mean, standard deviation) of the metrics listed below for each prompting method by model by question/task type. Statistical inference is uncommon in the prompting literature - most papers simply report accuracy. \footnote{Effect sizes and sample sizes are usually sufficiently large to merit confidence in the statistical significance of results. All paired t-tests comparing prompting methods and human responses were significant in the one paper I did find with inference, \citealp{pu_chatgpt_2023}.} However, in this work, I do check for significant differences in metrics between prompting methods, reporting at the 95\% level. For GSM8K accuracy scores I perform McNemar's test comparing each method to the direct prompting baseline. \footnote{The same questions are administered for each prompting method, so there is dependence that this paired test accounts for.} For sample means of creative writing scores and other statistics, I perform paired t-tests. \footnote{One other metric remains - the token cost of accuracy or change in accuracy divided by change in tokens for each method versus direct prompting. Bootstrapping confidence intervals for this value seems possible, but the dependent nature of the data poses challenges.}
+I provide accuracy scores as well as summary statistics (mean, standard deviation) of the metrics listed below for each prompting method by model by question/task type. Statistical inference is uncommon in the prompting literature - most papers simply report accuracy. \footnote{Effect sizes and sample sizes are usually sufficiently large to merit confidence in the statistical significance of results. All paired t-tests comparing prompting methods and human responses were significant in the one paper I did find with inference, \citealp{pu_chatgpt_2023}.} However, in this work, I do check for significant differences in metrics between prompting methods, reporting at the 95\% level. For GSM8K accuracy scores I perform McNemar's tests comparing each method to the direct prompting baseline. \footnote{The same questions are administered for each prompting method, so there is dependence that this paired test accounts for.} For sample means of creative writing scores and other statistics, I perform paired t-tests. \footnote{One other metric remains - the token cost of accuracy or change in accuracy divided by change in tokens for each method versus direct prompting. Bootstrapping confidence intervals for this value seems possible, but the dependent nature of the data poses challenges.}
 
 \subsection*{Quality and Accuracy}
 
-I report:
+Results concerning the accuracy and/or quality of each method can be found in Table \ref{tab:accuracy_quality}.
 
-For GSM8K problems:
-\begin{itemize}
-  \item Correct/Incorrect accuracy at the point a technique has been fully implemented (the end of the tree of thought or after all self-refinement, etc.)
-\end{itemize}
-
-For Creative Writing:
-\begin{itemize}
-  \item Human assessment of coherence (on a scale of 1 to 10, 1 being incoherent and 10 being very coherent). GPT-4 is known to be capable of producing scalar scores useful for this task \cite{yao_tree_2023}, so I also collect its evaluations as an additional opinion (see Appendix Section \ref{sec:evaluating_creative_writing}). I report human scores, GPT-4 scores, the average of them, and Krippendorff's alpha. I also collect data on whether or not the task constraints were followed (whether ending sentences exactly match those specified), and additionally report scores when the lowest possible rating of 1 is assigned to cases where the rules are broken. \footnote{I additionally tried to use GPT-4 to assess adherence to the original instructions - to check if the exact sentences specified in the prompt were used. In my initial experiments - in contrast to \citealp{yao_tree_2023} - I found that GPT-4 was not able to do this, repeatedly missing deviations of one or a few words, even when told to carefully perform the check in a step-by-step manner!}
-\end{itemize}
+For GSM8K problems, I report correct/incorrect accuracy at the point a technique has been fully implemented (the end of the tree of thought or after all self-refinement, etc.). Chain-of-thought methods and the related least-to-most method provide substantial gains for this task when implemented both manually and with a zero-shot approach. Few-shot prompting - implemented in this paper as the provision of questions and answers without reasoning - is ineffective and even harmful. The iterative self-refine and tree-of-thought methods are generally-ill suited to this task, with the exception of self-refine checking when implemented with GPT-4, which can bring results up to the level of chain-of-thought methods.
 
 %\input{../Output/avg_accuracy_quality_pivot_with_date.tex}
 
-Grader coherence scores are inherently noisy, as noted in \citealp{yao_tree_2023}, but I take several measures to ameliorate this problem. First, I limit reported results to information concerning which method was preferred for each model and selection of ending sentences. This limits demands on the data to only the ordinal ranking of methods. Second, I check the consistency of my methodology and results by soliciting a secondary opinion. I fine-tuned GPT-3.5 to learn my methodology for grading passage coherence - a difficult task, given the difficult nature of coherence as a concept and the wide variety of LLM responses and associated formats resulting from different models and methods. I created two fine-tuned models, each trained and validated on a randomly selected 50\% fold of responses (stratified by method) and human coherence scores and deployed on the other 50\% fold. The results demonstrate the consistency of human preferences. For \pAtlOneHumanEqAggPct~of model-sentence pairings, at least human and automated scores agree on at least one of the methods as among the top-preferred. Simulations using empirical probabilities of scores under independence indicate that this would occur in only \simProbAgmtCmplStr~of cases by chance.
+My initial analysis of creating writing coherence consisted of the author's assessment of generated passage coherence (on a scale of 1 to 10, 1 being incoherent and 10 being very coherent) based on several guidelines - unconnected ideas, abrupt changes in characters or settings recieved low scores, and connected sentences, continuous, and realistic scenarios received high scores.
 
-Figure \ref{fig:cw_preference_plot_ca} shows the number of conversations where each method was one of the most preferred.
+Grader coherence scores are inherently noisy, as noted in \citealp{yao_tree_2023}, but I take several measures to ameliorate this problem. First, I limit reported results for these grades to information concerning which method was preferred for each model and selection of ending sentences. This limits demands on the data to only the ordinal ranking of methods. Second, I check the consistency of my methodology and results by soliciting a secondary opinion. I fine-tuned GPT-3.5 to learn my methodology for grading passage coherence - a difficult task, given the difficult nature of coherence as a concept and the wide variety of LLM responses and associated formats resulting from different models and methods. \footnote{GPT-4 has been prompted to produce scalar scores for this task \cite{yao_tree_2023}, but I generally found its grading to be inconsisent, even with few-shot prompts providing a few examples included.} I created two fine-tuned models, each trained and validated on a randomly selected 50\% fold of responses (stratified by method) and human coherence scores and deployed on the other 50\% fold. The results demonstrate the consistency of human preferences. For \pAtlOneHumanEqAggPct~of model-sentence pairings, at least human and automated scores agree on at least one of the methods as among the top-preferred. Simulations using empirical probabilities of scores under independence indicate that this would occur in only \simProbAgmtCmplStr~of cases by chance.
 
-For my main results, however, I introduce more objective measures of passage coherence that give a good sense of the concept on various levels. To assess local coherence between sentences, I compute the average cosine similarity between consecutive sentence-level BERT embeddings (all-distilroberta-v1). For a more global measure, I compute average embeddings for each paragraph of the LLM response and compute the average cosine similarity between these paragraph embeddings for consecutive paragraphs. \footnote{Other structural methods for assessing global coherence were considered, but not implemented due to their limited additional value and overall feasibility for short, 2-paragraph passages.}
+In this and other analyses, I provide adjustments for scores accounting for whether or not the task constraints were followed - whether responses did, indeed, contain two paragraphs with specified ending sentences. \footnote{I additionally tried to use GPT-4 to assess adherence to the original instructions - to check if the exact sentences specified in the prompt were used. In my initial experiments - in contrast to \citealp{yao_tree_2023} - I found that GPT-4 was not able to do this, repeatedly missing deviations of one or a few words, even when told to carefully perform the check in a step-by-step manner! I instead implemented simple logic using regular expressions, paired with a small amount of manual cleaning, and recommend this approach for future work.} For human-preferred scores, adjustments for non-compliance model the outcomes in the case in which non-compliant responses are reduced to the lowest possible score.
+
+Figure \ref{fig:cw_preference_plot_ca} shows the number of conversations where each method was one of the most preferred. It appears to be difficult to attain any sort of gains from prompt engineering on this task, at least as far as human preferences for coherence are concerned. The provision of few-shot examples indicating preferences seems to be the most promising approach, while other, more complex methods may be detrimental.
+
+For my main results on creative writing, however, I introduce more objective measures of passage coherence that give a good sense of the concept on various levels - a novel approach for this creative writing assessment. To assess local coherence between sentences, I compute the average cosine similarity between consecutive sentence-level BERT embeddings (all-distilroberta-v1) \cite{landauer_introduction_1998, noauthor_sentence-transformersall-distilroberta-v1_nodate}. For a more global measure, I compute average embeddings for each paragraph of the LLM response by combining the sentence embeddings, and then the average cosine similarity between these paragraph embeddings for consecutive paragraphs. \footnote{Other structural methods for assessing global coherence were considered, but not implemented due to their limited additional value and overall feasibility for short, 2-paragraph passages.} I believe this custom method best captures success on this task, as outlined in the initial prompt and question, and it had the highest correlation with human scores. It is my preferred metric for the rest of this paper. For both cosine similarity measures, I adjust for task compliance by removing non-compliant conversations.
 
 % Potentially add math here
+
+These measures are again reported in Table \ref{tab:accuracy_quality}. It is difficult to attain much improvement in inter-sentence cosine similarity, particularly when accounting for task compliance, but chain-of-thought methods and the APE Zero-Shot CoT method (adapted to included an extra request for correctness and coherence for this task) perform well. Self-refinement also appears to be helpful. Gains are larger for inter-paragraph cosine similarity, and chain-of-thought and least-to-most methods tend to fairly consistently outperform, with some improvement coming from simple few-shot prompting on older models. Task compliance rates are low for both new and old models, suggesting careful adherence to complex instructions is an area with room for significant improvement in future models. No prompt engineering demonstates consistent improvment in task compliance, and prompting often leads to actively worse performance - potentially distracting models or adding additional complication.
 
 \begin{centering}
 
@@ -130,6 +128,15 @@ For my main results, however, I introduce more objective measures of passage coh
   %   \includegraphics[width=\textwidth]{../Output/cw_preference_plot_coherence_1_incoherent_10_very_coherent_coherence_1_incoherent_10_very_coherent.png}
   % \end{figure*}
 
+  \begin{table*}
+    \caption{Mean and Standard Deviation of Accuracy/Quality Scores}
+    \centering
+    \tiny
+    \input{../Output/avg_accuracy_quality_pivot_with_date.tex}  
+    \label{tab:accuracy_quality}
+    \newline \newline \footnotesize Stars indicate a significant difference from the direct prompting baseline from McNemar's tests at the 95\% level for GSM8K accuracy scores and creative writing task compliance scores and paired t-tests at the 95\% level for all other metrics.
+  \end{table*}
+
   \begin{figure*}
     \caption{Human-Preferred Method by Model - Creative Writing Coherence - Adjust for Non-Compliance}
     \centering
@@ -137,26 +144,15 @@ For my main results, however, I introduce more objective measures of passage coh
     \label{fig:cw_preference_plot_ca}
   \end{figure*}
 
-  \begin{table*}
-    \caption{Mean and Standard Deviation of Accuracy/Quality Scores}
-    \centering
-    \tiny
-    \input{../Output/avg_accuracy_quality_pivot_with_date.tex}  
-    \label{tab:accuracy_quality}
-    \newline \newline \footnotesize Stars indicate a significant difference from the direct prompting baseline from McNemar's test at the 95\% level for GSM8K accuracy scores and creative writing task compliance scores and paired t-tests at the 95\% level for all other metrics.
-  \end{table*}
-
   %\clearpage
 
   %\twocolumn
 
 \end{centering}
 
-General Discussion:
+Do larger/more modern models benefit more from prompt engineering, or are the techniques becoming obsolete? Gains from prompting on GSM8K questions have fallen as default performance on the task has improved dramatically. The creative writing task, however, is very much not a solved problem, and the gains from prompting actually appear to be larger for older models (though task compliance seems to suffer under all techniques). Earlier evidence demonstrated that gains from few-shot learning increased with model scale - but this paper does not seem to support evidence that trend has held. \cite{brown_language_2020} Gains have, if anything, decreased or flatlined with model improvement. For the moment at least, the relevance of prompting is a task-specific question.
 
-Which methods perform the best, and are the differences significant?
-
-Do larger/more modern models benefit more from prompt engineering, or are the techniques becoming obsolete? Earlier evidence demonstrated that gains from few-shot learning increased with scale - has this trend continued to hold? \cite{brown_language_2020} Are the most recent prompt engineering techniques (as measured by paper release/publication date) more powerful and useful?
+One might expect more recent prompt engineering techniques (as measured by paper release/publication date) to be more powerful and useful, but the evidence shows this is not the case. Chain-of-thought prompting, popularized throughout mid-late 2022 seems to have been the most significant innnovation not only for math-based reasoning tasks as might be expected, but also for the language-based creative writing challenge. The culmination of chain-of-thought improvements in zero-shotting is able to attain comparable and sometimes superior results relative the provision of few-shot chain-of-thought examples. Few-shotting does still have its uses, however, particularly for the creative writing task and when working with older models, where the construction of a coherent passage (a potentially subjective target) can be demonstrated. Complex iterative techniques such as self-refinement and traversal of the tree-of-thoughts, both introduced in 2023, do not lead to improvement, at least for these tasks. They may be appropriate only for some more specialized applications, and can only be successfully applied for the most recent models. \footnote{Inspection of results found significant non-compliance with prompt instructions for these methods, especially with older models.}
 
 Are improvements from a given method replicable across tasks? Are they replicable within tasks (what is the variance of the indicator for getting a question right or of coherency scores)?
 
@@ -306,6 +302,8 @@ To what extent does prompting require specialized skills and time investment? Ap
 \section*{Conclusion}
 
 Overarching conclusions about the practicality of prompt engineering and the tradeoffs between costs and benefits of specific techniques.
+
+Chain-of-thought prompting significantly outperforms, and it can be implemented quite cheaply and easily in a zero-shot manner.
 
 \section*{Limitations}
 
