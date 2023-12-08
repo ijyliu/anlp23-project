@@ -69,8 +69,8 @@ The following methods were selected based on their popularity (see Appendix Sect
 
 \begin{itemize}
   \item Few-Shot Prompting: The prompter provides a few examples of successfully answered questions or tasks before the main question/task. Notably featured in \citealp{brown_language_2020}.
-  \item Few-Shot Chain-of-Thought Prompting: The model is provided worked examples of answers in which the reasoning steps are written out. \cite{wei_chain--thought_nodate} Note, however, that such steps are not explicitly planned out or mentioned, as is the case in least-to-most prompting.
-  \item Least-to-most Prompting: The model is given few-shot examples that demonstrate how to first break down the task into smaller and simpler subproblems, then solve them sequentially. \cite{zhou_least--most_2023}
+  \item Few-Shot (Manual) Chain-of-Thought Prompting: The model is provided worked examples of answers in which the reasoning steps are written out. \cite{wei_chain--thought_nodate} Note, however, that such steps are not explicitly planned out or mentioned, as is the case in least-to-most prompting.
+  \item Least-to-Most Prompting: The model is given few-shot examples that demonstrate how to first break down the task into smaller and simpler subproblems, then solve them sequentially. \cite{zhou_least--most_2023}
   \item Zero-Shot Chain of Thought Prompting (Original): Initial advances in chain of thought prompting to improve reasoning were achieved by simply including the following before the question/task: "Let's think step by step." \cite{kojima_large_2023} For the creative writing task, the prompt following the question/task is adapted to: "Plan step-by-step before writing the passage." \footnote{In initial experiments, this modification was found necessary to elicit any sort of step-by-step behavior from the model.}
   \item Zero-Shot Chain of Thought Prompting (Automatic Prompt Engineer): Automated testing has indicated that an optimal zero-shot Chain of Thought prompt is "Let's work this out in a step by step way to be sure we have the right answer." \cite{zhou_large_2022} For the creative writing task, the prompt following the question/task is adapted to: "Plan step-by-step before writing the passage to be sure we have a correct and coherent answer." \footnote{Again, in initial experiments, this modification was found necessary to elicit any sort of step-by-step behavior from the model.}
   \item Self-Refine Prompting: The model produces an initial response, then is prompted for feedback which it uses for refinement. \cite{madaan_self-refine_2023}
@@ -88,7 +88,7 @@ I provide accuracy scores as well as summary statistics (mean, standard deviatio
 
 Results concerning the accuracy and/or quality of each method can be found in Table \ref{tab:accuracy_quality}.
 
-For GSM8K problems, I report correct/incorrect accuracy at the point a technique has been fully implemented (the end of the tree of thought or after all self-refinement, etc.). Chain-of-thought methods and the related least-to-most method provide substantial gains for this task when implemented both manually and with a zero-shot approach. Few-shot prompting - implemented in this paper as the provision of questions and answers without reasoning - is ineffective and even harmful. The iterative self-refine and tree-of-thought methods are generally-ill suited to this task, with the exception of self-refine checking when implemented with GPT-4, which can bring results up to the level of chain-of-thought methods.
+For GSM8K problems, I report correct/incorrect accuracy at the point a technique has been fully implemented (the end of the tree of thought or after all self-refinement, etc.). Chain-of-thought methods and the related least-to-most method provide substantial gains for this task when implemented both manually and with a zero-shot approach. \footnote{Surprisingly, APE-Improved Zero-Shot CoT is not more effective that the simple "Let's Think Step by Step approach.} Few-shot prompting - implemented in this paper as the provision of questions and answers without reasoning - is ineffective and even harmful. The iterative self-refine and tree-of-thought methods are generally-ill suited to this task, with the exception of self-refine checking when implemented with GPT-4, which can bring results up to the level of chain-of-thought methods.
 
 %\input{../Output/avg_accuracy_quality_pivot_with_date.tex}
 
@@ -158,18 +158,19 @@ We have seen that performance for a method does seem fairly repeatable across ta
 
 \subsection*{Length and Complexity}
 
-For length, I report:
+Table \ref{tab:avg_length_metrics_pivot} contains results on the length and cost of conversations. I begin with an analysis of the length of the entire interaction in tokens (using OpenAI's tiktoken tokenizer for the appropriate model). As shown in Figure \ref{fig:len_v_dp}, prompt engineering generally requires anywhere from 1-10 times as many tokens as direct prompting, with downstream effects for the amount of human effort and direct financial costs of tokens. Zero-Shot methods show moderate increases in length - factors of only 1-2 that of Direct Prompting. In Table \ref{tab:avg_length_metrics_pivot}, Self-Refine and Tree-of-Thought methods exhibit massive amounts of variability across questions and models that can lead to very long conversations - likely a result of differences in LLM decisions and backtracking. Few-shot methods generally have long lengths as a result of the space occupied by examples - oftentimes many times that of the actual question and results. This is clear from the results on input length, which are the vast majority of overall length for these methods - unlike the results for others.
 
-\begin{itemize}
-  \item Length of the entire interaction in tokens (using OpenAI's tiktoken tokenizer for the appropriate model)
-  \item Length of all prompts (all input) in tokens
-  \item Financial cost of the entire interaction using OpenAI's prices per 1,000 tokens (accounting for different input/output prices with GPT-4)
-  \item Length of the entire interaction in tokens relative to the length of the task/question + a baseline answer. For GSM8K, the baselines are the provided (OpenAI) solution and the answer achieved via direct prompting. For the Creative Writing task, the baseline is the answer achieved via direct prompting. How much is prompt engineering stretching the interaction out? The ratio of engineered answer length to baseline lengths can be informative. \footnote{I report a ratio as a difference in token counts would be harder to interpret directly - though it could easily be calculated by the reader using the length metrics.}
-  \item The change in accuracy (in percentage points, 0 to 100) or quality (coherence scale points) divided by the change in tokens (difference in token counts), between the prompt engineering technique and direct prompting. Is any stretching of output adding value/improving accuracy/quality?
-  \begin{displaymath}
-    \frac{AQ_{PE} - AQ_{B}}{Tokens_{PE} - Tokens_{B}}
-  \end{displaymath}
-\end{itemize}
+For the GSM8K task, we can compare the length of conversations for each method with the length of the provided question + answer in Figure \ref{fig:gsm8k_len_v_prov}, another perspective as to the extent to which prompt engineering can "stretch out" interactions. For text-davinci-003, direct prompting generally produces LLM conversations and responses somewhat shorter than provided answers, but zero-shot chain-of-thought prompting brings lengths up into the expected range. For GPT-4, direct responses are already near the expected length, and prompting add more tokens.
+
+In Table \ref{tab:avg_length_metrics_pivot}, the cost of conversations was computed using rates as of November 11, 2023 - 2 cents per 1000 tokens for text-davinci-003, and 3 cents per 1000 tokens (input), 6 cents per 1000 tokens (output) for GPT-4. Prompting is the difference between spending a fraction of a penny on every conservation to several cents or more. Zero-shot methods do not increase costs much at all, and GPT-4's relative discount on input tokens makes few-shot methods closer in expense to zero-shot ones, though there are still some differences. Similar to the results on length, the iterative Self-Refine and Tree-of-Thought methods have highly variable conversation cost.
+
+Figure \ref{fig:gains_v_dp} considers the average change in accuracy (in percentage points, 0 to 100) or quality (coherence scale points) divided by the change in tokens (difference in token counts), between the prompt engineering technique and direct prompting. Is any stretching of output adding value/improving accuracy/quality?
+
+\begin{displaymath}
+  \frac{AQ_{PE} - AQ_{B}}{Tokens_{PE} - Tokens_{B}}
+\end{displaymath}
+
+For GSM8K, the results are in percentage points per additional token. Zero-Shot Chain-of-Thought prompting (particularly with the original think step-by-step prompt) is cheap and extremely effective, and it outperforms techniques introduced earlier and later. The extra details and length of Least-to-Most and Manual Chain-of-Thought prompting do not provide additional benefit. Improvements in creative writing cosine similarity are harder to come by - note that changes are per 1,000 additional tokens, longer than most conversatiosn ever last. However, we can still see that Zero-Shot Chain-of-Thought prompting is the most effective, with some benefit for the provision of examples using few-shot methods with the older text-davinci-003 model.
 
 %\onecolumn
 
@@ -181,13 +182,6 @@ For length, I report:
   \label{tab:avg_length_metrics_pivot}
   \newline \newline \footnotesize Stars indicate a significant difference from the direct prompting baseline from paired t-tests at the 95\% level.
 \end{table*}
-
-\begin{figure*}
-  \caption{Average Length vs. Provided Length - GSM8K}
-  \centering
-  \includegraphics[width=\textwidth]{../Output/gsm8k_length_vs_provided_means.png}
-  \label{fig:gsm8k_len_v_prov}
-\end{figure*}
 
 \begin{figure*}
   \caption{Average Length vs. Direct Prompting Length}
@@ -203,6 +197,14 @@ For length, I report:
       \includegraphics[width=0.95\hsize]{../Output/cw_length_vs_direct_prompting_means.png}
   \end{subfigure}
   \hfill
+  \label{fig:len_v_dp}
+\end{figure*}
+
+\begin{figure*}
+  \caption{Average Length vs. Provided Length - GSM8K}
+  \centering
+  \includegraphics[width=\textwidth]{../Output/gsm8k_length_vs_provided_means.png}
+  \label{fig:gsm8k_len_v_prov}
 \end{figure*}
 
 \begin{figure*}
@@ -219,9 +221,12 @@ For length, I report:
       \includegraphics[width=0.95\hsize]{../Output/cw_change_in_accuracy_quality_per_change_in_conversation_length_sorted_by_technique_age_transformed.png}
   \end{subfigure}
   \hfill
+  \label{fig:gains_v_dp}
 \end{figure*}
 
 %\twocolumn
+
+Other metrics beyond just length may be of interest, particularly for considering the all-important task of human review/checking of LLM responses.
 
 For complexity, I report:
 
