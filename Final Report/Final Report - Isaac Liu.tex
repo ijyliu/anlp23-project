@@ -309,7 +309,7 @@ For GSM8K, increases in linear conversation length do tend to improve performanc
 
 Does increased length or complexity limit creativity and randomness? Table \ref{tab:regressions} also includes regression results on the creative writing task, which may be helpful - coherence requires creativity. Length and complexity (more steps/ideas and lower FRE scores) actually increase coherence, and the quadratic terms are weak. This comes at a cost of decreased task compliance, which follows an opposite relationship.
 
-Does increased prompted complexity lead to worse performance on simple questions? This is an active debate in the chain-of-thought literature. \cite{fu_complexity-based_2023, shum_automatic_2023} For GSM8K, we can use the complexity of provided answers to get a measure of how simple the question is, and add this as an interaction in the regression. The results in table \ref{tab:regressions_model_interaction} are not generally significant, perhaps due to the difficult problem of collinearity. When provided length is longer, additional response length decreases performance. As questions are more simple and have shorter provided length, additional response length increases performance. This conclusion is not in line with the literature.
+% Does increased prompted complexity lead to worse performance on simple questions? This is an active debate in the chain-of-thought literature. \cite{fu_complexity-based_2023, shum_automatic_2023} For GSM8K, we can use the complexity of provided answers to get a measure of how simple the question is, and add this as an interaction in the regression. The results in table \ref{tab:regressions_model_interaction} are not generally significant, perhaps due to the difficult problem of collinearity. When provided length is longer, additional response length decreases performance. As questions are more simple and have shorter provided length, additional response length increases performance. This conclusion is not in line with the literature.
 
 In Table \ref{tab:regressions_model_interaction}, for GSM8K, we can see that for text-davinci-003, length mostly decreases performance, but the relationship changes once length reaches a certain level and a quadratic term takes effect. For GPT-4, length is always detrimental. The number of steps/ideas is more beneficial. For creative writing, length improves cosine similarity for text-davinci-003, while the number of ideas and FRE complexity improve it for GPT-4. For GPT-4, task compliance decreases then increases with teh number of steps/idea and increases with higher FRE and less complexity.
 
@@ -324,14 +324,14 @@ In Table \ref{tab:regressions_model_interaction}, for GSM8K, we can see that for
   \newline \newline \footnotesize For logit regressions, the average of marginal effects are reported. Standard errors in parentheses. For linear models, standard errors are clustered by task question by method. Stars indicate significance at the 95\% level.
 \end{table*}
 
-\begin{table*}
-  \caption{Regressions with GSM8K Provided Answer Length Interaction}
-  \centering
-  \tiny
-  \input{../Output/regressions_provided_interaction.tex}  
-  \label{tab:regressions_provided_interaction}
-  \newline \newline \footnotesize For logit regressions, the average of marginal effects are reported. Standard errors in parentheses. For linear models, standard errors are clustered by task question by method. Stars indicate significance at the 95\% level.
-\end{table*}
+% \begin{table*}
+%   \caption{Regressions with GSM8K Provided Answer Length Interaction}
+%   \centering
+%   \tiny
+%   \input{../Output/regressions_provided_interaction.tex}  
+%   \label{tab:regressions_provided_interaction}
+%   \newline \newline \footnotesize For logit regressions, the average of marginal effects are reported. Standard errors in parentheses. For linear models, standard errors are clustered by task question by method. Stars indicate significance at the 95\% level.
+% \end{table*}
 
 \begin{table*}
   \caption{Regressions with Model Interaction}
