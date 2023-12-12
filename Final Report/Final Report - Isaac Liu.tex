@@ -200,31 +200,6 @@ We have seen that performance for a method does seem fairly repeatable across ta
   \label{fig:gsm8k_len_v_prov}
 \end{figure*}
 
-% Table \ref{tab:avg_length_metrics_pivot} contains results on the length and cost of conversations. I begin with an analysis of the length of the entire interaction in tokens (using OpenAI's tiktoken tokenizer for the appropriate model). As shown in Figure \ref{fig:len_v_dp}, prompt engineering generally requires anywhere from 1-10 times as many tokens as direct prompting, which ends up having downstream effects for the amount of human effort and direct financial costs of tokens. Zero-Shot methods show moderate increases in length - factors of only 1-2 that of direct prompting. In Table \ref{tab:avg_length_metrics_pivot}, Self-Refine and Tree-of-Thought methods exhibit massive amounts of variability across questions and models that can lead to very long conversations - likely a result of differences in LLM decisions and backtracking. Few-shot methods generally have long lengths as a result of the space occupied by examples - oftentimes many times that of the actual question and results. This is clear from the results on input length, which are the vast majority of overall length for these methods - unlike the results for others.
-
-Table \ref{tab:avg_length_metrics_pivot} contains results on the length and cost of conversations. I begin with an analysis of the length of the entire interaction in tokens (using OpenAI's tiktoken tokenizer for the appropriate model). Prompt engineering generally requires anywhere from 1-10 times as many tokens as direct prompting, which ends up having downstream effects for the amount of human effort and direct financial costs of tokens. Zero-Shot methods show moderate increases in length - factors of only 1-2 that of direct prompting. Self-Refine and Tree-of-Thought methods exhibit massive amounts of variability across questions and models that can lead to very long conversations - likely a result of differences in LLM decisions and backtracking. Few-shot methods generally have long lengths as a result of the space occupied by examples - oftentimes many times that of the actual question and results. This is clear from the results on input length, which are the vast majority of overall length for these methods - unlike the results for others.
-
-For the GSM8K task, we can compare the length of conversations for each method with the length of the provided question + answer in Figure \ref{fig:gsm8k_len_v_prov}, providing another perspective as to the extent to which prompt engineering can "stretch out" interactions. For text-davinci-003, direct prompting generally produces LLM conversations and responses somewhat shorter than provided answers, but zero-shot chain-of-thought prompting brings lengths up into the expected range. Other methods typically add large multiples. For GPT-4, direct responses are already near the expected length, and all forms of prompting add more tokens.
-
-In Table \ref{tab:avg_length_metrics_pivot}, the cost of conversations was computed using rates as of November 11, 2023 - 2 cents per 1000 tokens for text-davinci-003, and 3 cents per 1000 tokens (input), 6 cents per 1000 tokens (output) for GPT-4. Prompting is the difference between spending a fraction of a penny on every conservation to several cents or more. Zero-shot methods do not increase costs much at all, and GPT-4's relative discount on input tokens makes manual/few-shot methods closer in expense to zero-shot ones, though there are still some differences. Similar to the results on length, the iterative Self-Refine and Tree-of-Thought methods have highly variable conversation cost.
-
-Figure \ref{fig:gains_v_dp} considers the average change in accuracy or quality divided by the change in tokens, between the prompt engineering technique and the direct prompting baseline. Is any stretching of output adding value/improving accuracy/quality?
-
-\begin{displaymath}
-  \frac{AQ_{PE} - AQ_{B}}{Tokens_{PE} - Tokens_{B}}
-\end{displaymath}
-
-For GSM8K, the results are in percentage points per additional token. Zero-Shot Chain-of-Thought prompting (particularly with the original think step-by-step prompt) is cheap and extremely effective, and it outperforms techniques introduced earlier and later. The extra details and length of Least-to-Most and Manual Chain-of-Thought prompting do not provide the same benefit. Improvements in creative writing cosine similarity are harder to come by - note that changes are per 1,000 additional tokens, longer than most conversations ever last. However, we can still see that Zero-Shot Chain-of-Thought prompting is the most effective, with some benefit for the provision of examples using few-shot methods with the older text-davinci-003 model.
-
-Figure \ref{fig:gains_v_dp_cost} repeats the same calculation, but per additional cent of financial cost and with different y-axis scales.
-
-\begin{displaymath}
-  \frac{AQ_{PE} - AQ_{B}}{Cost_{PE} - Cost_{B}}
-\end{displaymath}
-
-The unique price structures for GPT-4 make this plot different, and the new y-axis scale provides additional insight - though one should be careful with extrapolation given the small cost (fraction of to a few cents) of most conversations (these plots should be interpreted in the context of earlier tables for any given practical decision). The intricacies of pricing structure reduce the relative gains on GPT-4 and level out comparisons between methods. On older models, prompting, and zero-shot-prompting in particular is very likely cost-effective, but newer models have changed this calculation.
-
-%\onecolumn
 
 \begin{figure*}
   \caption{Gains Per Token v. Direct Prompting}
@@ -259,6 +234,33 @@ The unique price structures for GPT-4 make this plot different, and the new y-ax
   \hfill
   \label{fig:gains_v_dp_cost}
 \end{figure*}
+
+
+% Table \ref{tab:avg_length_metrics_pivot} contains results on the length and cost of conversations. I begin with an analysis of the length of the entire interaction in tokens (using OpenAI's tiktoken tokenizer for the appropriate model). As shown in Figure \ref{fig:len_v_dp}, prompt engineering generally requires anywhere from 1-10 times as many tokens as direct prompting, which ends up having downstream effects for the amount of human effort and direct financial costs of tokens. Zero-Shot methods show moderate increases in length - factors of only 1-2 that of direct prompting. In Table \ref{tab:avg_length_metrics_pivot}, Self-Refine and Tree-of-Thought methods exhibit massive amounts of variability across questions and models that can lead to very long conversations - likely a result of differences in LLM decisions and backtracking. Few-shot methods generally have long lengths as a result of the space occupied by examples - oftentimes many times that of the actual question and results. This is clear from the results on input length, which are the vast majority of overall length for these methods - unlike the results for others.
+
+Table \ref{tab:avg_length_metrics_pivot} contains results on the length and cost of conversations. I begin with an analysis of the length of the entire interaction in tokens (using OpenAI's tiktoken tokenizer for the appropriate model). Prompt engineering generally requires anywhere from 1-10 times as many tokens as direct prompting, which ends up having downstream effects for the amount of human effort and direct financial costs of tokens. Zero-Shot methods show moderate increases in length - factors of only 1-2 that of direct prompting. Self-Refine and Tree-of-Thought methods exhibit massive amounts of variability across questions and models that can lead to very long conversations - likely a result of differences in LLM decisions and backtracking. Few-shot methods generally have long lengths as a result of the space occupied by examples - oftentimes many times that of the actual question and results. This is clear from the results on input length, which are the vast majority of overall length for these methods - unlike the results for others.
+
+For the GSM8K task, we can compare the length of conversations for each method with the length of the provided question + answer in Figure \ref{fig:gsm8k_len_v_prov}, providing another perspective as to the extent to which prompt engineering can "stretch out" interactions. For text-davinci-003, direct prompting generally produces LLM conversations and responses somewhat shorter than provided answers, but zero-shot chain-of-thought prompting brings lengths up into the expected range. Other methods typically add large multiples. For GPT-4, direct responses are already near the expected length, and all forms of prompting add more tokens.
+
+In Table \ref{tab:avg_length_metrics_pivot}, the cost of conversations was computed using rates as of November 11, 2023 - 2 cents per 1000 tokens for text-davinci-003, and 3 cents per 1000 tokens (input), 6 cents per 1000 tokens (output) for GPT-4. Prompting is the difference between spending a fraction of a penny on every conservation to several cents or more. Zero-shot methods do not increase costs much at all, and GPT-4's relative discount on input tokens makes manual/few-shot methods closer in expense to zero-shot ones, though there are still some differences. Similar to the results on length, the iterative Self-Refine and Tree-of-Thought methods have highly variable conversation cost.
+
+Figure \ref{fig:gains_v_dp} considers the average change in accuracy or quality divided by the change in tokens, between the prompt engineering technique and the direct prompting baseline. Is any stretching of output adding value/improving accuracy/quality?
+
+\begin{displaymath}
+  \frac{AQ_{PE} - AQ_{B}}{Tokens_{PE} - Tokens_{B}}
+\end{displaymath}
+
+For GSM8K, the results are in percentage points per additional token. Zero-Shot Chain-of-Thought prompting (particularly with the original think step-by-step prompt) is cheap and extremely effective, and it outperforms techniques introduced earlier and later. The extra details and length of Least-to-Most and Manual Chain-of-Thought prompting do not provide the same benefit. Improvements in creative writing cosine similarity are harder to come by - note that changes are per 1,000 additional tokens, longer than most conversations ever last. However, we can still see that Zero-Shot Chain-of-Thought prompting is the most effective, with some benefit for the provision of examples using few-shot methods with the older text-davinci-003 model.
+
+Figure \ref{fig:gains_v_dp_cost} repeats the same calculation, but per additional cent of financial cost and with different y-axis scales.
+
+\begin{displaymath}
+  \frac{AQ_{PE} - AQ_{B}}{Cost_{PE} - Cost_{B}}
+\end{displaymath}
+
+The unique price structures for GPT-4 make this plot different, and the new y-axis scale provides additional insight - though one should be careful with extrapolation given the small cost (fraction of to a few cents) of most conversations (these plots should be interpreted in the context of earlier tables for any given practical decision). The intricacies of pricing structure reduce the relative gains on GPT-4 and level out comparisons between methods. On older models, prompting, and zero-shot-prompting in particular is very likely cost-effective, but newer models have changed this calculation.
+
+%\onecolumn
 
 %\twocolumn
 \subsection*{Complexity}
@@ -302,6 +304,15 @@ The final components of my analysis of complexity are human-provided ratings of 
 
 As is the case in the study of chain-of-thought setting of \citealp{fu_complexity-based_2023}, are any gains in performance coming from reasoning steps as opposed to length in tokens? A generalized answer to this question across methods is central to our understanding of if and how prompt engineering works. Relationships may be complex. For language understanding tasks, prompt length has been found to improve model performance, with optimality achieved somewhere in the range of 20-100 tokens \cite{lester_power_2021}. Evidence shows that in longer conversations models may get distracted, go off on tangents, or get stuck in a loop repeating themselves (to the extent some platforms have imposed length limitations) \cite{shi_large_2023, mann_microsoft_nodate}. Accounting for non-linearity and relationships with reasoning steps to understand these phenomena may be helpful.
 
+\begin{table*}
+  \caption{Regression Results}
+  \centering
+  \tiny
+  \input{../Output/regressions.tex}  
+  \label{tab:regressions}
+  \\[10pt] \footnotesize For logit regressions, the average of marginal effects are reported. Standard errors in parentheses. For linear models, standard errors are clustered by task question by method. Stars indicate significance at the 95\% level.
+\end{table*}
+
 Table \ref{tab:regressions} implements regressions (with quadratic terms to model non-linearity) controlling for length and complexity to begin to address this question. To limit collinearity with my preferred length variable of thousands of tokens, I selected the number of steps/ideas as my desired complexity metric. I summed the "step i" and "1.", "2. ", etc. measures into this single measure to improve data quality.
 
 For GSM8K, increases in linear conversation length do tend to improve performance, but the far larger squared term indicates that beyond a certain point further increases are detrimental. The coefficients are farily small, being per thousand tokens, and less significant than those for the number of reasoning steps/ideas. Reasoning steps are more clearly linearly beneficial for performance, and their quadratic term is small.
@@ -313,15 +324,6 @@ Does increased length or complexity limit creativity and randomness? Table \ref{
 % In Table \ref{tab:regressions_model_interaction}, for GSM8K, we can see that for text-davinci-003, length mostly decreases performance, but the relationship changes once length reaches a certain level and a quadratic term takes effect. For GPT-4, length is always detrimental. The number of steps/ideas is more beneficial. For creative writing, length improves cosine similarity for text-davinci-003, while the number of ideas and FRE complexity improve it for GPT-4. For GPT-4, task compliance decreases then increases with teh number of steps/idea and increases with higher FRE and less complexity.
 
 %\onecolumn
-
-\begin{table*}
-  \caption{Regression Results}
-  \centering
-  \tiny
-  \input{../Output/regressions.tex}  
-  \label{tab:regressions}
-  \\[10pt] \footnotesize For logit regressions, the average of marginal effects are reported. Standard errors in parentheses. For linear models, standard errors are clustered by task question by method. Stars indicate significance at the 95\% level.
-\end{table*}
 
 % \begin{table*}
 %   \caption{Regressions with GSM8K Provided Answer Length Interaction}
