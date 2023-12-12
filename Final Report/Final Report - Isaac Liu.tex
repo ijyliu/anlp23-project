@@ -295,7 +295,7 @@ For the creative writing task, I also examine the sentence length (using NLTK wo
 
 Table \ref{tab:avg_complexity_diff_metrics_pivot} compares a selected set of the metrics above in responses to provided answers and prompts. GSM8K responses are compared to the provided answer. Manual few-shot prompting leads to short and simple responses by design. Other methods generally introduce more reasoning steps and sentences than the provided answers - Least-to-Most prompting, in particular, shows a dramatic increase. The iterative, choice-based setup of Tree-of-Thought prompting is again notable in the addition of steps. For the creative writing task, sentence length is generally somewhat longer in the responses relative to the prompts for few-shot methods (data on the other methods, which do not contain examples, is not as interpretable). For text-davinci-003, the few-shot responses are somewhat more readable than the prompts, but for GPT-4 they are less so - a concerning trend for the prospect of controlling readability in future.
 
-The final components of my analysis of complexity are human-provided ratings of the ease of review and difficulty of implementation for each method. For ease of review, each method was rated in Appendix Section \ref{sec:evaluating_ease_of_review}. These results concur with the finding that Least-to-Most and Tree-of-Thought prompting add steps and complexity, while few-shot methods generally decrease it. Though Chain-of-Thought reasoning may add steps, these evaluations note the fact that they are often not too difficult to follow. On the other hand, steps from Least-to-Most and Tree-of-Thought prompting are often difficult to piece back together. An additional note is that the provision of examples in few-shot prompting can, aside from readability, help with the formatting of responses. Appendix Section \ref{sec:difficulty} offers some observations on the difficulty of implementing each method. Zero-Shot methods are the easiest to implement. Few-shot methods just require a few examples - though providing chains of reasoning can be tricky. Iterative Self-Refine and Tree-of-Thought methods are complicated.
+The final components of my analysis of complexity are human-provided ratings of the ease of review and difficulty of implementation for each method. For ease of review, each method was rated in Appendix Section \ref{sec:evaluating_ease_of_review}. These results concur with the finding that Least-to-Most and Tree-of-Thought prompting add steps and complexity, while few-shot methods generally decrease it. Though Chain-of-Thought reasoning may add steps, these evaluations note the fact that they are often not too difficult to follow. On the other hand, steps from Least-to-Most and Tree-of-Thought prompting are often difficult to piece back together. An additional note is that the provision of examples in few-shot prompting can, aside from readability, help with the formatting of responses. Appendix Section \ref{sec:difficulty} offers some observations on the difficulty of implementing each method. Zero-Shot methods are the easiest to implement. Few-shot methods just require a few examples - though providing chains of reasoning can be tricky. Iterative Self-Refine and Tree-of-Thought methods are complicated and can require specialized skills and time investment.
 
 \subsection*{Length or Complexity?}
 
@@ -344,36 +344,17 @@ Does increased length or complexity limit creativity and randomness? Table \ref{
 
 \section*{Conclusion}
 
-Overarching conclusions about the practicality of prompt engineering and the tradeoffs between costs and benefits of specific techniques.
-
-Chain-of-thought prompting significantly outperforms, and it can be implemented quite cheaply and easily in a zero-shot manner.
-
-When there are gains to be had they generally come from chain of thought
-
-Instuction following is still hard - task compliance is low
+This broad standardized and quantitative evaluation of the trade-offs behind prompt engineering has revealed a fair amount of worthwhile benefit for a selected set of techniques. Chain-of-thought prompting outperforms other techniques and direct prompting on both math and language-based tasks, and it can be implemented quite cheaply and easily in a zero-shot manner.
 
 Why does chain-of-thought prompting do so well? One plausible explanation is that LLMs have many examples loosely following the method in their training data. It is easy to find examples of reasoning problems worked out step-by-step in humanity's collective corpus of text, but ostensibly more difficult to think of examples where a tree of possible decisions is considered or where there is text laying out a conversation of responses, feedback, and refinement.
 
-In a similar vein, LLMs may struggle with the creative writing task - even with prompt engineering - and with compliance with task instructions (to an alarming degree) as it is a unique task difficult to find examples for. Though the skills behind it and the task of maximizing passage coherence are a generalizable and well-studied, the highly random nature of sentences used and the need to follow instructions exactly makes for a challenge.
+In a similar vein, LLMs may struggle with the creative writing task - even with prompt engineering - and with compliance with task instructions (to an alarming degree) as it is a unique task difficult to find examples for. Though the skills behind it and the task of maximizing passage coherence are generalizable and well-studied, the highly random nature of sentences used and the need to follow instructions exactly makes for a challenge. Gains on this task from prompting are statistically significant, but small and hard-fought.
 
-Relevance of prompting is a task-specific question - shifting with base model performance
+Aside from being a somewhat task-specific question, the efficacy of prompting has indeed shifted over time, with benefits falling along with improvements in base models. Prompting is also a length and cost multiplier, especially for few-shot and interactive/complex methods. Putting these facts together, and further accounting for the differing cost structures for newer models, the gains in terms of accuracy and quality per additional token and cent spent on prompting have further fallen.
 
-Prompting is a length and cost multiplier for few-shot and interactive/complex methods, while zero-shot prompting generally brings conversations up to a length in line with that of provided answers.
+In addition to increasing the length of responses, prompting does introduce additional complexity - reasoning steps and structure, in addition to worsening readability (though sentence length may fall somewhat). Steps and complexity are not always a serious problem for human review, especially, if it done in a structured, ordered manner (Chain-of-Thought methods) - though this issue and complexity of implementation are real issues for the Tree-of-Thought (and to a lesser extent Self-Refine and Least-to-Most) method. Few-shot prompting is indeed a promising way to slightly reduce readability problems, in addition to improving formatting and the alignment of responses to human preferences. Though gains relative to direct prompting are somewhat larger, responsiveness to the readability of few-shot example passages has fallen for newer models.
 
-Costs are on the magnitude of fraction of to a few pennies per conversation. Unique cost structures for models can change the calculus. GPT-4 discount on inputs
-
-Planning and steps do change with prompting.
-
-Complexity carries over to readability and sentence length but few-shotting can control it somewhat, while also helping with the alignment of outputs to human preferences. However, the power of this decreased with GPT-4 as FRE dropped substantially in responses relative to prompts.
-
-Human evaluations add the perspective that few-shotting can help with formatting for ease of review despite potential difficulty in providing examples, that the order of steps affects review, and that iterative methods are challenging to implement.
-
-Overall, Least-to-Most, and Tree-of-Thought methods are complex to review, Self-Refine and Tree-of-Thought are complex to implement, and the others and zero-shot prompting in particular are not too difficult. Few-shot prompting is harder to implement than zero-shot prompting, but zero-shot prompting is somewhat harder to review as a result of formatting. Assuming expertly made few-shot examples are available, only the hardest methods - Tree-of-Thought and Self-Refine - which also offer highly variable and questionable gains - seem to require specialized skills and time investment.
-
-
-Reasoning steps indeed generally more important than length and the length quadratic term which provides counteraction beyond a certain point is important.
-
-For creative writing coherence, length and complexity improve cosine similarity but decrease compliance.
+Finally, this paper tested generalized models concerning the relationship between length and complexity and accuracy/quality - offering further insight into how methods work. On GSM8K, reasoning steps are indeed generally more important than length - which is also affected by a strong, negative quadratic term. For creative writing coherence, length and complexity improve cosine similarity but decrease task compliance. A chain of concise, organized, and well-chosen steps (or in a few cases, examples) can still bring out moderate gains from prompting, though some challenges and drawbacks remain.
 
 % Not really in line with literature on prompted complexity
 
