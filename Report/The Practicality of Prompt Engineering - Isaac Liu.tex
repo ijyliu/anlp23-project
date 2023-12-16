@@ -29,7 +29,7 @@
   \texttt{ijyliu@berkeley.edu}}
 
 % stattotex loading
-\input{../Output/cw_preference_stattotex.tex}
+\input{../Output for Report/cw_preference_stattotex.tex}
 
 \begin{document}
 
@@ -95,26 +95,26 @@ Results concerning the accuracy and/or quality of each method can be found in Ta
   % \begin{table*}
   %   \caption{Human-Preferred Method by Model - Creative Writing Coherence}
   %   \centering
-  %   \input{../Output/cw_preference_table_coherence_1_incoherent_10_very_coherent.tex}  
+  %   \input{../Output for Report/cw_preference_table_coherence_1_incoherent_10_very_coherent.tex}  
   % \end{table*}
   
   % \begin{table*}
   %   \caption{Human-Preferred Method by Model - Creative Writing Coherence - Adjust for Non-Compliance}
   %   \centering
-  %   \input{../Output/cw_preference_table_coherence_1_incoherent_10_very_coherent_compliance_adjusted.tex}  
+  %   \input{../Output for Report/cw_preference_table_coherence_1_incoherent_10_very_coherent_compliance_adjusted.tex}  
   % \end{table*}
 
   % \begin{figure*}
   %   \caption{Human-Preferred Method by Model - Creative Writing Coherence}
   %   \centering
-  %   \includegraphics[width=\textwidth]{../Output/cw_preference_plot_coherence_1_incoherent_10_very_coherent_coherence_1_incoherent_10_very_coherent.png}
+  %   \includegraphics[width=\textwidth]{../Output for Report/cw_preference_plot_coherence_1_incoherent_10_very_coherent_coherence_1_incoherent_10_very_coherent.png}
   % \end{figure*}
 
   \begin{table*}
     \caption{Mean and Standard Deviation of Accuracy/Quality Scores}
     \centering
     \tiny
-    \input{../Output/avg_accuracy_quality_pivot_with_date.tex}  
+    \input{../Output for Report/avg_accuracy_quality_pivot_with_date.tex}  
     \label{tab:accuracy_quality}
     \\[10pt] \footnotesize Stars indicate a significant difference from the direct prompting baseline from McNemar's tests at the 95\% level for GSM8K accuracy scores and creative writing task compliance scores and paired t-tests at the 95\% level for all other metrics.
   \end{table*}
@@ -122,7 +122,7 @@ Results concerning the accuracy and/or quality of each method can be found in Ta
   \begin{figure*}
     \caption{Human-Preferred Method by Model - Creative Writing Coherence - Adjust for Non-Compliance}
     \centering
-    \includegraphics[width=\textwidth]{../Output/cw_preference_plot_coherence_1_incoherent_10_very_coherent_compliance_adjusted.png}
+    \includegraphics[width=\textwidth]{../Output for Report/cw_preference_plot_coherence_1_incoherent_10_very_coherent_compliance_adjusted.png}
     \label{fig:cw_preference_plot_ca}
   \end{figure*}
 
@@ -134,7 +134,7 @@ Results concerning the accuracy and/or quality of each method can be found in Ta
 
 For GSM8K problems, I report correct/incorrect accuracy at the point a technique has been fully implemented (the end of the tree of thought or after all Self-Refinement, etc.). Chain-of-thought methods (including Least-to-Most) provide substantial gains for this task when implemented both manually and with a zero-shot approach. \footnote{Surprisingly, APE-Improved Zero-Shot CoT is not more effective than the simple "Let's Think Step by Step approach, as was the case in \citealp{zhou_large_2022}.} Few-shot prompting - implemented in this paper as the provision of questions and answers without reasoning - is ineffective and even harmful. The iterative Self-Refine and Tree-of-Thought methods are generally-ill suited to this task, with the exception of Self-Refine checking when implemented with GPT-4, which can bring results up to the level of chain-of-thought methods.
 
-%\input{../Output/avg_accuracy_quality_pivot_with_date.tex}
+%\input{../Output for Report/avg_accuracy_quality_pivot_with_date.tex}
 
 My initial analysis of creating writing coherence consisted of the author's assessment of generated passage coherence (on a scale of 1 to 10, 1 being incoherent and 10 being very coherent) based on several guidelines - unconnected ideas or abrupt changes in characters or settings received low scores, and opposite cases received high scores.
 
@@ -172,7 +172,7 @@ We can see that performance for a method does seem fairly repeatable across task
   \caption{Mean and Standard Deviation of Length Metrics}
   \centering
   \tiny
-  \input{../Output/avg_length_metrics_pivot.tex}  
+  \input{../Output for Report/avg_length_metrics_pivot.tex}  
   \label{tab:avg_length_metrics_pivot}
   \\[10pt] \footnotesize Stars indicate a significant difference from the direct prompting baseline from paired t-tests at the 95\% level.
 \end{table*}
@@ -182,13 +182,13 @@ We can see that performance for a method does seem fairly repeatable across task
 %   \begin{subfigure}[h]{0.4925\textwidth}
 %       \centering
 %       \subcaption{GSM8K}
-%       \includegraphics[width=0.95\hsize]{../Output/gsm8k_length_vs_direct_prompting_means.png} 
+%       \includegraphics[width=0.95\hsize]{../Output for Report/gsm8k_length_vs_direct_prompting_means.png} 
 %   \end{subfigure}
 %   %\hfill
 %   \begin{subfigure}[h]{0.4925\textwidth}
 %       \centering
 %       \subcaption{Creative Writing}
-%       \includegraphics[width=0.95\hsize]{../Output/cw_length_vs_direct_prompting_means.png}
+%       \includegraphics[width=0.95\hsize]{../Output for Report/cw_length_vs_direct_prompting_means.png}
 %   \end{subfigure}
 %   \hfill
 %   \label{fig:len_v_dp}
@@ -197,7 +197,7 @@ We can see that performance for a method does seem fairly repeatable across task
 \begin{figure*}
   \caption{Average Length vs. Provided Length - GSM8K}
   \centering
-  \includegraphics[width=\textwidth]{../Output/gsm8k_length_vs_provided_means.png}
+  \includegraphics[width=\textwidth]{../Output for Report/gsm8k_length_vs_provided_means.png}
   \label{fig:gsm8k_len_v_prov}
 \end{figure*}
 
@@ -207,13 +207,13 @@ We can see that performance for a method does seem fairly repeatable across task
   \begin{subfigure}[h]{0.4925\textwidth}
       \centering
       \subcaption{GSM8K}
-      \includegraphics[width=0.95\hsize]{../Output/gsm8k_change_in_accuracy_quality_per_change_in_conversation_length_sorted_by_technique_age.png} 
+      \includegraphics[width=0.95\hsize]{../Output for Report/gsm8k_change_in_accuracy_quality_per_change_in_conversation_length_sorted_by_technique_age.png} 
   \end{subfigure}
   %\hfill
   \begin{subfigure}[h]{0.4925\textwidth}
       \centering
       \subcaption{Creative Writing}
-      \includegraphics[width=0.95\hsize]{../Output/cw_change_in_accuracy_quality_per_change_in_conversation_length_sorted_by_technique_age_transformed.png}
+      \includegraphics[width=0.95\hsize]{../Output for Report/cw_change_in_accuracy_quality_per_change_in_conversation_length_sorted_by_technique_age_transformed.png}
   \end{subfigure}
   \hfill
   \label{fig:gains_v_dp}
@@ -224,13 +224,13 @@ We can see that performance for a method does seem fairly repeatable across task
   \begin{subfigure}[h]{0.4925\textwidth}
       \centering
       \subcaption{GSM8K}
-      \includegraphics[width=0.95\hsize]{../Output/gsm8k_change_in_accuracy_quality_per_change_in_cost_sorted_by_technique_age.png} 
+      \includegraphics[width=0.95\hsize]{../Output for Report/gsm8k_change_in_accuracy_quality_per_change_in_cost_sorted_by_technique_age.png} 
   \end{subfigure}
   %\hfill
   \begin{subfigure}[h]{0.4925\textwidth}
       \centering
       \subcaption{Creative Writing}
-      \includegraphics[width=0.95\hsize]{../Output/cw_change_in_accuracy_quality_per_change_in_cost_sorted_by_technique_age_transformed.png}
+      \includegraphics[width=0.95\hsize]{../Output for Report/cw_change_in_accuracy_quality_per_change_in_cost_sorted_by_technique_age_transformed.png}
   \end{subfigure}
   \hfill
   \label{fig:gains_v_dp_cost}
@@ -272,7 +272,7 @@ For the GSM8K task, which often lacks standard formatting, drawing conclusions f
 
 For the creative writing task, I also examine the sentence length (using NLTK word and sentence tokenizers) in the response and the Flesch Reading Ease (implemented via the textstat Python package) of the response \cite{flesch_how_2016, aggarwal_textstat_nodate}. Most prompting methods produce slightly shorter sentences, except for the Tree-of-Thoughts, which produces longer ones - potentially through inclinations of the model to choose more complex paths and drafts of passages. Higher FRE scores indicate that material is easier to read. When few-shot examples are provided for the manual prompting methods and for Least-to-Most prompting, scores and readability increase somewhat relative to direct prompting (a modest effect, far less than a grade level), but for the other methods they remain similar or fall. Controlling readability may be difficult, but in line with the literature it is clear few-shot examples can provide a starting point. \cite{imperial_flesch_2023}
 
-%\input{../Output/avg_fres_pivot.tex}
+%\input{../Output for Report/avg_fres_pivot.tex}
 
 %\onecolumn
 
@@ -280,7 +280,7 @@ For the creative writing task, I also examine the sentence length (using NLTK wo
   \caption{Mean and Standard Deviation of Complexity Metrics}
   \centering
   \tiny
-  \input{../Output/avg_complexity_metrics_pivot.tex}  
+  \input{../Output for Report/avg_complexity_metrics_pivot.tex}  
   \label{tab:avg_complexity_metrics_pivot}
   \\[10pt] \footnotesize Stars indicate a significant difference from the direct prompting baseline from paired t-tests at the 95\% level.
 \end{table*}
@@ -289,7 +289,7 @@ For the creative writing task, I also examine the sentence length (using NLTK wo
   \caption{Differences of Complexity Metrics}
   \centering
   \tiny
-  \input{../Output/avg_complexity_diff_metrics_pivot.tex}  
+  \input{../Output for Report/avg_complexity_diff_metrics_pivot.tex}  
   \label{tab:avg_complexity_diff_metrics_pivot}
 \end{table*}
 
@@ -309,7 +309,7 @@ As is the case in the study of chain-of-thought setting of \citealp{fu_complexit
   \caption{Regression Results}
   \centering
   \tiny
-  \input{../Output/regressions.tex}  
+  \input{../Output for Report/regressions.tex}  
   \label{tab:regressions}
   \\[10pt] \footnotesize For logit regressions, the average of marginal effects are reported. Standard errors in parentheses. For linear models, standard errors are clustered by task question by method. Stars indicate significance at the 95\% level.
 \end{table*}
@@ -330,7 +330,7 @@ Does increased length or complexity limit creativity and randomness? Table \ref{
 %   \caption{Regressions with GSM8K Provided Answer Length Interaction}
 %   \centering
 %   \tiny
-%   \input{../Output/regressions_provided_interaction.tex}  
+%   \input{../Output for Report/regressions_provided_interaction.tex}  
 %   \label{tab:regressions_provided_interaction}
 %   \\[10pt] \footnotesize For logit regressions, the average of marginal effects are reported. Standard errors in parentheses. For linear models, standard errors are clustered by task question by method. Stars indicate significance at the 95\% level.
 % \end{table*}
@@ -339,7 +339,7 @@ Does increased length or complexity limit creativity and randomness? Table \ref{
 %   \caption{Regressions with Model Interaction}
 %   \centering
 %   \tiny
-%   \input{../Output/regressions_model_interaction.tex}  
+%   \input{../Output for Report/regressions_model_interaction.tex}  
 %   \label{tab:regressions_model_interaction}
 %   \\[10pt] \footnotesize For logit regressions, the average of marginal effects are reported. Standard errors in parentheses. For linear models, standard errors are clustered by task question by method. Stars indicate significance at the 95\% level.
 % \end{table*}
@@ -448,7 +448,7 @@ It took her to a small village in the mountains far from the city. She had days 
 \begin{figure}[h]
   \caption{Histogram - Average Inter-Paragraph Cosine Similarity}
   \centering
-  \includegraphics[width=\textwidth]{../Output/avg_inter_paragraph_cosine_sim_hist.png}
+  \includegraphics[width=\textwidth]{../Output for Report/avg_inter_paragraph_cosine_sim_hist.png}
   \label{fig:avg_inter_paragraph_cosine_sim_hist}
 \end{figure}
 
