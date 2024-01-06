@@ -311,7 +311,7 @@ As is the case in the study of chain-of-thought setting of \citealp{fu_complexit
   \tiny
   \input{../Output for Report/regressions.tex}  
   \label{tab:regressions}
-  \\[10pt] \footnotesize For logit regressions, the average of marginal effects are reported. Standard errors in parentheses. For linear models, standard errors are clustered by task question by method. Stars indicate significance at the 95\% level.
+  \\[10pt] \footnotesize For logit regressions, the average of marginal effects are reported, and a binary indicator for the model (text-davinci-003 or GPT-4) is included. Standard errors in parentheses. For linear models, fixed effects for the model and task question are included, and standard errors are clustered by task question by method. Stars indicate significance at the 95\% level.
 \end{table*}
 
 Table \ref{tab:regressions} implements regressions (with quadratic terms to model non-linearity) controlling for length and complexity to begin to address this question. To limit collinearity with my preferred length variable of thousands of tokens, I selected the number of steps/ideas as my desired complexity metric. I summed the "step i" and "1.", "2. ", etc. measures into this single measure to improve data quality.
