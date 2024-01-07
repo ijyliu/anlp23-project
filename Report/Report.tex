@@ -473,7 +473,7 @@ Rating: 3. Worked questions and solutions must be provided, but these are usuall
 
 \subsubsection*{Few-Shot Least-to-Most}
 
-Rating: 4 A little more detail must be added to chain of thought solutions to demonstrate the structure behind splitting a problem into subproblems.
+Rating: 4. A little more detail must be added to chain of thought solutions to demonstrate the structure behind splitting a problem into subproblems.
 
 \subsubsection*{Self-Refine}
 
@@ -673,7 +673,7 @@ A:
 
 The sample task below is the first one in the Creative Writing dataset. \cite{yao_tree_2023}
 
-<Task> Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph must be: 1. It isn't difficult to do a handstand if you just stand on your hands. 2. It caught him off guard that space smelled of seared steak. \footnote{Some preliminary experiments replacing the first sentence with "Write a coherent passage of 2 short paragraphs that flow together.", which seemed to improve zero-shot performance. This seems to nudge the model away from writing two unrelated paragraphs ending in the selected sentences - a flaw it often notices when asked for feedback on its own passages. However, I decided not to adopt this modification to stay in line with the original task.}
+<Task> Write a coherent passage of 2 short paragraphs. The end sentence of each paragraph must be: 1. It isn't difficult to do a handstand if you just stand on your hands. 2. It caught him off guard that space smelled of seared steak. \footnote{Some preliminary experiments were made replacing the first sentence with "Write a coherent passage of 2 short paragraphs that flow together.", which seemed to improve zero-shot performance. This seems to nudge the model away from writing two unrelated paragraphs ending in the selected sentences - a flaw it often notices when asked for feedback on its own passages. However, I decided not to adopt this modification to stay in line with the original task.}
 
 No training data was provided, so I used random sentences courtesy of \url{https://www.thewordfinder.com/random-sentence-generator/} and my own answers in the construction of few-shot examples.
 
@@ -723,7 +723,7 @@ Task: Write a coherent passage of 2 short paragraphs. The end sentence of each p
 
 Response:
 
-Ideas:
+Ideas: \footnote{Note \citealp{yao_tree_2023} prompts the model for a plan in what is considered the Chain-of-Thought method adaptation for the Creative Writing task.}
 
 1. Make the passage about a sister visiting her brother; the brother has recently become a successful Youtuber - she excitedly gets her sweater caught leaving a meeting with him.
 
@@ -740,8 +740,6 @@ As it turned out, John would need his own production staff to help with script w
 Task: <Task>
 
 Response:
-
-\footnote{Note \citealp{yao_tree_2023} prompts the model for a plan in what is considered the Chain-of-Thought method adaptation for the Creative Writing task.}
 
 \subsubsection*{Least-to-most Prompting}
 
