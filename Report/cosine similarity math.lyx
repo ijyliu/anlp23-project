@@ -81,7 +81,7 @@
 Cosine Similarity Math
 \end_layout
 
-\begin_layout Standard
+\begin_layout Section*
 Average Inter-Sentence Cosine Similarity
 \end_layout
 
@@ -90,7 +90,11 @@ For passage with
 \begin_inset Formula $n$
 \end_inset
 
- sentences, each with embedding 
+ sentences indexed by 
+\begin_inset Formula $i$
+\end_inset
+
+, each with embedding 
 \begin_inset Formula $s_{i}$
 \end_inset
 
@@ -104,7 +108,7 @@ For passage with
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Section*
 Average Inter-Paragragh Cosine Similarity
 \end_layout
 
@@ -117,11 +121,11 @@ For passage with
 \begin_inset Formula $j$
 \end_inset
 
- each with length 
+, comprised of 
 \begin_inset Formula $l_{j}$
 \end_inset
 
-, comprised of sentences each with embedding 
+ sentences with embedding 
 \begin_inset Formula $s_{j,i}$
 \end_inset
 
