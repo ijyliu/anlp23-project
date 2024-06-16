@@ -6,7 +6,7 @@ This paper examines the practicality of prompt engineering in improving the perf
 
 The report can be found [here](Report/Report.pdf). Analysis includes experiments conducted on a standard GSM8K math task and a creative writing coherence task (with a finetuned LLM used, in part, to grade responses), as well as appropriate statistical testing. In addition to devising and applying unique metrics such as inter-paragraph cosine similarity and the ratio of model to human interaction length, I also contribute data on the popularity of prompt engineering techniques as implied by Semantic Scholar citations.
 
-The code structure of this repository is generally self-explanatory. Environment/package specs can be found [here](https://github.com/ijyliu/anlp23-project/blob/main/Code/environment.yml).
+The structure of this repository is generally self-explanatory. Environment/package specs can be found [here](https://github.com/ijyliu/anlp23-project/blob/main/Code/environment.yml).
 
 ## Technologies (not exhaustive!)
 
